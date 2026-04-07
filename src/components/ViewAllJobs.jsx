@@ -3,12 +3,39 @@ import { Link } from "react-router-dom";
 
 const ViewAllJobs = () => {
   return (
-    <section className="m-auto max-w-lg my-10 px-6">
-      <Link
-        to="/jobs"
-        className="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700">
-        View All Jobs
-      </Link>
+    <section className="px-4 py-8 sm:py-12">
+      <div className="container-xl lg:container m-auto">
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 px-6 py-10 shadow-[0_20px_80px_rgba(15,23,42,0.28)] backdrop-blur-2xl sm:px-10">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-indigo-500/15 via-cyan-400/10 to-fuchsia-500/15" />
+          <div className="pointer-events-none absolute -top-20 right-0 h-48 w-48 rounded-full bg-indigo-400/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 left-0 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl" />
+
+          <div className="relative z-10 mx-auto max-w-3xl text-center">
+            <span className="inline-flex items-center rounded-full border border-white/15 bg-black/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-indigo-200">
+              Keep exploring
+            </span>
+            <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Ready to discover more React jobs?
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+              Dive into the full job board to find fresh openings, compare opportunities, and
+              take the next step toward your ideal role.
+            </p>
+
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link
+                to="/jobs"
+                className="inline-flex min-w-[220px] items-center justify-center rounded-xl bg-white px-6 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-slate-950/20 transition duration-200 hover:scale-[1.02] hover:bg-slate-100"
+              >
+                View All Jobs
+              </Link>
+              <p className="text-sm text-slate-300 sm:text-base">
+                Browse current listings and find a role worth applying to.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
