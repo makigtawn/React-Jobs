@@ -11,25 +11,20 @@ const ViewAllJobs = () => {
           <div className="pointer-events-none absolute -bottom-24 left-0 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl" />
 
           <div className="relative z-10 mx-auto max-w-3xl text-center">
-            
             <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Ready to discover more React jobs?
+              Discover More{" "}
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-00 sm:text-lg">
-              Dive into the full job board to find fresh openings, compare opportunities, and
-              take the next step toward your ideal role.
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+              Browse current jobs and find a role worth applying to.
             </p>
 
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 to="/jobs"
-                className="inline-flex min-w-[220px] items-center justify-center rounded-xl bg-white px-6 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-slate-950/20 transition duration-200 hover:scale-[1.02] hover:bg-slate-100"
-              >
+                className="inline-flex min-w-[220px] items-center justify-center rounded-xl bg-white px-6 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-slate-950/20 transition duration-200 hover:scale-[1.02] hover:bg-slate-100">
                 View All Jobs
               </Link>
-              <p className="text-sm text-slate-300 sm:text-base">
-                Browse current listings and find a role worth applying to.
-              </p>
+              <p className=""></p>
             </div>
           </div>
         </div>

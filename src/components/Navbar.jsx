@@ -47,9 +47,9 @@ const Navbar = () => {
       : "rounded-full border border-transparent px-4 py-2 text-sm font-medium text-[var(--color-text-secondary)] transition duration-300 hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]";
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 px-2 pt-2 sm:px-6 lg:px-4">
       <nav className=" mx-auto max-w-7xl rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] shadow-2xl shadow-black/20 backdrop-blur-xl">
-        <div className="flex min-h-20 items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <div className="flex min-h-20 items-center justify-between gap-4 px-4 py-3 sm:px-3 lg:px-8">
           <div className="flex min-w-0 flex-1 items-center">
             <NavLink to="/" className="flex items-center gap-3">
               <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-2 shadow-lg shadow-black/10">

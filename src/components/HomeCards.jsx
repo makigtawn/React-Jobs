@@ -7,10 +7,10 @@ const HomeCards = () => {
     <section className="relative py-14 sm:py-16">
       <div className="container-xl lg:container m-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center rounded-full border border-[var(--panel-border)] bg-[var(--panel-bg)]/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--muted-foreground)] shadow-sm backdrop-blur-sm">
+          <div className="inline-flex items-center rounded-full border border-[var(--panel-border)] bg-[var(--panel-bg)]/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--muted-foreground)] shadow-sm backdrop-blur-sm">
             Built for both sides of the hire
-          </span>
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl">
+          </div>
+          <h2 className="mt-5 text-3xl font-bold tracking-tight text-violet-900 sm:text-4xl">
             Everything you need to connect great React talent with standout teams
           </h2>
           <p className="mt-4 text-base leading-7 text-[var(--muted-foreground)] sm:text-lg">

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FiBriefcase, FiSearch, FiTrendingUp, FiUsers } from "react-icons/fi";
 
 const Hero = ({
-  title = "Become a React Dev",
+  title = "Become a React Developer",
   subtitle = "Find the React job that fits your skill set",
 }) => {
   const stats = [
@@ -14,18 +14,15 @@ const Hero = ({
   const trustBadges = ["Remote-first", "Fast apply", "Curated companies"];
 
   return (
-    <section className="relative overflow-hidden px-4 pb-16 pt-14 sm:px-6 lg:px-8 lg:pb-24 lg:pt-20">
+    <section className="relative overflow-hidden px-4 pb-16 pt-20 sm:px-6 lg:px-8 lg:pb-24 lg:pt-20">
       <div className="mx-auto max-w-7xl">
         <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-panel-bg)] shadow-2xl shadow-black/20 backdrop-blur-xl">
-          <div className="absolute inset-0 bg-black/10 dark:bg-black/30" />
+          <div className="absolute inset-0 bg-black/1 dark:bg-black/30" />
 
           <div className="relative grid gap-12 px-6 py-10 sm:px-10 md:py-14 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-14 lg:py-18">
             <div className="max-w-3xl">
               <h1 className="max-w-2xl text-4xl font-black tracking-tight text-[var(--color-text-primary)] sm:text-5xl lg:text-6xl">
                 {title}
-                <span className="mt-2 block text-[var(--color-text-secondary)]">
-                  Build your next chapter with confidence.
-                </span>
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--color-text-secondary)] sm:text-lg">
