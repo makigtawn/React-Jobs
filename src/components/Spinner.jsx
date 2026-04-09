@@ -8,7 +8,7 @@ const override = {
 
 const Spinner = ({ loading }) => {
   return (
-    <Cliploader
+    <ClipLoader
       color="#111110"
       loading={loading}
       cssOverride={override}

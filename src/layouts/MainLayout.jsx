@@ -5,7 +5,7 @@ import bgImage from "../assets/images/bgpic.jpg";
 const MainLayout = () => {
   return (
     <div
-      className="relative min-h-screen overflow-hidden bg-slate-950 text-white"
+      className="relative min-h-screen overflow-hidden bg-slate-950 text-black"
       style={{
         backgroundImage: ` url(${bgImage})`,
         backgroundSize: "cover",

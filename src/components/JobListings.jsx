@@ -14,7 +14,7 @@ const JobListings = ({ isHome = false }) => {
 
 
       try {
-        const res = await fetch("apiUrl");
+        const res = await fetch(apiUrl);
         const data = await res.json();
         setJobs(data);
       } catch (error) {
@@ -33,7 +33,7 @@ const JobListings = ({ isHome = false }) => {
           {isHome ? 'Recent jobs' : 'Browse jobs'}
         </h2>
         {loading ? ( 
-          <spinner loading={loading} />
+          <Spinner loading={loading} />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {jobs.map((job) => (

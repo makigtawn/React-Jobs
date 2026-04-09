@@ -11,13 +11,11 @@ const ViewAllJobs = () => {
           <div className="pointer-events-none absolute -bottom-24 left-0 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl" />
 
           <div className="relative z-10 mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center rounded-full border border-white/15 bg-black/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-indigo-200">
-              Keep exploring
-            </span>
+            
             <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Ready to discover more React jobs?
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-00 sm:text-lg">
               Dive into the full job board to find fresh openings, compare opportunities, and
               take the next step toward your ideal role.
             </p>

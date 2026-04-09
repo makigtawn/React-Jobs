@@ -21,11 +21,6 @@ const Hero = ({
 
           <div className="relative grid gap-12 px-6 py-10 sm:px-10 md:py-14 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-14 lg:py-18">
             <div className="max-w-3xl">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-strong)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-text-secondary)]">
-                <span className="h-2 w-2 rounded-full bg-[var(--color-accent)]" />
-                React opportunities curated for modern teams
-              </div>
-
               <h1 className="max-w-2xl text-4xl font-black tracking-tight text-[var(--color-text-primary)] sm:text-5xl lg:text-6xl">
                 {title}
                 <span className="mt-2 block text-[var(--color-text-secondary)]">
@@ -34,22 +29,21 @@ const Hero = ({
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--color-text-secondary)] sm:text-lg">
-                {subtitle}. Discover standout frontend, full-stack, and product-focused roles
-                from companies that value craftsmanship, flexibility, and growth.
+                {subtitle}. Discover standout frontend, full-stack, and
+                product-focused roles from companies that value craftsmanship,
+                flexibility, and growth.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link
                   to="/jobs"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-6 py-3.5 text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg shadow-black/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent-hover)]"
-                >
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-6 py-3.5 text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg shadow-black/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent-hover)]">
                   <FiSearch className="text-base" />
                   Explore jobs
                 </Link>
                 <Link
                   to="/add-job"
-                  className="inline-flex items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-3.5 text-sm font-semibold text-[var(--color-text-primary)] transition duration-300 hover:-translate-y-0.5 hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-strong)]"
-                >
+                  className="inline-flex items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-3.5 text-sm font-semibold text-[var(--color-text-primary)] transition duration-300 hover:-translate-y-0.5 hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-strong)]">
                   Post a job
                 </Link>
               </div>
@@ -58,8 +52,7 @@ const Hero = ({
                 {trustBadges.map((badge) => (
                   <span
                     key={badge}
-                    className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-text-secondary)]"
-                  >
+                    className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-text-secondary)]">
                     {badge}
                   </span>
                 ))}
@@ -71,8 +64,7 @@ const Hero = ({
                 {stats.map(({ label, value, icon: Icon }) => (
                   <div
                     key={label}
-                    className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-lg shadow-black/15"
-                  >
+                    className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-lg shadow-black/15">
                     <div className="flex items-center justify-between">
                       <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-strong)] p-3 text-[var(--color-text-primary)]">
                         <Icon className="text-xl" />
@@ -84,7 +76,9 @@ const Hero = ({
                     <div className="mt-5 text-3xl font-bold text-[var(--color-text-primary)]">
                       {value}
                     </div>
-                    <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{label}</p>
+                    <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+                      {label}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -94,8 +88,8 @@ const Hero = ({
                   Trusted by ambitious developers
                 </p>
                 <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
-                  Join a talent network built for React professionals seeking meaningful work,
-                  clean teams, and high-growth environments.
+                  Join a talent network built for React professionals seeking
+                  meaningful work, clean teams, and high-growth environments.
                 </p>
               </div>
             </div>

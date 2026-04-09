@@ -48,7 +48,7 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-      <nav className="mx-auto max-w-7xl rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] shadow-2xl shadow-black/20 backdrop-blur-xl">
+      <nav className=" mx-auto max-w-7xl rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] shadow-2xl shadow-black/20 backdrop-blur-xl">
         <div className="flex min-h-20 items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex min-w-0 flex-1 items-center">
             <NavLink to="/" className="flex items-center gap-3">
