@@ -59,10 +59,12 @@ const AddJobPage = ({ addJobSubmit }) => {
                 required
                 value={type}
                 onChange={(e) => setType(e.target.value)}>
+
                 <option value="Full-Time">Full-Time</option>
                 <option value="Part-Time">Part-Time</option>
                 <option value="Remote">Remote</option>
-                <option value="Internship">Internship</option>
+                <option value="Paid Internship">Paid Internship</option>
+                <option value="Unpaid Internship">Unpaid Internship</option>
               </select>
             </div>
 
@@ -104,7 +106,7 @@ const AddJobPage = ({ addJobSubmit }) => {
               <label
                 htmlFor="type"
                 className="block text-gray-700 font-bold mb-2">
-                Salary
+                Salary per year
               </label>
               <select
                 id="salary"
@@ -114,15 +116,10 @@ const AddJobPage = ({ addJobSubmit }) => {
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}>
                 <option value="Under $50K">Under $50K</option>
-                <option value="$50K - 60K">$50K - $60K</option>
-                <option value="$60K - 70K">$60K - $70K</option>
-                <option value="$70K - 80K">$70K - $80K</option>
-                <option value="$80K - 90K">$80K - $90K</option>
-                <option value="$90K - 100K">$90K - $100K</option>
-                <option value="$100K - 125K">$100K - $125K</option>
-                <option value="$125K - 150K">$125K - $150K</option>
-                <option value="$150K - 175K">$150K - $175K</option>
-                <option value="$175K - 200K">$175K - $200K</option>
+                <option value="$50K - 90K">$50K - $90K </option>
+                <option value="$90K - 140K">$90K - $140K </option>
+                <option value="$140K - 170K">$140K - $170K </option>
+                <option value="$170K - 200K">$170K - $210K </option>
                 <option value="Over $200K">Over $200K</option>
               </select>
             </div>

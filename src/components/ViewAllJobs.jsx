@@ -27,6 +27,7 @@ const ViewAllJobs = () => {
               <p className=""></p>
             </div>
           </div>
+
         </div>
       </div>
     </section>

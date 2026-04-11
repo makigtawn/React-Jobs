@@ -10,7 +10,7 @@ const JobPage = ({ deleteJob }) => {
 
   const onDeleteClick = (jobId) => {
     const confirm = window.confirm(
-      "are you sure you want to delete this listing?",
+      "are you sure you want to delete?",
     );
     if (!confirm) return;
     deleteJob(jobId);
