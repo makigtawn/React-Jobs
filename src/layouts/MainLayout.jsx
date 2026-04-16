@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 const MainLayout = () => {
   return (
     <div
-      className="relative min-h-screen overflow-hidden bg-slate-950 text-black"
+      className="relative min-h-screen overflow-hidden bg-white text-black dark:bg-slate-950 dark:text-white"
       style={{
         backgroundImage: ` url(${bgImage})`,
         backgroundSize: "cover",

@@ -83,6 +83,20 @@
         "contactEmail": "contact@ipsumlorem.com",
         "contactPhone": "555-555-5555"
       }
+    },
+    {
+      "id": "3657",
+      "title": "test job name",
+      "type": "Remote",
+      "location": "test country",
+      "description": "test job description",
+      "salary": "Under $50K",
+      "company": {
+        "name": "test company",
+        "description": "test company description",
+        "contactEmail": "meklitgirmaw@gmail.com",
+        "contactPhone": "555-555-5555"
+      }
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
