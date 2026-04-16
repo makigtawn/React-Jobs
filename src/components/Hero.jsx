@@ -1,17 +1,15 @@
 import { Link } from "react-router-dom";
-import { FiBriefcase, FiSearch, FiTrendingUp, FiUsers } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 
 const Hero = ({
   title = "Become a React Developer",
   subtitle = "Find the React job that fits your skill set",
 }) => {
   const stats = [
-    { label: "Open roles", value: "2K+", icon: FiBriefcase },
-    { label: "Hiring teams", value: "480+", icon: FiUsers },
-    { label: "Weekly matches", value: "95%", icon: FiTrendingUp },
+    { label: "Open roles", value: "2K+" },
+    { label: "Hiring teams", value: "480+" },
+    { label: "Weekly matches", value: "95%" },
   ];
-
-  const trustBadges = ["Remote-first", "Fast apply", "Curated companies"];
 
   return (
     <section className="relative overflow-hidden px-4 pb-16 pt-20 sm:px-6 lg:px-8 lg:pb-24 lg:pt-20">
@@ -44,16 +42,6 @@ const Hero = ({
                   Post a job
                 </Link>
               </div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                {trustBadges.map((badge) => (
-                  <span
-                    key={badge}
-                    className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-sm text-[var(--color-text-secondary)]">
-                    {badge}
-                  </span>
-                ))}
-              </div>
             </div>
 
             <div className="relative">
@@ -61,33 +49,16 @@ const Hero = ({
                 {stats.map(({ label, value, icon: Icon }) => (
                   <div
                     key={label}
-                    className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-lg shadow-black/15">
-                    <div className="flex items-center justify-between">
-                      <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-strong)] p-3 text-[var(--color-text-primary)]">
-                        <Icon className="text-xl" />
-                      </div>
-                      <span className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
-                        Live
-                      </span>
-                    </div>
+                    className=" flex justify-between items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-lg shadow-black/15">
                     <div className="mt-5 text-3xl font-bold text-[var(--color-text-primary)]">
                       {value}
                     </div>
+
                     <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
                       {label}
                     </p>
                   </div>
                 ))}
-              </div>
-
-              <div className="mt-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-strong)] p-5 shadow-lg shadow-black/10">
-                <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-                  Trusted by ambitious developers
-                </p>
-                <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
-                  Join a talent network built for React professionals seeking
-                  meaningful work, clean teams, and high-growth environments.
-                </p>
               </div>
             </div>
           </div>
