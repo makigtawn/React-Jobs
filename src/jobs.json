@@ -25,7 +25,7 @@
         "name": "Veneer Solutions",
         "description": "Veneer Solutions is a creative agency specializing in digital design and development. Our team is dedicated to pushing the boundaries of creativity and innovation to deliver exceptional results for our clients.",
         "contactEmail": "contact@loremipsum.com",
-        "contactPhone": "555-555-5555"
+        "contactPhone": "555-555-777"
       }
     },
     {
@@ -95,6 +95,20 @@
         "name": "test company",
         "description": "test company description",
         "contactEmail": "meklitgirmaw@gmail.com",
+        "contactPhone": "555-555-5555"
+      }
+    },
+    {
+      "id": "d8f9",
+      "title": "back end django developer",
+      "type": "Full-Time",
+      "location": "meriland",
+      "description": "a developer who uses advanced python",
+      "salary": "$140K - 170K",
+      "company": {
+        "name": "qandil",
+        "description": "a start up company focus on edtech",
+        "contactEmail": "qandil@gmail.com",
         "contactPhone": "555-555-5555"
       }
     }
