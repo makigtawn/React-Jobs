@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FiArrowRight, FiMoon, FiSun } from "react-icons/fi";
 import logo from "../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const getStoredTheme = () => {
   if (typeof window === "undefined") return "dark";
@@ -19,6 +20,7 @@ const getStoredTheme = () => {
 
 const Navbar = () => {
   const [theme, setTheme] = useState(() => getStoredTheme());
+  const navigate = useNavigate();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -47,7 +49,7 @@ const Navbar = () => {
               </div>
               <div className="min-w-0">
                 <span className="block text-lg font-black tracking-[0.2em] text-[var(--color-text-primary)] sm:text-xl">
-                  REACT JOBS{" "}
+                  Spering {" "}
                 </span>
                 <span className="hidden text-xs tracking-[0.24em] text-[var(--color-text-secondary)] sm:block">
                   PREMIUM DEVELOPER ROLES
@@ -79,10 +81,13 @@ const Navbar = () => {
 
             <NavLink
               to="/add-job"
-             className=" inline-flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg shadow-black/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent-hover)]">
+              className=" inline-flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg shadow-black/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent-hover)]">
               Add Job
               <FiArrowRight className="text-base" />
             </NavLink>
+            
+             
+            
           </div>
         </div>
       </nav>

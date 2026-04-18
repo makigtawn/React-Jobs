@@ -20,6 +20,7 @@ const JobPage = ({ deleteJob }) => {
 
   return (
     <>
+    
       <section>
         <div className="container m-auto py-6 px-6">
           <Link
@@ -96,6 +97,7 @@ const JobPage = ({ deleteJob }) => {
           </div>
         </div>
       </section>
+
     </>
   );
 };
