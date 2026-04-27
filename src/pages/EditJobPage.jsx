@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Button from "../components/Button";
 const EditJobPage = ({ updateJobSubmit }) => {
   const job = useLoaderData();
   const [title, setTitle] = useState(job.title);
@@ -218,14 +218,16 @@ const { id} = useParams()
             </div>
 
             <div>
-              <button
-                className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                type="submit">
-                Update Job
-              </button>
+              <Button  
+              className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                type="submit"
+                text="Update Job"
+                />
+
             </div>
           </form>
         </div>
+
       </div>
     </section>
   );

@@ -12,7 +12,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import JobPage, { jobLoader } from "./pages/JobPage";
 import AddJobPage from "./pages/AddJobPage";
 import EditJobPage from "./pages/EditJobPage";
-
+import AboutPage from "./pages/AboutPage";
 const App = () => {
   const addJob = async (newJob) => {
     await fetch("/api/jobs", {
@@ -49,6 +49,8 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/add-job" element={<AddJobPage addJobSubmit={addJob} />} />
+        <Route path="/about" element={<AboutPage />} />
+
         <Route
           path="/edit-job/:id"
           element={<EditJobPage updateJobSubmit={updateJob} />}
@@ -59,6 +61,8 @@ const App = () => {
           element={<JobPage deleteJob={deleteJob} />}
           loader={jobLoader}
         />
+
+        
         <Route path="*" element={<NotFoundPage />} />
       </Route>,
     ),

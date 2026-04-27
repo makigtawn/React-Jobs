@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Button from "../components/Button";
 const AddJobPage = ({ addJobSubmit }) => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Full-Time");
@@ -59,7 +59,6 @@ const AddJobPage = ({ addJobSubmit }) => {
                 required
                 value={type}
                 onChange={(e) => setType(e.target.value)}>
-
                 <option value="Full-Time">Full-Time</option>
                 <option value="Part-Time">Part-Time</option>
                 <option value="Remote">Remote</option>
@@ -89,8 +88,6 @@ const AddJobPage = ({ addJobSubmit }) => {
                 className="block text-gray-700 font-bold mb-2">
                 Description
               </label>
-
-
 
               <textarea
                 id="description"
@@ -212,11 +209,11 @@ const AddJobPage = ({ addJobSubmit }) => {
             </div>
 
             <div>
-              <button
-                className="bg-green-600 hover:bg-green-300 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                type="submit">
-                Add Job
-              </button>
+              <Button
+                text="Add job"
+                onClick={submitForm}
+                className="bg-indigo-400 hover:bg-indigo-300 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+              />
             </div>
           </form>
         </div>

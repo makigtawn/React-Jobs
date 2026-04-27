@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-
 const Hero = ({
-  title = "Become a React Developer",
-  subtitle = "Find the React job that fits your skill set",
+  title = " Hire Your Next Lead Developer in Half the Time.",
+  subtitle = " Stop sifting through irrelevant resumes. Access a curated pool of top-tier developers ready to scale your team",
 }) => {
   const stats = [
-    { label: "Open roles", value: "2K+" },
-    { label: "Hiring teams", value: "480+" },
+    { label: "Hiring teams", value: "2k+" },
     { label: "Weekly matches", value: "95%" },
+    { label: "post in seconds", value: "" },
   ];
 
   return (
@@ -24,9 +23,9 @@ const Hero = ({
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--color-text-secondary)] sm:text-lg">
-                {subtitle}. Discover standout frontend, full-stack, and
-                product-focused roles from companies that value craftsmanship,
-                flexibility, and growth.
+                {subtitle}. Finding the right fit shouldn't be a full-time job.
+                Our platform is designed for busy founders and hiring managers
+                who value precision over volume.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -46,7 +45,7 @@ const Hero = ({
 
             <div className="relative">
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-                {stats.map(({ label, value, icon: Icon }) => (
+                {stats.map(({ label, value }) => (
                   <div
                     key={label}
                     className=" flex justify-between items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-lg shadow-black/15">

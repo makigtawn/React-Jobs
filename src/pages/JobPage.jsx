@@ -2,7 +2,7 @@ import { useParams, useLoaderData, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Button from "../components/Button";
 const JobPage = ({ deleteJob }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -87,11 +87,13 @@ const JobPage = ({ deleteJob }) => {
                   edit job
                 </Link>
 
-                <button
-                  onClick={() => onDeleteClick(job.id)}
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
-                  delete job
-                </button>
+                 <Button  
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+
+              onClick={() => onDeleteClick(job.id)}
+                type="submit"
+                text="delete Job"
+                />
               </div>
             </aside>
           </div>
