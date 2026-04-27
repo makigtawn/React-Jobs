@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  FaTwitter,
   FaLinkedin,
   FaGithub,
   FaEnvelope,
@@ -8,7 +7,7 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import logo from "../assets/images/logo.png";
-import { FaX } from "react-icons/fa6";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -54,7 +53,7 @@ const Footer = () => {
             href="https://x.com/makigtawn"
             aria-label="x"
             className="hover:text-blue-400 transition-colors">
-            <FaX />
+            <FaXTwitter />
           </a>
           <a
             href="https://linkedin.com/makigtawn"

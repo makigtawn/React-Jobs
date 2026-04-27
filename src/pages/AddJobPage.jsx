@@ -42,20 +42,20 @@ const AddJobPage = ({ addJobSubmit }) => {
   return (
     <section>
       <div className="container m-auto max-w-2xl py-24">
-        <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
+        <div className="bg-white  dark:bg-black/90 px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
           <form onSubmit={submitForm}>
             <h2 className="text-3xl text-center font-semibold mb-6">Add Job</h2>
 
             <div className="mb-4">
               <label
                 htmlFor="type"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Job Type
               </label>
               <select
                 id="type"
                 name="type"
-                className="border rounded w-full py-2 px-3 "
+                className="border rounded dark:text-indigo-500 w-full py-2 px-3 "
                 required
                 value={type}
                 onChange={(e) => setType(e.target.value)}>
@@ -68,7 +68,7 @@ const AddJobPage = ({ addJobSubmit }) => {
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
+              <label className="block text-gray-700 dark:text-white  font-bold mb-2">
                 Job Name
               </label>
               <input
@@ -85,7 +85,7 @@ const AddJobPage = ({ addJobSubmit }) => {
             <div className="mb-4">
               <label
                 htmlFor="description"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Description
               </label>
 
@@ -102,13 +102,13 @@ const AddJobPage = ({ addJobSubmit }) => {
             <div className="mb-4">
               <label
                 htmlFor="type"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white  font-bold mb-2">
                 Salary per year
               </label>
               <select
                 id="salary"
                 name="salary"
-                className="border rounded w-full py-2 px-3"
+                className="border rounded w-full py-2 px-3 dark:text-indigo-500"
                 required
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}>
@@ -122,7 +122,7 @@ const AddJobPage = ({ addJobSubmit }) => {
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
+              <label className="block text-gray-700 dark:text-white  font-bold mb-2">
                 Location
               </label>
               <input
@@ -142,7 +142,7 @@ const AddJobPage = ({ addJobSubmit }) => {
             <div className="mb-4">
               <label
                 htmlFor="company"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white  font-bold mb-2">
                 Company Name
               </label>
               <input
@@ -159,7 +159,7 @@ const AddJobPage = ({ addJobSubmit }) => {
             <div className="mb-4">
               <label
                 htmlFor="company_description"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Company Description
               </label>
               <textarea
@@ -177,7 +177,7 @@ const AddJobPage = ({ addJobSubmit }) => {
             <div className="mb-4">
               <label
                 htmlFor="contact_email"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white  font-bold mb-2">
                 Contact Email
               </label>
               <input
@@ -194,7 +194,7 @@ const AddJobPage = ({ addJobSubmit }) => {
             <div className="mb-4">
               <label
                 htmlFor="contact_phone"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Contact Phone
               </label>
               <input

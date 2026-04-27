@@ -17,7 +17,7 @@ const EditJobPage = ({ updateJobSubmit }) => {
   const [contactPhone, setContactPhone] = useState(job.company.contactPhone);
 
   const navigate = useNavigate();
-const { id} = useParams()
+  const { id } = useParams();
   const submitForm = (e) => {
     e.preventDefault();
 
@@ -46,7 +46,7 @@ const { id} = useParams()
   return (
     <section className="bg-indigo-50">
       <div className="container m-auto max-w-2xl py-24">
-        <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
+        <div className="bg-white dark:bg-black/80 px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
           <form onSubmit={submitForm}>
             <h2 className="text-3xl text-center font-semibold mb-6">
               Update Job
@@ -55,13 +55,13 @@ const { id} = useParams()
             <div className="mb-4">
               <label
                 htmlFor="type"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Job Type
               </label>
               <select
                 id="type"
                 name="type"
-                className="border rounded w-full py-2 px-3"
+                className="border rounded w-full py-2 px-3 dark:text-indigo-500"
                 required
                 value={type}
                 onChange={(e) => setType(e.target.value)}>
@@ -73,7 +73,7 @@ const { id} = useParams()
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
+              <label className="block text-gray-700 dark:text-white font-bold mb-2">
                 Job Listing Name
               </label>
               <input
@@ -90,7 +90,7 @@ const { id} = useParams()
             <div className="mb-4">
               <label
                 htmlFor="description"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Description
               </label>
               <textarea
@@ -106,13 +106,13 @@ const { id} = useParams()
             <div className="mb-4">
               <label
                 htmlFor="type"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 font-bold dark:text-white mb-2">
                 Salary
               </label>
               <select
                 id="salary"
                 name="salary"
-                className="border rounded w-full py-2 px-3"
+                className="border rounded w-full py-2 px-3 dark:text-indigo-500"
                 required
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}>
@@ -131,7 +131,7 @@ const { id} = useParams()
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
+              <label className="block text-gray-700 dark:text-white font-bold mb-2">
                 Location
               </label>
               <input
@@ -146,12 +146,12 @@ const { id} = useParams()
               />
             </div>
 
-            <h3 className="text-2xl mb-5">Company Info</h3>
+            <h3 className="text-2xl mb-5 dark:text-white ">Company Info</h3>
 
             <div className="mb-4">
               <label
                 htmlFor="company"
-                className="block text-gray-700 font-bold mb-2">
+                className="block dark:text-white text-gray-700 font-bold mb-2">
                 Company Name
               </label>
               <input
@@ -168,7 +168,7 @@ const { id} = useParams()
             <div className="mb-4">
               <label
                 htmlFor="company_description"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Company Description
               </label>
               <textarea
@@ -186,14 +186,14 @@ const { id} = useParams()
             <div className="mb-4">
               <label
                 htmlFor="contact_email"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Contact Email
               </label>
               <input
                 type="email"
                 id="contact_email"
                 name="contact_email"
-                className="border rounded w-full py-2 px-3"
+                className="border rounded w-full py-2 px-3 "
                 placeholder="Email address for applicants"
                 required
                 value={contactEmail}
@@ -203,7 +203,7 @@ const { id} = useParams()
             <div className="mb-4">
               <label
                 htmlFor="contact_phone"
-                className="block text-gray-700 font-bold mb-2">
+                className="block text-gray-700 dark:text-white font-bold mb-2">
                 Contact Phone
               </label>
               <input
@@ -218,16 +218,14 @@ const { id} = useParams()
             </div>
 
             <div>
-              <Button  
-              className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+              <Button
+                className="bg-indigo-400 hover:bg-indigo-300 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                 type="submit"
                 text="Update Job"
-                />
-
+              />
             </div>
           </form>
         </div>
-
       </div>
     </section>
   );

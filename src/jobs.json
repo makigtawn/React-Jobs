@@ -111,6 +111,20 @@
         "contactEmail": "qandil@gmail.com",
         "contactPhone": "555-555-5555"
       }
+    },
+    {
+      "id": "d49c",
+      "title": "n  k",
+      "type": "Full-Time",
+      "location": "",
+      "description": "",
+      "salary": "Under $50K",
+      "company": {
+        "name": "",
+        "description": "",
+        "contactEmail": "",
+        "contactPhone": ""
+      }
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
