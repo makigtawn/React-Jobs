@@ -11,6 +11,8 @@
     "server": "json-server --watch src/jobs.json --port 8000"
   },
   "dependencies": {
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/supabase-js": "^2.105.0",
     "@tailwindcss/vite": "^4.2.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
