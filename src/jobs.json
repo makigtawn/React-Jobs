@@ -125,6 +125,34 @@
         "contactEmail": "",
         "contactPhone": ""
       }
+    },
+    {
+      "id": "69f7",
+      "title": "dev",
+      "type": "Part-Time",
+      "location": "ss",
+      "description": "xd",
+      "salary": "Under $50K",
+      "company": {
+        "name": "mmd",
+        "description": "dve",
+        "contactEmail": "meklitgirmaw@gmail.com",
+        "contactPhone": "555-555-5555"
+      }
+    },
+    {
+      "id": "9f1d",
+      "title": "",
+      "type": "Full-Time",
+      "location": "",
+      "description": "",
+      "salary": "Under $50K",
+      "company": {
+        "name": "",
+        "description": "",
+        "contactEmail": "",
+        "contactPhone": ""
+      }
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -31,11 +31,11 @@ const JobPage = ({ deleteJob }) => {
         </div>
       </section>
 
-      <section className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-panel-bg)] shadow-2xl shadow-black/20 backdrop-blur-xl">
+      <section      className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-panel-bg)] shadow-2xl shadow-black/20 backdrop-blur-xl">
         <div className="container m-auto py-10 px-6">
           <div className="grid grid-cols-1 md:grid-cols-[70%_30%] w-full gap-6">
             <main>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
+              <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md text-center md:text-left">
                 <div className="text-gray-500 mb-4">{job.type}</div>
                 <h1 className="text-3xl font-bold mb-4">{job.title}</h1>
                 <div className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
@@ -43,7 +43,7 @@ const JobPage = ({ deleteJob }) => {
                   <p className="text-orange-700">{job.location}</p>
                 </div>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+              <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md mt-6">
                 <h3 className="text-olive-800 text-lg font-bold mb-6">
                   job description
                 </h3>
@@ -56,7 +56,7 @@ const JobPage = ({ deleteJob }) => {
             </main>
 
             <aside>
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold mb-6">company info</h3>
 
                 <h2 className="text-2xl">{job.company.name}</h2>
@@ -79,7 +79,7 @@ const JobPage = ({ deleteJob }) => {
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+              <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md mt-6">
                 <h3 className="text-xl font-bold mb-6">manage job</h3>
                 <Link
                   to={`/edit-job/${job.id}`}

@@ -1,46 +1,3 @@
-// import { useState } from "react";
-// import { useAuth } from "../context/AuthContext";
-
-// const LoginPage = () => {
-//   const { login } = useAuth();
-//   const [email, setEmail] = useState("");
-//   const [loading, setLoading] = useState(false);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-
-//     const { error } = await login(email);
-
-//     if (error) {
-//       alert(error.message);
-//     } else {
-//       alert("Check your email for the login link!");
-//     }
-
-//     setLoading(false);
-//   };
-
-//   return (
-//     <div>
-//       <h1>Login</h1>
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           type="email"
-//           value={email}
-//           required
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-//         <button disabled={loading}>
-//           {loading ? "Loading..." : "Send magic link"}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default LoginPage;
-
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
@@ -84,10 +41,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-900 px-4">
-      <div className="w-full max-w-md bg-slate-800 rounded-xl shadow-lg p-8">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-slate-200 rounded-xl shadow-lg p-8">
         <h1 className="text-2xl font-semibold text-white mb-2">Welcome back</h1>
-        <p className="text-sm text-slate-400 mb-6">
+        <p className="text-sm text-slate-500 mb-6">
           Enter your email to receive a login link
         </p>
 
@@ -112,8 +69,8 @@ const LoginPage = () => {
             className={`py-2 rounded-lg font-medium transition 
               ${
                 loading
-                  ? "bg-blue-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700"
+                  ? "bg-indigo-400 cursor-not-allowed"
+                  : "bg-indigo-600 hover:bg-blue-700"
               } text-white`}>
             {loading ? "Sending..." : "Send link"}
           </button>

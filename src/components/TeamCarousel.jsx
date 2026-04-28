@@ -44,7 +44,7 @@ const TeamCarousel = () => {
         <img
           src={member.image}
           alt={member.name}
-          className="w-32 h-32 rounded-full object-cover border-4 border-blue-400 shadow-lg"
+          className="w-50 h-50 rounded-full object-cover border-2 border-indigo-400 shadow-lg"
         />
         <h3 className="text-xl font-bold mt-2">{member.name}</h3>
         <p className="text-blue-600 font-semibold">{member.position}</p>
