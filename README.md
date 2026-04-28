@@ -1,16 +1,137 @@
-# React + Vite
+# React Jobs – Job Platform Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+React Jobs is a full-stack job platform built with the MERN stack. It allows employers to post and manage job listings while developers (job seekers) can browse, view, and apply for jobs. The system is designed with scalability, clean architecture, and role-based functionality in mind.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### For Developers (Job Seekers)
 
-## Expanding the ESLint configuration
+* Browse available job listings
+* View detailed job descriptions
+* Search and filter jobs
+* Apply for jobs (if implemented)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### For Employers
+
+* Add new job postings
+* Edit existing jobs
+* Delete job listings
+* Manage job visibility
+
+### General
+
+* Responsive UI (works on desktop and mobile)
+* Role-based views (Employer vs Developer)
+* Clean and structured component architecture
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* React
+* Tailwind CSS
+* React Router
+
+### Backend
+
+* simple json file
+---
+
+## Project Structure
+
+```
+react-jobs/
+│
+├── src/             
+│   └── asset/
+│       ├── components/
+│       ├── pages/
+│       └── layouts/
+|       └── assets/
+|
+└── README.md
+```
+
+---
+
+## Installation & Setup
+
+### 1. Clone the Repository
+
+```
+git clone <your-repo-link>
+cd react-jobs
+```
+
+### 2. Install Dependencies
+
+#### Client
+
+```
+cd client
+npm install
+```
+
+#### Server
+
+```
+cd server
+npm install
+```
+
+---
+
+## Running the App
+
+### Start Backend
+
+```
+npm run server
+```
+
+### Start Frontend
+
+```
+npm run dev
+```
+
+App will run on:
+
+```
+http://localhost:5173
+```
+
+---
+
+## Key Concepts Used
+
+* Component-based architecture
+* State management using React hooks
+* RESTful API design
+* CRUD operations
+* Separation of concerns (frontend vs backend)
+* Role-based UI rendering
+
+---
+
+## Future Improvements
+
+* Authorization (Role-based access)
+* Job application tracking system
+* Notifications system
+* Offline/PWA support
+* Advanced filtering and recommendations
+
+---
+
+## Author
+
+Meklit Girmaw
+
+---
