@@ -40,7 +40,7 @@ const TeamCarousel = () => {
     <div className="w-full max-w-md mx-auto text-center py-8">
       <div
         key={member.name}
-        className="flex flex-col items-center gap-4 transition-all duration-200">
+        className="flex flex-col dark:text-black items-center gap-4 transition-all duration-200">
         <img
           src={member.image}
           alt={member.name}
@@ -48,7 +48,7 @@ const TeamCarousel = () => {
         />
         <h3 className="text-xl font-bold mt-2">{member.name}</h3>
         <p className="text-blue-600 font-semibold">{member.position}</p>
-        <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+        <p className="text-gray-600 dark:text-black text-sm mt-4">
           {member.story}
         </p>
         <div className="flex gap-4 mt-4">

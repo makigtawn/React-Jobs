@@ -36,19 +36,19 @@ const JobPage = ({ deleteJob }) => {
           <div className="grid grid-cols-1 md:grid-cols-[70%_30%] w-full gap-6">
             <main>
               <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md text-center md:text-left">
-                <div className="text-gray-500 mb-4">{job.type}</div>
+                <div className="text-gray-500 dark:text-white mb-4">{job.type}</div>
                 <h1 className="text-3xl font-bold mb-4">{job.title}</h1>
-                <div className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
+                <div className="text-gray-500 dark:text-white mb-4 flex align-middle justify-center md:justify-start">
                   <FaMapMarker className="text-orange-700 mr-1" />
-                  <p className="text-orange-700">{job.location}</p>
+                  <p className="text-orange-700 ">{job.location}</p>
                 </div>
               </div>
               <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md mt-6">
-                <h3 className="text-olive-800 text-lg font-bold mb-6">
+                <h3 className="text-olive-800 dark:text-white text-lg font-bold mb-6">
                   job description
                 </h3>
                 <p className="mb-4">{job.description}</p>
-                <h3 className="text-olive-800 text-lg font-bold mb-2">
+                <h3 className="text-olive-800 dark:text-white text-lg font-bold mb-4">
                   salary compensation
                 </h3>
                 <p className="mb-4">{job.salary}</p>
@@ -67,13 +67,13 @@ const JobPage = ({ deleteJob }) => {
 
                 <h3 className="text-xl">contact email:</h3>
 
-                <p className="my-2 bg-olive-100 p-2 font-bold">
+                <p className="my-2 bg-olive-100 dark:text-olive-800 p-2 font-bold">
                   {job.company.contactEmail}
                 </p>
 
                 <h3 className="text-xl">contact phone</h3>
 
-                <p className="my-2 bg-olive-100 p-2 font-bold">
+                <p className="my-2 bg-olive-100 dark:text-olive-800 p-2 font-bold">
                   {""}
                   {job.company.contactPhone}
                 </p>

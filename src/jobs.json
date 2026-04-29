@@ -153,6 +153,20 @@
         "contactEmail": "",
         "contactPhone": ""
       }
+    },
+    {
+      "id": "d180",
+      "title": "backend dev",
+      "type": "Remote",
+      "location": "Portland, OR",
+      "description": "h",
+      "salary": "Under $50K",
+      "company": {
+        "name": "qandild",
+        "description": "dfdv",
+        "contactEmail": "meklitgirmaw@gmail.com",
+        "contactPhone": "555-555-5555"
+      }
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

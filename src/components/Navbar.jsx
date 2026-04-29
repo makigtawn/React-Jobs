@@ -52,14 +52,7 @@ const Navbar = () => {
                 </span>
               </div>
 
-              <div>
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]">
-                  {theme === "dark" ? <FiSun /> : <FiMoon />}
-                </button>
-              </div>
+              
             </NavLink>
           </div>
 
@@ -95,6 +88,14 @@ const Navbar = () => {
                 <FiArrowRight />
               </NavLink>
             </div>
+            <div>
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]">
+                  {theme === "dark" ? <FiSun /> : <FiMoon />}
+                </button>
+              </div>
           </div>
         </div>
       </nav>
@@ -103,3 +104,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+

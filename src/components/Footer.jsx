@@ -43,7 +43,7 @@ const Footer = () => {
           <div className="flex items-center gap-2">
             <FaPhoneAlt className="text-green-500" />
             <a href="tel:+251900000000" className="underline">
-              +251 970 369 110
+              +251970369110
             </a>
           </div>
         </div>
