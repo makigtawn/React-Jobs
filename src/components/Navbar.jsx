@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { FiArrowRight, FiMoon, FiSun, FiSearch } from "react-icons/fi";
+import { FiArrowRight, FiMoon, FiSun } from "react-icons/fi";
 import logo from "../assets/images/logo.png";
 
 
@@ -15,12 +15,39 @@ const getStoredTheme = () => {
 
 const Navbar = () => {
   const [theme, setTheme] = useState(() => getStoredTheme());
+  const [hideNavbar, setHideNavbar] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle("dark", theme === "dark");
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDifference = currentScrollY - lastScrollY.current;
+
+      if (currentScrollY <= 16) {
+        setHideNavbar(false);
+      } else if (scrollDifference > 4) {
+        setHideNavbar(true);
+      } else if (scrollDifference < -4) {
+        setHideNavbar(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
@@ -32,7 +59,14 @@ const Navbar = () => {
       : "rounded-full border border-transparent px-4 py-2 text-sm font-medium text-[var(--color-text-secondary)] transition duration-300 hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]";
 
   return (
-    <header className="sticky top-0 z-50 px-2 pt-2 sm:px-6 lg:px-4 header_section">
+    <header
+      className={`sticky top-0 z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4 header_section ${
+        hideNavbar
+          ? "pointer-events-none -translate-y-[calc(100%+0.5rem)]"
+          : "translate-y-0"
+      }`}
+      aria-hidden={hideNavbar}
+      inert={hideNavbar ? "" : undefined}>
       <nav className="mx-auto max-w-7xl rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] shadow-xl shadow-black/10 navbar navbar-expand-lg custom_nav-container">
 
         <div className="flex min-h-20 items-center justify-between gap-3 px-4 py-3 sm:px-3 lg:px-8 container-fluid">
@@ -104,7 +138,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
 
 
 

@@ -3,13 +3,11 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MyBackground from "../assets/images/image.svg?react";
 
 const MainLayout = () => {
   return (
     <div className="relative min-h-screen bg-white dark:bg-slate-950 dark:text-white">
       <div className="fixed inset-0 z-0 opacity-80 pointer-events-none">
-        <MyBackground className="w-full h-full object-cover text-blue-500 dark:text-slate-700" />
       </div>
 
       <div className="relative z-10">
