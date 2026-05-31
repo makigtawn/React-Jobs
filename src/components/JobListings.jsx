@@ -21,7 +21,7 @@ const JobListings = ({ isHome = false }) => {
     };
 
     fetchJobs();
-  }, []);
+  }, [isHome]);
 
   return (
     <section >
