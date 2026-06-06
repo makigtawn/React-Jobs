@@ -1,11 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../utils/supabase";
 
-const supabase = createClient(
-    import.meta.env.VITE_SUPABASE_URL,
-    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
-
-);
+// #region agent log
+fetch('http://127.0.0.1:7344/ingest/f404edb9-b305-43de-9ba7-568fd646dc90',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'2b480a'},body:JSON.stringify({sessionId:'2b480a',runId:'post-fix',hypothesisId:'A',location:'AuthContext.jsx:init',message:'auth uses shared supabase client',data:{usingSharedClient:true,hasAnonKey:!!import.meta.env.VITE_SUPABASE_ANON_KEY},timestamp:Date.now()})}).catch(()=>{});
+// #endregion
 
 const AuthContext = createContext();
 
@@ -30,7 +28,10 @@ export const AuthProvider = ({ children }) => {
         });
     }
 
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(({ data, error }) => {
+      // #region agent log
+      fetch('http://127.0.0.1:7344/ingest/f404edb9-b305-43de-9ba7-568fd646dc90',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'2b480a'},body:JSON.stringify({sessionId:'2b480a',runId:'post-fix',hypothesisId:'A',location:'AuthContext.jsx:getSession',message:'auth getSession result',data:{hasError:!!error,errorMessage:error?.message??null,hasUser:!!data?.session?.user},timestamp:Date.now()})}).catch(()=>{});
+      // #endregion
       setUser(data.session?.user || null);
       setLoading(false);
     });
