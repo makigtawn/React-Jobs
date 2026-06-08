@@ -61,8 +61,7 @@ const JobForm = ({
   };
 
   return (
-    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute right-10 top-10 h-28 w-28 rounded-full bg-[#21b8b2]/20 blur-3xl" />
+    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 bg-[#21b8b2] ">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
           <div className="rounded-[2rem] border border-white/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.24)] text-white">
