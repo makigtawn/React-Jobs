@@ -1,5 +1,5 @@
 import React from "react";
-import Hero from "../components/Hero";
+import HeroCarousel from "../components/HeroCarousel";
 import HomeCards from "../components/HomeCards";
 import JobListings from "../components/JobListings";
 import ViewAllJobs from "../components/ViewAllJobs";
@@ -7,9 +7,9 @@ import ViewAllJobs from "../components/ViewAllJobs";
 const HomePage = () => {
   return (
     <>
-      <Hero />
+      <HeroCarousel />
       <HomeCards />
-      <JobListings isHome={true}  />
+      <JobListings isHome={true} />
       <ViewAllJobs />
     </>
   );

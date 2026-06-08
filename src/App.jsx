@@ -18,20 +18,30 @@ import AddJobPage from "./pages/AddJobPage";
 import EditJobPage from "./pages/EditJobPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
-import HeroCarousel from "./components/HeroCarousel";
 
 import { supabase } from "./utils/supabase";
 
-const HomeWithCarousel = () => (
-  <>
-    <HeroCarousel />
-    <HomePage />
-  </>
-);
-
 const App = () => {
   // #region agent log
-  fetch('http://127.0.0.1:7344/ingest/f404edb9-b305-43de-9ba7-568fd646dc90',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'2b480a'},body:JSON.stringify({sessionId:'2b480a',runId:'pre-fix',hypothesisId:'E',location:'App.jsx:render',message:'App component mounted',data:{pathname:typeof window!=='undefined'?window.location.pathname:null},timestamp:Date.now()})}).catch(()=>{});
+  fetch("http://127.0.0.1:7344/ingest/f404edb9-b305-43de-9ba7-568fd646dc90", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Debug-Session-Id": "2b480a",
+    },
+    body: JSON.stringify({
+      sessionId: "2b480a",
+      runId: "pre-fix",
+      hypothesisId: "E",
+      location: "App.jsx:render",
+      message: "App component mounted",
+      data: {
+        pathname:
+          typeof window !== "undefined" ? window.location.pathname : null,
+      },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
   // #endregion
 
   const addJob = async (newJob) => {
@@ -75,8 +85,7 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<HomeWithCarousel />} />
-        <Route path="/hero-carousel" element={<HeroCarousel />} />
+        <Route index element={<HomePage />} />
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<LoginPage />} />

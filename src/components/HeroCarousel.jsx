@@ -9,7 +9,7 @@ const slides = [
     id: 1,
     heading: "You Can\nHire Freelancer\nHere",
     description:
-      "It is a long established fact that a reader will be distracted by the readable content of a page",
+      "It is a long established fact that a reader will be distracted by the readable content of a page.",
     image: sliderImage,
   },
   {
@@ -66,92 +66,72 @@ const HeroCarousel = () => {
   };
 
   return (
-    <section
-      className="relative left-1/2 flex min-h-screen w-screen -translate-x-1/2 items-center overflow-hidden bg-cover bg-center transition-all duration-500"
-      style={{
-        backgroundImage: `
-          linear-gradient(
-            rgba(0,0,0,0.55),
-            rgba(0,0,0,0.55)
-          ),
-          url(${slides[currentSlide].image})
-        `,
-      }}>
-      {/* Controls */}
-      <div className="absolute bottom-10 left-[8%] z-50 flex items-center gap-3">
+    <section className="relative overflow-hidden">
+      <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2">
+        <div className="bg-[#1f3238]" />
+        <div className="bg-[#21b8b2]" />
+      </div>
+
+      <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-6 py-16 sm:px-8 lg:px-12 lg:py-24">
+        <div className="grid w-full items-center gap-10 lg:grid-cols-2">
+          <div className="max-w-2xl text-white">
+            <h1 className="whitespace-pre-line text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl md:text-7xl">
+              {slides[currentSlide].heading}
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-8 text-white/80 sm:text-lg">
+              {slides[currentSlide].description}
+            </p>
+
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <a
+                href="#about"
+                className="inline-flex items-center justify-center rounded-full bg-[#ff515b] px-8 py-3 text-sm font-semibold text-white shadow-xl shadow-[#ff4c57]/20 transition hover:bg-[#ff6b77]">
+                About Us
+              </a>
+              <a
+                href="#quote"
+                className="inline-flex items-center justify-center rounded-full border border-white bg-white px-8 py-3 text-sm font-semibold text-[#152a31] transition hover:bg-white/90">
+                Get A Quote
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center">
+            <img
+              src={slides[currentSlide].image}
+              alt={`Slide ${currentSlide + 1}`}
+              className="max-h-[650px] min-w-[260px] w-full max-w-[700px] object-contain"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-10 left-6 z-20 flex items-center gap-3">
         <button
           onClick={prevSlide}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-500 transition hover:scale-105 hover:bg-red-500">
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#21b8b2] text-white transition hover:scale-105 hover:bg-white/20">
           <img src={prevIcon} alt="Previous" className="h-4 w-4" />
         </button>
 
         <button
           onClick={nextSlide}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-500 transition hover:scale-105 hover:bg-red-500">
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#21b8b2] text-white transition hover:scale-105 hover:bg-white/20">
           <img src={nextIcon} alt="Next" className="h-4 w-4" />
         </button>
       </div>
 
-      {/* Indicators */}
-      <div className="absolute bottom-10 right-6 z-50 flex flex-col gap-3">
+      <div className="absolute bottom-10 right-6 z-20 flex flex-col gap-3">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
             className={`flex h-14 w-14 items-center justify-center rounded-full text-lg font-bold text-white transition ${
               currentSlide === index
-                ? "border border-white bg-white/10"
+                ? "border border-white bg-white/20"
                 : "opacity-40 hover:opacity-100"
             }`}>
             {String(index + 1).padStart(2, "0")}
           </button>
-        ))}
-      </div>
-
-      {/* Slides */}
-      <div className="relative h-full w-full">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              currentSlide === index ? "z-10 opacity-100" : "z-0 opacity-0"
-            }`}>
-            <div className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-between px-6 py-20 md:flex-row md:px-12">
-              {/* Left Content */}
-              <div className="max-w-xl">
-                <h1 className="mb-6 whitespace-pre-line text-4xl font-bold uppercase leading-tight text-white md:text-6xl">
-                  {slide.heading}
-                </h1>
-
-                <p className="mb-10 text-base leading-relaxed text-white/90 md:text-lg">
-                  {slide.description}
-                </p>
-
-                <div className="flex flex-wrap gap-4">
-                  <a
-                    href="#about"
-                    className="w-40 border border-red-500 bg-red-500 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-transparent hover:text-red-500">
-                    About Us
-                  </a>
-
-                  <a
-                    href="#quote"
-                    className="w-40 border border-white bg-white px-6 py-3 text-center text-sm font-semibold text-black transition hover:bg-transparent hover:text-white">
-                    Get A Quote
-                  </a>
-                </div>
-              </div>
-
-              {/* Right Image */}
-              <div className="mt-12 w-full max-w-md md:mt-0">
-                <img
-                  src={slide.image}
-                  alt={`Slide ${index + 1}`}
-                  className="w-full object-contain"
-                />
-              </div>
-            </div>
-          </div>
         ))}
       </div>
     </section>

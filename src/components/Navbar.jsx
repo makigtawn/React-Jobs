@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { FiArrowRight, FiMoon, FiSun } from "react-icons/fi";
+import { NavLink, useLocation } from "react-router-dom";
+import { FiArrowRight, FiMoon, FiSun, FiMenu } from "react-icons/fi";
 import logo from "../assets/images/logo.png";
-
 
 const getStoredTheme = () => {
   if (typeof window === "undefined") return "dark";
@@ -49,69 +48,102 @@ const Navbar = () => {
     };
   }, []);
 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
+
   const linkClass = ({ isActive }) =>
-    isActive
-      ? "rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface-strong)] px-4 py-2 text-sm font-semibold text-[var(--color-text-primary)] shadow-sm transition duration-300"
-      : "rounded-full border border-transparent px-4 py-2 text-sm font-medium text-[var(--color-text-secondary)] transition duration-300 hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]";
+    `rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
+      isHome
+        ? isActive
+          ? "border border-white/30 bg-white/10 text-white"
+          : "border border-transparent text-white/80 hover:border-white/20 hover:text-white"
+        : isActive
+          ? "rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface-strong)] text-[var(--color-text-primary)]"
+          : "rounded-full border border-transparent text-[var(--color-text-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]"
+    }`;
 
   return (
     <header
-      className={`sticky top-0 z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4 header_section ${
-        hideNavbar
-          ? "pointer-events-none -translate-y-[calc(100%+0.5rem)]"
-          : "translate-y-0"
-      }`}
+      className={`${
+        isHome ? "fixed inset-x-0 top-0" : "sticky top-0"
+      } z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4`}
       aria-hidden={hideNavbar}
       inert={hideNavbar ? "" : undefined}>
-      <nav className="mx-auto max-w-7xl rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] shadow-xl shadow-black/10 navbar navbar-expand-lg custom_nav-container">
+      <nav
+        className={`mx-auto flex max-w-7xl flex-col rounded-[1.75rem] border border-transparent px-3 py-3 shadow-xl shadow-black/10 transition duration-300 sm:px-4 lg:px-6 ${
+          isHome
+            ? "bg-[#12242f]/90 backdrop-blur-xl border-white/15"
+            : "bg-[var(--color-nav-bg)] border-[var(--color-border)]"
+        }`}>
+        <div className="flex items-center justify-between gap-3">
+          <NavLink to="/" className="flex items-center gap-3">
+            <img src={logo} alt="Spering Logo" className="h-9 w-auto" />
+            <div className="min-w-0">
+              <span
+                className={`block text-lg font-black tracking-[0.2em] sm:text-xl ${
+                  isHome ? "text-white" : "text-[var(--color-text-primary)]"
+                }`}>
+                Spering
+              </span>
+              <span
+                className={`hidden text-xs tracking-[0.24em] sm:block ${
+                  isHome
+                    ? "text-white/70"
+                    : "text-[var(--color-text-secondary)]"
+                }`}>
+                PREMIUM DEVELOPER ROLES
+              </span>
+            </div>
+          </NavLink>
 
-        <div className="flex min-h-20 items-center justify-between gap-3 px-4 py-3 sm:px-3 lg:px-8 container-fluid">
-          
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              aria-label="Toggle menu"
+              onClick={toggleMenu}
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border px-3 text-xl transition duration-300 ${
+                isHome
+                  ? "border-white/20 bg-white/10 text-white"
+                  : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)]"
+              }`}>
+              <FiMenu />
+            </button>
 
-          <div className="flex min-w-0 flex-1 items-center">
-            <NavLink to="/" className="navbar-brand flex items-center gap-3">
-              <div className="rounded-2xl">
-                <img src={logo} alt="Spering Logo" className="h-9 w-auto" />
-              </div>
-              <div className="min-w-0">
-                <span className="block text-lg font-black tracking-[0.2em] text-[var(--color-text-primary)] sm:text-xl">
-                  Spering
-                </span>
-                <span className="hidden text-xs tracking-[0.24em] text-[var(--color-text-secondary)] sm:block">
-                  PREMIUM DEVELOPER ROLES
-                </span>
-              </div>
+            <div className="hidden items-center gap-3 lg:flex">
+              <ul className="flex items-center gap-2">
+                <li>
+                  <NavLink to="/" className={linkClass}>
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/about" className={linkClass}>
+                    About
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/jobs" className={linkClass}>
+                    Jobs
+                  </NavLink>
+                </li>
+              </ul>
 
-              
-            </NavLink>
-          </div>
-
-          <div className="bg-color-white flex flex-wrap items-center justify-end gap-2 sm:gap-3">
-            <ul className="navbar-nav flex items-center gap-2">
-              <li className="">
-                <NavLink to="/" className={linkClass}>
-                  Home
-                </NavLink>
-              </li>
-              <li className="">
-                <NavLink to="/about" className={linkClass}>
-                  About
-                </NavLink>
-              </li>
-
-              <NavLink to="/jobs" className={linkClass}>
-                Jobs
-              </NavLink>
-            </ul>
-
-            <div className=" flex items-center gap-3 ml-lg-4">
               <NavLink
                 to="/login"
-                className="text-sm font-medium text-[var(--color-text-primary)]">
+                className={`text-sm font-medium transition duration-300 ${
+                  isHome
+                    ? "text-white/80 hover:text-white"
+                    : "text-[var(--color-text-primary)]"
+                }`}>
                 Login
               </NavLink>
 
@@ -121,24 +153,64 @@ const Navbar = () => {
                 Add Job
                 <FiArrowRight />
               </NavLink>
+
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]">
+                {theme === "dark" ? <FiSun /> : <FiMoon />}
+              </button>
             </div>
-            <div>
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]">
-                  {theme === "dark" ? <FiSun /> : <FiMoon />}
-                </button>
-              </div>
           </div>
         </div>
+
+        {menuOpen && (
+          <div className="mt-4 space-y-3 rounded-[1.5rem] bg-black/10 p-4 lg:hidden">
+            <ul className="space-y-2">
+              <li>
+                <NavLink
+                  to="/"
+                  onClick={() => setMenuOpen(false)}
+                  className={linkClass}>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/about"
+                  onClick={() => setMenuOpen(false)}
+                  className={linkClass}>
+                  About
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/jobs"
+                  onClick={() => setMenuOpen(false)}
+                  className={linkClass}>
+                  Jobs
+                </NavLink>
+              </li>
+            </ul>
+            <div className="flex flex-col gap-3 pt-2">
+              <NavLink
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                Login
+              </NavLink>
+              <NavLink
+                to="/add-job"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-4 py-3 text-center text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg transition hover:-translate-y-0.5">
+                Add Job
+              </NavLink>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );
 };
 
 export default Navbar;
-
-
-
-
