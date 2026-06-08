@@ -110,7 +110,7 @@ const Navbar = () => {
               type="button"
               aria-label="Toggle menu"
               onClick={toggleMenu}
-              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border px-3 text-xl transition duration-300 ${
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border px-3 text-xl transition duration-300 lg:hidden ${
                 isHome
                   ? "border-white/20 bg-white/10 text-white"
                   : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)]"

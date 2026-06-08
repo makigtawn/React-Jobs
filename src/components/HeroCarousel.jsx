@@ -89,9 +89,9 @@ const HeroCarousel = () => {
                 About Us
               </a>
               <a
-                href="#quote"
+                href="/jobs"
                 className="inline-flex items-center justify-center rounded-full border border-white bg-white px-8 py-3 text-sm font-semibold text-[#152a31] transition hover:bg-white/90">
-                Get A Quote
+                Explore Jobs
               </a>
             </div>
           </div>

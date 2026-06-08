@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const HomeCards = () => {
   return (
-    <section className="relative py-14 sm:py-16">
+    <section className="relative bg-white py-14 sm:py-16">
       <div className="container-xl lg:container m-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center rounded-full border border-[var(--panel-border)] bg-[var(--panel-bg)]/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--muted-foreground)] shadow-sm backdrop-blur-sm">
