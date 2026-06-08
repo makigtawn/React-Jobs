@@ -40,7 +40,8 @@ React Jobs is a full-stack job platform built with the MERN stack. It allows emp
 
 ### Backend
 
-* simple json file
+* supabase database
+* postgre
 ---
 
 ## Project Structure
