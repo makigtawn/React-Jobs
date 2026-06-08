@@ -13,7 +13,7 @@ const MainLayout = () => {
       <div className="relative z-10">
         <Navbar />
         <ToastContainer />
-        <main className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 pt-20">
+        <main className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
           <Outlet />
         </main>
 

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { FiArrowRight, FiMoon, FiSun } from "react-icons/fi";
 import logo from "../assets/images/logo.png";
 
+
 const getStoredTheme = () => {
   if (typeof window === "undefined") return "dark";
   const savedTheme = localStorage.getItem("theme");
@@ -15,7 +16,6 @@ const getStoredTheme = () => {
 const Navbar = () => {
   const [theme, setTheme] = useState(() => getStoredTheme());
   const [hideNavbar, setHideNavbar] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -53,127 +53,83 @@ const Navbar = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
-  };
-
   const linkClass = ({ isActive }) =>
     isActive
-      ? "text-white font-semibold"
-      : "text-white/70 transition hover:text-white";
+      ? "rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface-strong)] px-4 py-2 text-sm font-semibold text-[var(--color-text-primary)] shadow-sm transition duration-300"
+      : "rounded-full border border-transparent px-4 py-2 text-sm font-medium text-[var(--color-text-secondary)] transition duration-300 hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]";
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-300 ${
+      className={`sticky top-0 z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4 header_section ${
         hideNavbar
-          ? "pointer-events-none -translate-y-16"
+          ? "pointer-events-none -translate-y-[calc(100%+0.5rem)]"
           : "translate-y-0"
-      }`}>
-      <nav className="relative z-50 w-full bg-[#112830]/95 px-4 py-4 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-          <NavLink to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Spering logo" className="h-10 w-auto" />
-            <span className="text-lg font-black tracking-[0.2em] text-white sm:text-xl">
-              Spering
-            </span>
-          </NavLink>
+      }`}
+      aria-hidden={hideNavbar}
+      inert={hideNavbar ? "" : undefined}>
+      <nav className="mx-auto max-w-7xl rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] shadow-xl shadow-black/10 navbar navbar-expand-lg custom_nav-container">
 
-          <div className="hidden items-center gap-8 lg:flex">
-            <NavLink to="/" className={linkClass}>
-              Home
-            </NavLink>
-            <NavLink to="/about" className={linkClass}>
-              About
-            </NavLink>
-            <NavLink to="/jobs" className={linkClass}>
-              Jobs
+        <div className="flex min-h-20 items-center justify-between gap-3 px-4 py-3 sm:px-3 lg:px-8 container-fluid">
+          
+
+          <div className="flex min-w-0 flex-1 items-center">
+            <NavLink to="/" className="navbar-brand flex items-center gap-3">
+              <div className="rounded-2xl">
+                <img src={logo} alt="Spering Logo" className="h-9 w-auto" />
+              </div>
+              <div className="min-w-0">
+                <span className="block text-lg font-black tracking-[0.2em] text-[var(--color-text-primary)] sm:text-xl">
+                  Spering
+                </span>
+                <span className="hidden text-xs tracking-[0.24em] text-[var(--color-text-secondary)] sm:block">
+                  PREMIUM DEVELOPER ROLES
+                </span>
+              </div>
+
+              
             </NavLink>
           </div>
 
-          <div className="hidden items-center gap-3 lg:flex">
-            <NavLink
-              to="/login"
-              className="text-sm font-medium text-white/80 transition hover:text-white">
-              Login
-            </NavLink>
+          <div className="bg-color-white flex flex-wrap items-center justify-end gap-2 sm:gap-3">
+            <ul className="navbar-nav flex items-center gap-2">
+              <li className="">
+                <NavLink to="/" className={linkClass}>
+                  Home
+                </NavLink>
+              </li>
+              <li className="">
+                <NavLink to="/about" className={linkClass}>
+                  About
+                </NavLink>
+              </li>
 
-            <NavLink
-              to="/add-job"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-white/90">
-              Add Job
-              <FiArrowRight />
-            </NavLink>
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition hover:bg-white/15">
-              {theme === "dark" ? <FiSun /> : <FiMoon />}
-            </button>
-          </div>
-
-          <button
-            type="button"
-            aria-label="Toggle navigation menu"
-            onClick={toggleMenu}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/0 text-white shadow-sm transition hover:bg-white/10 lg:hidden">
-            <span className="flex h-5 w-5 flex-col justify-between">
-              <span className="block h-[2px] w-full bg-white" />
-              <span className="block h-[2px] w-full bg-white" />
-              <span className="block h-[2px] w-full bg-white" />
-            </span>
-          </button>
-        </div>
-
-        <div
-          className={`absolute inset-x-0 top-full overflow-hidden bg-[#0f232a]/95 transition-all duration-300 ${
-            menuOpen ? "max-h-[420px] py-6" : "max-h-0"
-          }`}>
-          <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-3 border-b border-white/10 pb-5">
-              <NavLink
-                to="/"
-                className={linkClass}
-                onClick={() => setMenuOpen(false)}>
-                Home
-              </NavLink>
-              <NavLink
-                to="/about"
-                className={linkClass}
-                onClick={() => setMenuOpen(false)}>
-                About
-              </NavLink>
-              <NavLink
-                to="/jobs"
-                className={linkClass}
-                onClick={() => setMenuOpen(false)}>
+              <NavLink to="/jobs" className={linkClass}>
                 Jobs
               </NavLink>
-            </div>
+            </ul>
 
-            <div className="flex flex-wrap gap-3">
+            <div className=" flex items-center gap-3 ml-lg-4">
               <NavLink
                 to="/login"
-                className="text-sm font-medium text-white/80 transition hover:text-white"
-                onClick={() => setMenuOpen(false)}>
+                className="text-sm font-medium text-[var(--color-text-primary)]">
                 Login
               </NavLink>
 
               <NavLink
                 to="/add-job"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-white/90"
-                onClick={() => setMenuOpen(false)}>
+                className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg transition duration-300 hover:-translate-y-0.5">
                 Add Job
                 <FiArrowRight />
               </NavLink>
-
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition hover:bg-white/15">
-                {theme === "dark" ? <FiSun /> : <FiMoon />}
-              </button>
             </div>
+            <div>
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]">
+                  {theme === "dark" ? <FiSun /> : <FiMoon />}
+                </button>
+              </div>
           </div>
         </div>
       </nav>
@@ -182,3 +138,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
