@@ -1,47 +1,64 @@
-import React from "react";
 import { useState } from "react";
-import {
-  FaMap,
-  FaMapMarked,
-  FaMapMarkedAlt,
-  FaMapMarker,
-} from "react-icons/fa";
-import { FaMapLocation, FaMapLocationDot, FaMapPin } from "react-icons/fa6";
+import { FaMapLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import Button from "./Button";
+import DOMPurify from "dompurify";
+
+
+const stripHtml = (html) => {
+  const div = document.createElement("div");
+  div.innerHTML = DOMPurify.sanitize(html || "");
+  return div.textContent || div.innerText || "";
+};
+
+const RichText = ({ html, className }) => {
+  const clean = DOMPurify.sanitize(html || "", {
+    USE_PROFILES: { html: true },
+    ADD_ATTR: ["target", "rel"],
+  });
+  return (
+    <div
+      className={`rich-description ${className ?? ""}`}
+      dangerouslySetInnerHTML={{ __html: clean }}
+    />
+  );
+};
 
 const JobListing = ({ job }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-  let description = job.description;
-
-  if (!showFullDescription) {
-    description = description.substring(0, 90) + "...";
-  }
+  const plainText = stripHtml(job.description);
+  const previewText =
+    plainText.length > 90 ? plainText.substring(0, 90) + "…" : plainText;
 
   return (
     <div className="bg-white dark:bg-black/80 rounded-xl shadow-md relative">
       <div className="p-4">
         <div className="mb-6">
           <div className="text-white-600 my-2">{job.type}</div>
-          <h3 className="text-xl font-bold"> {job.title}</h3>
+          <h3 className="text-xl font-bold">{job.title}</h3>
         </div>
 
-        <div className="mb-5">{description}</div>
+        <div className="mb-5">
+          {showFullDescription ? (
+            <RichText html={job.description} />
+          ) : (
+            <p className="text-sm leading-relaxed">{previewText}</p>
+          )}
+        </div>
 
         <button
-          onClick={() => setShowFullDescription((prevState) => !prevState)}
+          onClick={() => setShowFullDescription((prev) => !prev)}
           className="text-indigo-500 mb-5 hover:text-indigo-600">
           {showFullDescription ? "less" : "more"}
         </button>
 
-        <h3 className="text-indigo-500 mb-2">{job.salary} / year </h3>
+        <h3 className="text-indigo-500 mb-2">{job.salary} / year</h3>
 
         <div className="border border-gray-100 mb-5"></div>
+
         <div className="flex flex-col lg:flex-row justify-between mb-4">
           <div className="text-orange-700 mb-3">
             <FaMapLocationDot className="inline text-lg mb-1 mr-1" />
-
             {job.location}
           </div>
           <Link

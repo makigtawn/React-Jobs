@@ -26,24 +26,40 @@ import { supabase } from "./utils/supabase";
 import { apiRequest } from "./services/api";
 
 const App = () => {
-  const addJob = async (newJob) => {
-    await apiRequest("/api/jobs", {
-      method: "POST",
-      body: JSON.stringify({
-      title: newJob.title,
-      type: newJob.type,
-      location: newJob.location,
-      description: newJob.description,
-      salary: newJob.salary,
-        companyName: newJob.company.name,
-        companyDescription: newJob.company.description,
-        contactEmail: newJob.company.contactEmail,
-        contactPhone: newJob.company.contactPhone,
-        minimumScoreThreshold: Number(newJob.minimumScoreThreshold || 0),
-      }),
-    });
-  };
+const addJob = async (newJob) => {
+    try {
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      
+      if (authError || !user) {
+        console.error("Authentication error:", authError);
+        throw new Error("You must be logged in to add a job.");
+      }
 
+      const { error } = await supabase
+        .from("jobs")
+        .insert({
+          employer_id: user.id, 
+          title: newJob.title,
+          type: newJob.type,
+          location: newJob.location,
+          description: newJob.description,
+          salary: newJob.salary,
+          company_name: newJob.company.name,
+          company_description: newJob.company.description,
+          contact_email: newJob.company.contactEmail,
+          contact_phone: newJob.company.contactPhone,
+          minimum_score_threshold: Number(newJob.minimumScoreThreshold || 0),
+        });
+
+      if (error) {
+        console.error("Supabase insert error details:", error);
+        throw error;
+      }
+    } catch (err) {
+      console.error("Failed to add job:", err);
+      throw err; 
+    }
+  };
   const deleteJob = async (id) => {
     const { error } = await supabase.from("jobs").delete().eq("id", id);
     if (error) console.error("Delete job error:", error);

@@ -10,7 +10,6 @@ const jobLoader = async ({ params }) => {
 
   if (error) throw new Error('Job not found');
 
-  // reshape to nested format
   return {
     id:          data.id,
     title:       data.title,

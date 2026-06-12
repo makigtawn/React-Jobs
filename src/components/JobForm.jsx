@@ -1,5 +1,7 @@
+// src/components/JobForm.jsx
 import { useEffect, useState } from "react";
 import freelanceImg from "../assets/images/new images/freelance-img.jpg";
+import JobDescriptionEditor from "./editor/JobDescriptionEditor";
 
 const jobTypes = [
   "Full-Time",
@@ -17,29 +19,32 @@ const salaryRanges = [
   "Over $200K",
 ];
 
-const JobForm = ({
-  initialJob = {
-    title: "",
-    type: "Full-Time",
-    location: "",
+// Defined outside the component so the object reference is stable across
+// renders. If this were an inline default in the function signature, React
+// would create a new object every render, making the useEffect dependency
+// change on every keystroke and resetting the form continuously.
+const EMPTY_JOB = {
+  title: "",
+  type: "Full-Time",
+  location: "",
+  description: "",
+  salary: "Under $50K",
+  minimumScoreThreshold: 50,
+  company: {
+    name: "",
     description: "",
-    salary: "Under $50K",
-    minimumScoreThreshold: 50,
-    company: {
-      name: "",
-      description: "",
-      contactEmail: "",
-      contactPhone: "",
-    },
+    contactEmail: "",
+    contactPhone: "",
   },
-  onSubmit,
-  heading,
-  submitLabel,
-}) => {
-  const [job, setJob] = useState(initialJob);
+};
+
+const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
+  const [job, setJob] = useState(initialJob ?? EMPTY_JOB);
 
   useEffect(() => {
-    setJob(initialJob);
+    if (initialJob) {
+      setJob(initialJob);
+    }
   }, [initialJob]);
 
   const updateField = (field, value) => {
@@ -62,7 +67,7 @@ const JobForm = ({
   };
 
   return (
-    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 bg-[#21b8b2] ">
+    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 bg-[#21b8b2]">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
           <div className="rounded-[2rem] border border-white/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.24)] text-white">
@@ -74,12 +79,13 @@ const JobForm = ({
                 Share your role with quality developers
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">
-                Fill in the details and we’ll help your listing reach top talent
-                faster with a polished presentation that stands out.
+                Fill in the details and we'll help your listing reach top
+                talent faster with a polished presentation that stands out.
               </p>
             </div>
 
-            <form className="space-y-5" onSubmit={submit}>
+     <form id="job-form" className="space-y-5" onSubmit={submit}>
+              {/* Job type + Salary */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
                   <span className="text-sm text-white/70">Job type</span>
@@ -109,6 +115,7 @@ const JobForm = ({
                 </label>
               </div>
 
+              {/* Job title */}
               <label className="block">
                 <span className="text-sm text-white/70">Job title</span>
                 <input
@@ -119,6 +126,7 @@ const JobForm = ({
                 />
               </label>
 
+              {/* Location */}
               <label className="block">
                 <span className="text-sm text-white/70">Location</span>
                 <input
@@ -129,17 +137,16 @@ const JobForm = ({
                 />
               </label>
 
-              <label className="block">
+              {/* ── Job Description (CKEditor) ── */}
+              <div className="block">
                 <span className="text-sm text-white/70">Job description</span>
-                <textarea
+                <JobDescriptionEditor
                   value={job.description}
-                  onChange={(e) => updateField("description", e.target.value)}
-                  rows={5}
-                  placeholder="Describe the role, expectations, and culture"
-                  className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  onChange={(html) => updateField("description", html)}
                 />
-              </label>
+              </div>
 
+              {/* Minimum score */}
               <label className="block">
                 <span className="text-sm text-white/70">
                   Minimum candidate score
@@ -156,12 +163,15 @@ const JobForm = ({
                 />
               </label>
 
+              {/* Company name + Email */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
                   <span className="text-sm text-white/70">Company name</span>
                   <input
                     value={job.company.name}
-                    onChange={(e) => updateCompanyField("name", e.target.value)}
+                    onChange={(e) =>
+                      updateCompanyField("name", e.target.value)
+                    }
                     placeholder="Company name"
                     className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                   />
@@ -180,6 +190,7 @@ const JobForm = ({
                 </label>
               </div>
 
+              {/* Company phone */}
               <label className="block">
                 <span className="text-sm text-white/70">Company phone</span>
                 <input
@@ -192,6 +203,7 @@ const JobForm = ({
                 />
               </label>
 
+              {/* Company description */}
               <label className="block">
                 <span className="text-sm text-white/70">
                   Company description
@@ -207,11 +219,13 @@ const JobForm = ({
                 />
               </label>
 
-              <button
-                type="submit"
-                className="w-full rounded-3xl bg-[#21b8b2] px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-[#1aa69f]">
-                {submitLabel}
-              </button>
+<button
+  type="submit"
+  form="job-form"
+  className="w-full rounded-3xl bg-[#21b8b2] px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-[#1aa69f]">
+  {submitLabel}
+</button>
+
             </form>
           </div>
 
@@ -219,9 +233,9 @@ const JobForm = ({
             <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl text-white">
               <h3 className="text-2xl font-bold">Why this form works</h3>
               <p className="mt-4 text-sm leading-7 text-white/70">
-                The new UI helps recruiters and hiring managers quickly scan the
-                job outline, and candidates immediately understand the role,
-                pay, and company fit.
+                The new UI helps recruiters and hiring managers quickly scan
+                the job outline, and candidates immediately understand the
+                role, pay, and company fit.
               </p>
               <ul className="mt-6 space-y-3 text-sm text-white/80">
                 <li>• Clean fields for fast posting</li>
