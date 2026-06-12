@@ -39,7 +39,7 @@ const Footer = () => {
         toast.success(
           "Thank you for subscribing. You have been successfully added to our mailing list.",
         );
-      } catch (err) {
+      } catch {
         toast.error("Subscription failed. Please try again.");
       } finally {
         setLoading(false);

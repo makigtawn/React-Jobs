@@ -15,9 +15,6 @@ const JobListings = ({ isHome = false }) => {
         if (isHome) query = query.limit(3);  // replaces ?_limit=3
 
         const { data, error } = await query;
-        // #region agent log
-        fetch('http://127.0.0.1:7344/ingest/f404edb9-b305-43de-9ba7-568fd646dc90',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'2b480a'},body:JSON.stringify({sessionId:'2b480a',runId:'pre-fix',hypothesisId:'B',location:'JobListings.jsx:fetchJobs',message:'jobs query result',data:{isHome,hasError:!!error,errorCode:error?.code??null,errorMessage:error?.message??null,rowCount:data?.length??0},timestamp:Date.now()})}).catch(()=>{});
-        // #endregion
         if (error) throw error;
 
         // reshape flat DB rows → nested shape your components expect
@@ -38,9 +35,6 @@ const JobListings = ({ isHome = false }) => {
 
         setJobs(shaped);
       } catch (error) {
-        // #region agent log
-        fetch('http://127.0.0.1:7344/ingest/f404edb9-b305-43de-9ba7-568fd646dc90',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'2b480a'},body:JSON.stringify({sessionId:'2b480a',runId:'pre-fix',hypothesisId:'B',location:'JobListings.jsx:catch',message:'jobs fetch failed',data:{isHome,errorMessage:error?.message??String(error)},timestamp:Date.now()})}).catch(()=>{});
-        // #endregion
         console.log("Error fetching jobs:", error);
       } finally {
         setLoading(false);

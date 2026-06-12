@@ -24,6 +24,7 @@ const JobForm = ({
     location: "",
     description: "",
     salary: "Under $50K",
+    minimumScoreThreshold: 50,
     company: {
       name: "",
       description: "",
@@ -135,6 +136,22 @@ const JobForm = ({
                   onChange={(e) => updateField("description", e.target.value)}
                   rows={5}
                   placeholder="Describe the role, expectations, and culture"
+                  className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                />
+              </label>
+
+              <label className="block">
+                <span className="text-sm text-white/70">
+                  Minimum candidate score
+                </span>
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={job.minimumScoreThreshold}
+                  onChange={(e) =>
+                    updateField("minimumScoreThreshold", e.target.value)
+                  }
                   className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>

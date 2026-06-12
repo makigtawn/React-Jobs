@@ -7,6 +7,7 @@ import {
 
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PublicOnlyRoute from "./components/PublicOnlyRoute";
 
 import HomePage from "./pages/HomePage";
 import MainLayout from "./layouts/MainLayout";
@@ -18,45 +19,29 @@ import AddJobPage from "./pages/AddJobPage";
 import EditJobPage from "./pages/EditJobPage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import EmployerDashboardPage from "./pages/EmployerDashboardPage";
 
 import { supabase } from "./utils/supabase";
+import { apiRequest } from "./services/api";
 
 const App = () => {
-  // #region agent log
-  fetch("http://127.0.0.1:7344/ingest/f404edb9-b305-43de-9ba7-568fd646dc90", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Debug-Session-Id": "2b480a",
-    },
-    body: JSON.stringify({
-      sessionId: "2b480a",
-      runId: "pre-fix",
-      hypothesisId: "E",
-      location: "App.jsx:render",
-      message: "App component mounted",
-      data: {
-        pathname:
-          typeof window !== "undefined" ? window.location.pathname : null,
-      },
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {});
-  // #endregion
-
   const addJob = async (newJob) => {
-    const { error } = await supabase.from("jobs").insert({
+    await apiRequest("/api/jobs", {
+      method: "POST",
+      body: JSON.stringify({
       title: newJob.title,
       type: newJob.type,
       location: newJob.location,
       description: newJob.description,
       salary: newJob.salary,
-      company_name: newJob.company.name,
-      company_description: newJob.company.description,
-      contact_email: newJob.company.contactEmail,
-      contact_phone: newJob.company.contactPhone,
+        companyName: newJob.company.name,
+        companyDescription: newJob.company.description,
+        contactEmail: newJob.company.contactEmail,
+        contactPhone: newJob.company.contactPhone,
+        minimumScoreThreshold: Number(newJob.minimumScoreThreshold || 0),
+      }),
     });
-    if (error) console.error("Add job error:", error);
   };
 
   const deleteJob = async (id) => {
@@ -73,6 +58,7 @@ const App = () => {
         location: job.location,
         description: job.description,
         salary: job.salary,
+        minimum_score_threshold: Number(job.minimumScoreThreshold || 0),
         company_name: job.company.name,
         company_description: job.company.description,
         contact_email: job.company.contactEmail,
@@ -88,7 +74,30 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={
+            <PublicOnlyRoute>
+              <LoginPage />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicOnlyRoute>
+              <SignupPage />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <EmployerDashboardPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/add-job"
           element={

@@ -90,10 +90,10 @@ npm install
 
 ## Running the App
 
-### Start Backend
+### Start Backend API
 
 ```
-npm run server
+npm run dev:api
 ```
 
 ### Start Frontend
@@ -108,6 +108,16 @@ App will run on:
 http://localhost:5173
 ```
 
+The backend API runs on:
+
+```
+http://localhost:3000
+```
+
+Required environment variables are listed in `.env.example`. Apply
+`supabase/migrations/202606110001_auth_ranking.sql` to your Supabase project
+before using candidate ranking.
+
 ---
 
 ## Key Concepts Used
@@ -118,6 +128,8 @@ http://localhost:5173
 * CRUD operations
 * Separation of concerns (frontend vs backend)
 * Role-based UI rendering
+* Supabase Auth session persistence
+* AI-assisted resume and GitHub scoring
 
 ---
 

@@ -1,82 +1,128 @@
 import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const LoginPage = () => {
   const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = location.state?.from?.pathname || "/jobs";
 
-  const [email, setEmail] = useState("");
+  const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
 
-  const validateEmail = (value) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  const updateField = (field, value) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const validate = () => {
+    if (!emailRegex.test(form.email))
+      return "Please enter a valid email address.";
+    if (form.password.length < 6)
+      return "Password must be at least 6 characters.";
+    return "";
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setErrorMsg("");
-    setSuccessMsg("");
 
-    if (!validateEmail(email)) {
-      setErrorMsg("Please enter a valid email address.");
+    const validationError = validate();
+    if (validationError) {
+      setErrorMsg(validationError);
       return;
     }
 
-    if (loading) return;
-
     setLoading(true);
-
-    const { error } = await login(email);
+    const { error } = await login(form.email, form.password);
+    setLoading(false);
 
     if (error) {
-      setErrorMsg(error.message || "Something went wrong.");
-    } else {
-      setSuccessMsg("Check your email for the login link.");
-      setEmail("");
+      // Handle specific error messages
+      if (
+        error.message?.toLowerCase().includes("invalid login credentials") ||
+        error.message?.toLowerCase().includes("invalid credentials")
+      ) {
+        setErrorMsg(
+          "Invalid email or password. Please check your credentials and ensure you've verified your email.",
+        );
+      } else if (error.message?.toLowerCase().includes("email not confirmed")) {
+        setErrorMsg(
+          "Please verify your email address first. Check your inbox for the verification link.",
+        );
+      } else {
+        setErrorMsg(error.message || "Unable to log in.");
+      }
+      return;
     }
 
-    setLoading(false);
+    navigate(redirectTo, { replace: true });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-slate-200 rounded-xl shadow-lg p-8">
-        <h1 className="text-2xl font-semibold text-white mb-2">Welcome back</h1>
-        <p className="text-sm text-slate-500 mb-6">
-          Enter your email to receive a login link
+    <section className="min-h-screen bg-[#152a31] px-4 py-24">
+      <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-[#0d1f25] p-8 text-white shadow-2xl">
+        <h1 className="text-3xl font-black">Welcome back</h1>
+        <p className="mt-2 text-sm text-white/65">
+          Log in to post jobs, apply, and review candidates.
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={loading}
-            required
-            className="px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-          />
+        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+          <label className="block">
+            <span className="text-sm text-white/75">Email</span>
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) => updateField("email", e.target.value)}
+              disabled={loading}
+              className="mt-2 w-full rounded-xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+            />
+          </label>
 
-          {errorMsg && <p className="text-sm text-red-400">{errorMsg}</p>}
+          <label className="block">
+            <span className="text-sm text-white/75">Password</span>
+            <input
+              type="password"
+              value={form.password}
+              onChange={(e) => updateField("password", e.target.value)}
+              disabled={loading}
+              className="mt-2 w-full rounded-xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+            />
+          </label>
 
-          {successMsg && <p className="text-sm text-green-400">{successMsg}</p>}
+          {errorMsg && (
+            <div className="rounded-lg bg-red-900/20 border border-red-700/30 p-3">
+              <p className="text-sm text-red-200">{errorMsg}</p>
+            </div>
+          )}
 
           <button
             type="submit"
             disabled={loading}
-            className={`py-2 rounded-lg font-medium transition 
-              ${
-                loading
-                  ? "bg-indigo-400 cursor-not-allowed"
-                  : "bg-indigo-600 hover:bg-blue-700"
-              } text-white`}>
-            {loading ? "Sending..." : "Send link"}
+            className="w-full rounded-xl bg-[#21b8b2] px-5 py-3 font-semibold text-slate-950 transition hover:bg-[#1aa69f] disabled:cursor-not-allowed disabled:opacity-70">
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        <div className="mt-6 rounded-lg bg-blue-900/20 border border-blue-700/30 p-4">
+          <p className="text-xs text-blue-200">
+            <strong>💡 Tip:</strong> After signing up, check your email for a
+            verification link. You'll need to verify your email before you can
+            log in.
+          </p>
+        </div>
+
+        <p className="mt-6 text-center text-sm text-white/65">
+          Need an account?{" "}
+          <Link to="/signup" className="font-semibold text-[#21b8b2]">
+            Sign up
+          </Link>
+        </p>
       </div>
-    </div>
+    </section>
   );
 };
 

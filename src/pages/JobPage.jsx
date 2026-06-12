@@ -3,9 +3,12 @@ import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../components/Button";
+import ApplicationForm from "../components/ApplicationForm";
+import { useAuth } from "../context/useAuth";
 const JobPage = ({ deleteJob }) => {
   const navigate = useNavigate();
   const job = useLoaderData();
+  const { user } = useAuth();
 
   const onDeleteClick = (jobId) => {
     const confirm = window.confirm(
@@ -52,6 +55,7 @@ const JobPage = ({ deleteJob }) => {
                 </h3>
                 <p className="mb-4">{job.salary}</p>
               </div>
+              {user && <ApplicationForm jobId={job.id} />}
             </main>
 
             <aside>

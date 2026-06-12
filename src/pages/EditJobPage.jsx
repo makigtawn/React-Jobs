@@ -18,6 +18,7 @@ const EditJobPage = ({ updateJobSubmit }) => {
     location: job.location,
     description: job.description,
     salary: job.salary,
+    minimumScoreThreshold: job.minimumScoreThreshold || 0,
     company: {
       name: job.company.name,
       description: job.company.description,

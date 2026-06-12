@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiArrowRight, FiMoon, FiSun, FiMenu } from "react-icons/fi";
 import logo from "../assets/images/logo.png";
+import { useAuth } from "../context/useAuth";
 
 const getStoredTheme = () => {
   if (typeof window === "undefined") return "dark";
@@ -13,6 +14,7 @@ const getStoredTheme = () => {
 };
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   const [theme, setTheme] = useState(() => getStoredTheme());
   const [hideNavbar, setHideNavbar] = useState(false);
   const lastScrollY = useRef(0);
@@ -58,6 +60,11 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setMenuOpen(false);
   };
 
   const linkClass = ({ isActive }) =>
@@ -137,15 +144,47 @@ const Navbar = () => {
                 </li>
               </ul>
 
-              <NavLink
-                to="/login"
-                className={`text-sm font-medium transition duration-300 ${
-                  isHome
-                    ? "text-white/80 hover:text-white"
-                    : "text-[var(--color-text-primary)]"
-                }`}>
-                Login
-              </NavLink>
+              {!user && (
+                <>
+                  <NavLink
+                    to="/login"
+                    className={`text-sm font-medium transition duration-300 ${
+                      isHome
+                        ? "text-white/80 hover:text-white"
+                        : "text-[var(--color-text-primary)]"
+                    }`}>
+                    Login
+                  </NavLink>
+
+                  <NavLink
+                    to="/signup"
+                    className={`text-sm font-medium transition duration-300 ${
+                      isHome
+                        ? "text-white/80 hover:text-white"
+                        : "text-[var(--color-text-primary)]"
+                    }`}>
+                    Signup
+                  </NavLink>
+                </>
+              )}
+
+              {user && (
+                <>
+                  <NavLink to="/dashboard" className={linkClass}>
+                    Dashboard
+                  </NavLink>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className={`text-sm font-medium transition duration-300 ${
+                      isHome
+                        ? "text-white/80 hover:text-white"
+                        : "text-[var(--color-text-primary)]"
+                    }`}>
+                    Logout
+                  </button>
+                </>
+              )}
 
               <NavLink
                 to="/add-job"
@@ -193,12 +232,39 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="flex flex-col gap-3 pt-2">
-              <NavLink
-                to="/login"
-                onClick={() => setMenuOpen(false)}
-                className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
-                Login
-              </NavLink>
+              {!user && (
+                <>
+                  <NavLink
+                    to="/login"
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    Login
+                  </NavLink>
+                  <NavLink
+                    to="/signup"
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    Signup
+                  </NavLink>
+                </>
+              )}
+
+              {user && (
+                <>
+                  <NavLink
+                    to="/dashboard"
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    Dashboard
+                  </NavLink>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    Logout
+                  </button>
+                </>
+              )}
               <NavLink
                 to="/add-job"
                 onClick={() => setMenuOpen(false)}

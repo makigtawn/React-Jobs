@@ -1,10 +1,9 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 import Spinner from "./Spinner";
 
-const ProtectedRoute = ({ children }) => {
+const PublicOnlyRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const location = useLocation();
 
   if (loading) {
     return (
@@ -14,9 +13,9 @@ const ProtectedRoute = ({ children }) => {
     );
   }
 
-  if (!user) return <Navigate to="/login" state={{ from: location }} replace />;
+  if (user) return <Navigate to="/jobs" replace />;
 
   return children;
 };
 
-export default ProtectedRoute;
+export default PublicOnlyRoute;
