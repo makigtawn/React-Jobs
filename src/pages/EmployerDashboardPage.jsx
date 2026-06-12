@@ -16,14 +16,62 @@ const EmployerDashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const handleInjectTestData = () => {
+    if (jobs.length === 0) {
+      setJobs([{ id: "dummy-id", title: "React Developer (Demo Mode)" }]);
+    }
+    setSelectedJobId("dummy-id");
+    
+    setApplications([
+      {
+        id: "mock-1",
+        candidate_name: "Meklit Tesfaye",
+        candidate_email: "meklit@example.com",
+        skills_score: 95,
+        experience_score: 88,
+        github_score: 92,
+        final_score: 93,
+        status: "Pending",
+        ai_reasoning: "Excellent matching technical profile. Extensive experience building production-ready UIs with React, Next.js, and Tailwind CSS. Demonstrates architectural understanding of efficient state layouts.",
+        github_reasoning: "High code quality across repositories. Active development stream with highly detailed documentation, clean branching habits, and solid structural patterns."
+      },
+      {
+        id: "mock-2",
+        candidate_name: "John Doe",
+        candidate_email: "john@dev.com",
+        skills_score: 74,
+        experience_score: 80,
+        github_score: 65,
+        final_score: 71,
+        status: "Accepted",
+        ai_reasoning: "Solid foundational knowledge in core engineering paradigms, but lacks deeper complexity in mid-to-senior framework execution.",
+        github_reasoning: "Basic repository layouts present. Commits are bundled in single blocks rather than distributed cleanly across feature timelines."
+      }
+    ]);
+
+    setTopCandidates([
+      { candidateName: "Meklit Tesfaye", finalScore: 93, status: "Pending" },
+      { candidateName: "John Doe", finalScore: 71, status: "Accepted" }
+    ]);
+    
+    setLoading(false); 
+  };
+
   useEffect(() => {
     const loadJobs = async () => {
       try {
         const data = await apiRequest("/api/jobs/mine");
-        setJobs(data.jobs);
-        setSelectedJobId(data.jobs[0]?.id || "");
+        setJobs(data.jobs || []);
+        
+        if (!data.jobs || data.jobs.length === 0) {
+          setJobs([{ id: "dummy-id", title: "React Developer (Demo Mode)" }]);
+          setSelectedJobId("dummy-id");
+        } else {
+          setSelectedJobId(data.jobs[0]?.id || "");
+        }
       } catch (error) {
-        setErrorMsg(error.message);
+        setJobs([{ id: "dummy-id", title: "React Developer (Demo Mode)" }]);
+        setSelectedJobId("dummy-id");
       } finally {
         setLoading(false);
       }
@@ -33,23 +81,19 @@ const EmployerDashboardPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!selectedJobId) return;
+    if (!selectedJobId || selectedJobId === "dummy-id") return;
 
     const loadDashboard = async () => {
       setLoading(true);
       setErrorMsg("");
       try {
-        const params = new URLSearchParams({
-          status,
-          sort,
-          ...(search ? { search } : {}),
-        });
+        const params = new URLSearchParams({ status, sort, ...(search ? { search } : {}) });
         const [applicationData, topData] = await Promise.all([
           apiRequest(`/api/jobs/${selectedJobId}/applications?${params}`),
           apiRequest(`/api/jobs/${selectedJobId}/top-candidates`),
         ]);
-        setApplications(applicationData.applications);
-        setTopCandidates(topData);
+        setApplications(applicationData.applications || []);
+        setTopCandidates(topData || []);
       } catch (error) {
         setErrorMsg(error.message);
       } finally {
@@ -65,165 +109,175 @@ const EmployerDashboardPage = () => {
     [jobs, selectedJobId],
   );
 
+  const ScoreBar = ({ label, score }) => (
+    <div className="flex flex-col gap-1 w-24">
+      <div className="flex justify-between text-[11px] text-white/60">
+        <span>{label}</span>
+        <span className="font-semibold text-white">{score}</span>
+      </div>
+      <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+        <div 
+          className="h-full bg-[#21b8b2] rounded-full" 
+          style={{ width: `${Math.min(Math.max(score, 0), 100)}%` }}
+        />
+      </div>
+    </div>
+  );
+
   return (
-    <section className="min-h-screen bg-[#152a31] px-3 py-12 text-white sm:px-4 sm:py-16 md:px-6 md:py-20 lg:px-8 lg:py-24">
+    <section className="min-h-screen bg-[#152a31] px-4 py-12 text-white md:px-8">
       <div className="mx-auto w-full max-w-7xl">
-        <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
+        {/* Header */}
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-white/10 pb-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-[#21b8b2] sm:text-sm">
-              Employer dashboard
+            <p className="text-xs uppercase tracking-[0.3em] text-[#21b8b2] font-semibold">
+              Employer Dashboard
             </p>
-            <h1 className="mt-2 text-2xl font-black sm:mt-3 sm:text-3xl md:text-4xl">
-              Candidate rankings
+            <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
+              Candidate Rankings
             </h1>
           </div>
 
-          <select
-            value={selectedJobId}
-            onChange={(e) => setSelectedJobId(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-[#0d1f25] px-3 py-2 text-sm text-white outline-none focus:border-[#21b8b2] sm:px-4 sm:py-3 md:w-auto">
-            {jobs.map((job) => (
-              <option key={job.id} value={job.id}>
-                {job.title}
-              </option>
-            ))}
-          </select>
+          <div className="flex items-center gap-3 w-full md:w-auto">
+            {/* The Safe Inject Button */}
+            <button
+              type="button"
+              onClick={handleInjectTestData}
+              className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs px-4 py-3 rounded-xl transition shadow-md whitespace-nowrap">
+              ⚡ Inject Test Data
+            </button>
+
+            <select
+              value={selectedJobId}
+              onChange={(e) => setSelectedJobId(e.target.value)}
+              className="w-full rounded-xl border border-white/10 bg-[#0d1f25] px-4 py-3 text-sm text-white outline-none focus:border-[#21b8b2] md:w-72 transition cursor-pointer">
+              {jobs.map((job) => (
+                <option key={job.id} value={job.id}>
+                  {job.title}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {errorMsg && (
-          <div className="mt-4 rounded-xl border border-red-300/30 bg-red-500/10 p-3 text-sm text-red-100 sm:mt-6 sm:p-4">
+          <div className="mt-6 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-200">
             {errorMsg}
-          </div>
-        )}
-
-        {!loading && jobs.length === 0 && (
-          <div className="mt-6 rounded-2xl border border-white/10 bg-[#0d1f25] p-4 text-sm sm:mt-8 sm:p-8">
-            Create a job post to start receiving ranked applicants.
           </div>
         )}
 
         {selectedJob && (
           <>
-            <div className="mt-6 grid gap-2 sm:gap-3 sm:mt-8 md:grid-cols-4">
+            {/* Filters */}
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search candidate"
-                className="rounded-xl border border-white/10 bg-[#0d1f25] px-3 py-2 text-sm text-white outline-none focus:border-[#21b8b2] sm:px-4 sm:py-3 md:col-span-2"
+                placeholder="Search candidate name..."
+                className="rounded-xl border border-white/10 bg-[#0d1f25] px-4 py-3 text-sm text-white outline-none focus:border-[#21b8b2] md:col-span-2 placeholder:text-white/40"
               />
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="rounded-xl border border-white/10 bg-[#0d1f25] px-3 py-2 text-sm text-white outline-none focus:border-[#21b8b2] sm:px-4 sm:py-3">
-                <option value="highest">Highest score</option>
-                <option value="lowest">Lowest score</option>
+                className="rounded-xl border border-white/10 bg-[#0d1f25] px-4 py-3 text-sm text-white outline-none focus:border-[#21b8b2] transition cursor-pointer">
+                <option value="highest">Highest Score</option>
+                <option value="lowest">Lowest Score</option>
               </select>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="rounded-xl border border-white/10 bg-[#0d1f25] px-3 py-2 text-sm text-white outline-none focus:border-[#21b8b2] sm:px-4 sm:py-3">
+                className="rounded-xl border border-white/10 bg-[#0d1f25] px-4 py-3 text-sm text-white outline-none focus:border-[#21b8b2] transition cursor-pointer">
                 {statusOptions.map((option) => (
                   <option key={option} value={option}>
-                    {option}
+                    {option} Status
                   </option>
                 ))}
               </select>
             </div>
 
-            <div className="mt-6 grid gap-4 sm:mt-8 sm:gap-6 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px]">
-              <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1f25]">
-                <div className="border-b border-white/10 px-3 py-3 sm:px-5 sm:py-4">
-                  <h2 className="text-lg font-bold sm:text-xl">
-                    {selectedJob.title}
-                  </h2>
-                  <p className="mt-1 text-xs text-white/60 sm:text-sm">
-                    Minimum score: {selectedJob.minimum_score_threshold ?? 0}
-                  </p>
+            {/* Main Content Layout */}
+            <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px]">
+              
+              {/* Applications Table */}
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1f25] shadow-xl">
+                <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.02] px-6 py-5">
+                  <div>
+                    <h2 className="text-xl font-bold tracking-tight text-[#21b8b2]">
+                      {selectedJob.title}
+                    </h2>
+                    <p className="mt-1 text-xs text-white/50">
+                      Required Passing Threshold: <span className="text-white font-medium">{selectedJob.minimum_score_threshold ?? 50}%</span>
+                    </p>
+                  </div>
                 </div>
 
                 {loading ? (
-                  <div className="flex min-h-64 items-center justify-center">
+                  <div className="flex min-h-[350px] items-center justify-center">
                     <Spinner loading={loading} />
                   </div>
                 ) : applications.length === 0 ? (
-                  <div className="flex min-h-48 items-center justify-center px-4 py-8">
-                    <p className="text-center text-sm text-white/60">
-                      No applications yet for this job.
+                  <div className="flex min-h-[250px] items-center justify-center px-4 py-8">
+                    <p className="text-sm text-white/40 text-center">
+                      No applications. Click the orange "Inject Test Data" button above to populate layout!
                     </p>
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
-                    <table className="min-w-full text-left text-xs sm:text-sm">
-                      <thead className="bg-white/5 text-white/70 text-xs sticky top-0">
-                        <tr>
-                          <th className="px-3 py-2 font-semibold sm:px-5 sm:py-3 whitespace-nowrap">
-                            Candidate
-                          </th>
-                          <th className="px-2 py-2 font-semibold sm:px-5 sm:py-3 whitespace-nowrap">
-                            Skills
-                          </th>
-                          <th className="px-2 py-2 font-semibold sm:px-5 sm:py-3 whitespace-nowrap">
-                            Exp.
-                          </th>
-                          <th className="px-2 py-2 font-semibold sm:px-5 sm:py-3 whitespace-nowrap">
-                            GitHub
-                          </th>
-                          <th className="px-2 py-2 font-semibold sm:px-5 sm:py-3 whitespace-nowrap">
-                            Final
-                          </th>
-                          <th className="px-2 py-2 font-semibold sm:px-5 sm:py-3 whitespace-nowrap">
-                            Status
-                          </th>
-                          <th className="px-2 py-2 font-semibold sm:px-5 sm:py-3 whitespace-nowrap">
-                            View
-                          </th>
+                    <table className="w-full text-left text-sm border-collapse">
+                      <thead>
+                        <tr className="border-b border-white/10 bg-white/[0.01] text-xs font-semibold uppercase tracking-wider text-white/40">
+                          <th className="px-6 py-4">Candidate Information</th>
+                          <th className="px-6 py-4">AI Score Metrics Breakdown</th>
+                          <th className="px-6 py-4 text-center">Match</th>
+                          <th className="px-6 py-4 text-center">Status</th>
+                          <th className="px-6 py-4 text-right">Action</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="divide-y divide-white/5">
                         {applications.map((application) => (
-                          <tr
-                            key={application.id}
-                            className="border-t border-white/10 hover:bg-white/5 transition">
-                            <td className="px-3 py-2 sm:px-5 sm:py-4">
-                              <div className="font-semibold text-xs sm:text-sm">
+                          <tr key={application.id} className="hover:bg-white/[0.02] transition-colors group">
+                            <td className="px-6 py-5">
+                              <div className="font-bold text-white group-hover:text-[#21b8b2] transition-colors">
                                 {application.candidate_name}
                               </div>
-                              <div className="text-xs text-white/55 truncate">
+                              <div className="text-xs text-white/50 mt-0.5">
                                 {application.candidate_email}
                               </div>
                             </td>
-                            <td className="px-2 py-2 sm:px-5 sm:py-4 text-center font-medium text-xs sm:text-sm">
-                              {application.skills_score}
+                            <td className="px-6 py-5">
+                              <div className="flex flex-wrap gap-x-4 gap-y-2">
+                                <ScoreBar label="Skills" score={application.skills_score} />
+                                <ScoreBar label="Exp." score={application.experience_score} />
+                                <ScoreBar label="GitHub" score={application.github_score} />
+                              </div>
                             </td>
-                            <td className="px-2 py-2 sm:px-5 sm:py-4 text-center font-medium text-xs sm:text-sm">
-                              {application.experience_score}
+                            <td className="px-6 py-5 text-center">
+                              <div className="inline-flex flex-col items-center justify-center h-12 w-12 rounded-xl bg-[#21b8b2]/10 border border-[#21b8b2]/20">
+                                <span className="text-base font-black text-[#21b8b2]">
+                                  {application.final_score}
+                                </span>
+                              </div>
                             </td>
-                            <td className="px-2 py-2 sm:px-5 sm:py-4 text-center font-medium text-xs sm:text-sm">
-                              {application.github_score}
-                            </td>
-                            <td className="px-2 py-2 sm:px-5 sm:py-4 font-bold text-xs sm:text-sm text-[#21b8b2]">
-                              {application.final_score}
-                            </td>
-                            <td className="px-2 py-2 sm:px-5 sm:py-4 text-xs sm:text-sm">
-                              <span
-                                className={`inline-block px-2 py-1 rounded text-xs font-semibold ${
+                            <td className="px-6 py-5 text-center">
+                              <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium tracking-wide ${
                                   application.status === "Accepted"
-                                    ? "bg-green-500/20 text-green-300"
+                                    ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                                     : application.status === "Rejected"
-                                      ? "bg-red-500/20 text-red-300"
-                                      : "bg-yellow-500/20 text-yellow-300"
+                                      ? "bg-rose-500/10 text-rose-400 border border-rose-500/20"
+                                      : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
                                 }`}>
+                                <span className={`h-1.5 w-1.5 rounded-full mr-1.5 ${
+                                  application.status === "Accepted" ? "bg-emerald-400" : application.status === "Rejected" ? "bg-rose-400" : "bg-amber-400"
+                                }`} />
                                 {application.status}
                               </span>
                             </td>
-                            <td className="px-2 py-2 sm:px-5 sm:py-4">
+                            <td className="px-6 py-5 text-right">
                               <button
                                 type="button"
-                                onClick={() =>
-                                  setSelectedReasoning(application)
-                                }
-                                className="rounded-lg border border-white/10 px-2 py-1 text-xs font-semibold text-[#21b8b2] hover:bg-white/5 transition sm:px-3 sm:py-2">
-                                View
+                                onClick={() => setSelectedReasoning(application)}
+                                className="rounded-xl border border-[#21b8b2]/30 bg-[#21b8b2]/5 px-4 py-2 text-xs font-bold text-[#21b8b2] hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200">
+                                View Report
                               </button>
                             </td>
                           </tr>
@@ -234,31 +288,25 @@ const EmployerDashboardPage = () => {
                 )}
               </div>
 
-              <aside className="rounded-2xl border border-white/10 bg-[#0d1f25] p-3 sm:p-5">
-                <h2 className="text-lg font-bold sm:text-xl">
-                  Top 10 candidates
+              {/* Sidebar */}
+              <aside className="rounded-2xl border border-white/10 bg-[#0d1f25] p-5 shadow-xl self-start">
+                <h2 className="text-lg font-bold tracking-tight text-white/90">
+                  Top 10 Leaderboard
                 </h2>
-                <div className="mt-3 sm:mt-4 space-y-2 sm:space-y-3 max-h-96 overflow-y-auto">
+                <p className="text-xs text-white/40 mt-0.5 mb-4">Highest ranking profiles</p>
+                <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
                   {topCandidates.length === 0 ? (
-                    <p className="text-sm text-white/60 py-4">
-                      No candidates yet.
-                    </p>
+                    <p className="text-sm text-white/40 py-4 text-center">No candidates indexed yet.</p>
                   ) : (
                     topCandidates.map((candidate, index) => (
-                      <div
-                        key={`${candidate.candidateName}-${index}`}
-                        className="rounded-xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition">
-                        <div className="flex items-center justify-between gap-2">
-                          <p className="font-semibold text-sm truncate">
-                            {candidate.candidateName}
-                          </p>
-                          <span className="text-lg font-black text-[#21b8b2] flex-shrink-0">
-                            {candidate.finalScore}
-                          </span>
+                      <div key={index} className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3.5 hover:border-white/10 hover:bg-white/[0.04] transition-all">
+                        <div className="min-w-0">
+                          <p className="font-semibold text-sm text-white truncate">{candidate.candidateName}</p>
+                          <p className="text-[11px] text-white/40 mt-0.5">Status: {candidate.status}</p>
                         </div>
-                        <p className="mt-1 text-xs text-white/60">
-                          {candidate.status}
-                        </p>
+                        <span className="text-lg font-black text-[#21b8b2] bg-[#21b8b2]/10 px-2.5 py-1 rounded-lg border border-[#21b8b2]/10">
+                          {candidate.finalScore}
+                        </span>
                       </div>
                     ))
                   )}
@@ -269,47 +317,39 @@ const EmployerDashboardPage = () => {
         )}
       </div>
 
+      {/* Evaluation Details Popup Modal */}
       {selectedReasoning && (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/70 px-3 py-4 sm:px-4">
-          <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-[#0d1f25] p-4 shadow-2xl sm:p-6">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-              <div className="min-w-0">
-                <h2 className="text-xl font-black sm:text-2xl truncate">
-                  {selectedReasoning.candidate_name}
-                </h2>
-                <p className="mt-1 text-xs text-white/60 sm:text-sm">
-                  Final score: {selectedReasoning.final_score}
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 px-4 backdrop-blur-sm">
+          <div className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-[#0d1f25] p-6 shadow-2xl">
+            <div className="flex items-start justify-between border-b border-white/10 pb-4">
+              <div>
+                <h2 className="text-2xl font-black text-white">{selectedReasoning.candidate_name}</h2>
+                <p className="text-sm text-white/50 mt-1">
+                  Overall Evaluation Rating: <span className="text-[#21b8b2] font-bold">{selectedReasoning.final_score}/100</span>
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedReasoning(null)}
-                className="w-full rounded-lg border border-white/10 px-3 py-2 text-sm font-semibold hover:bg-white/5 transition sm:w-auto">
-                Close
+                className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold hover:bg-white/10 transition">
+                Close Report
               </button>
             </div>
-            <h3 className="mt-4 text-sm font-bold text-[#21b8b2] sm:mt-6">
-              Resume analysis
-            </h3>
-            <p className="mt-2 whitespace-pre-wrap text-xs leading-5 text-white/75 sm:text-sm sm:leading-6">
-              {selectedReasoning.ai_reasoning}
-            </p>
-            <h3 className="mt-4 text-sm font-bold text-[#21b8b2] sm:mt-6">
-              GitHub analysis
-            </h3>
-            <p className="mt-2 whitespace-pre-wrap text-xs leading-5 text-white/75 sm:text-sm sm:leading-6">
-              {selectedReasoning.github_reasoning}
-            </p>
-            {selectedReasoning.rejection_reason && (
-              <>
-                <h3 className="mt-4 text-sm font-bold text-red-300 sm:mt-6">
-                  Rejection reason
-                </h3>
-                <p className="mt-2 text-xs leading-5 text-white/75 sm:text-sm sm:leading-6">
-                  {selectedReasoning.rejection_reason}
+            
+            <div className="space-y-6 mt-6">
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#21b8b2]">Resume Analysis Insights</h3>
+                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-white/80 bg-white/[0.01] border border-white/5 p-4 rounded-xl">
+                  {selectedReasoning.ai_reasoning}
                 </p>
-              </>
-            )}
+              </div>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#21b8b2]">GitHub Performance Assessment</h3>
+                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-white/80 bg-white/[0.01] border border-white/5 p-4 rounded-xl">
+                  {selectedReasoning.github_reasoning}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}

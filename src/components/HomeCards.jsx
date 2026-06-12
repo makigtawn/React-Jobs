@@ -4,101 +4,49 @@ import { Link } from "react-router-dom";
 
 const HomeCards = () => {
   return (
-    <section className="relative bg-white py-14 sm:py-16">
+    <section className="relative bg-[#1f3238] dark:bg-slate-950 py-14 sm:py-16 text-white min-h-screen transition-colors duration-300">
       <div className="container-xl lg:container m-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center rounded-full border border-[var(--panel-border)] bg-[var(--panel-bg)]/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--muted-foreground)] shadow-sm backdrop-blur-sm">
-            Built for both sides of the hire
+          <div className="inline-flex items-center rounded-full border border-[#21b8b2]/30 bg-black/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[#21b8b2] shadow-sm backdrop-blur-sm">
+            Built for Hiring Managers and Employers
           </div>
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-violet-900 sm:text-4xl">
-            Everything you need to connect great talents with standout teams
+          <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Stop reading hundreds of resumes manually
           </h2>
-          <p className="mt-4 text-base leading-7 text-[var(--muted-foreground)] sm:text-lg">
-            Whether you are searching for growing your engineering team or
-            remote developers, explore a faster, clearer, and more polished path
-            forward.
+          <p className="mt-4 text-base leading-7 text-slate-200 sm:text-lg">
+            Automatically rank developers based on their technical skills, background, and code quality to hire the best talent instantly.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:gap-8">
-          <Card bg="bg-[color:rgba(52,48,42,0.7)] border border-[color:rgba(92,82,67,0.5)] shadow-[0_20px_60px_rgba(15,23,42,0.18)] dark:bg-[color:rgba(38,34,30,0.94)] dark:border-[color:rgba(124,112,94,0.32)]">
-            <div className="flex h-full flex-col">
-              <div className="inline-flex rounded-full border border-[color:rgba(219,196,161,0.2)] bg-[color:rgba(219,196,161,0.12)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[color:rgb(245,235,214)]">
-                For Developers
+        <div className="mt-10 max-w-2xl mx-auto">
+          <Card bg="bg-black/40 dark:bg-slate-900/60 border border-[#21b8b2]/20 dark:border-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-md">
+            <div className="flex h-full flex-col p-6">
+              <div className="inline-flex max-w-fit rounded-full border border-[#21b8b2]/40 bg-[#21b8b2]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#21b8b2]">
+                Automated Screening
               </div>
 
-              <h3 className="text-2xl font-bold tracking-tight text-[color:rgb(250,246,239)] sm:text-[1.8rem]">
-                Find opportunities that matches your ambition
+              <h3 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-[1.8rem]">
+                Rank developers and hire fast
               </h3>
-              <p className="mt-4 max-w-xl text-sm leading-7 text-[color:rgb(222,213,198)] sm:text-base">
-                Browse curated tech openings, compare teams quickly, and
-                discover roles where your skills can make a real impact.
+              <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
+                Our system parses applicant profiles and source code to bubble up top-tier candidates instantly, saving you dozens of hours.
               </p>
 
-              <div className="mt-8 grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-2xl border border-white/10 bg-black/10 px-4 py-3">
-                  <p className="text-lg font-semibold text-[color:rgb(250,246,239)]">
-                    Remote-ready
+              <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 text-sm">
+                <div className="rounded-2xl border border-white/10 bg-white/5 dark:bg-slate-950/40 px-4 py-3">
+                  <p className="text-lg font-semibold text-white">
+                    Code Quality Analysis
                   </p>
-
-                  <p className="mt-1 text-[color:rgb(222,213,198)]">
-                    Clear, relevant Skill-focused jobs
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-black/10 px-4 py-3">
-                  <p className="text-lg font-semibold text-[color:rgb(250,246,239)]">
-                    Curated listings
-                  </p>
-
-                  <p className="mt-1 text-[color:rgb(222,213,198)]">
-                    find jobs easily{" "}
+                  <p className="mt-1 text-slate-300">
+                    Deep insights into practical coding history.
                   </p>
                 </div>
-              </div>
-
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link
-                  to="/jobs"
-                  className="inline-flex items-center justify-center rounded-xl border border-[color:rgba(245,235,214,0.22)] bg-[color:rgb(231,220,201)] px-5 py-3 text-sm font-semibold text-[color:rgb(49,43,35)] transition duration-200 hover:-translate-y-0.5 hover:bg-[color:rgb(239,230,214)]">
-                  Browse Jobs
-                </Link>
-                <span className="text-sm text-[color:rgb(222,213,198)]">
-                  Explore the latest openings in seconds
-                </span>
-              </div>
-            </div>
-          </Card>
-
-          <Card bg="bg-[color:rgba(52,48,42,0.7)] border border-[color:rgba(92,82,67,0.5)] shadow-[0_20px_60px_rgba(15,23,42,0.18)] dark:bg-[color:rgba(38,34,30,0.94)] dark:border-[color:rgba(124,112,94,0.32)]">
-            <div className="flex h-full flex-col">
-              <div className="inline-flex rounded-full border border-[color:rgba(219,196,161,0.2)] bg-[color:rgba(219,196,161,0.12)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[color:rgb(245,235,214)]">
-                For Employers
-              </div>
-
-              <h3 className="text-2xl font-bold tracking-tight text-[color:rgb(250,246,239)] sm:text-[1.8rem]">
-                Showcase your role and attract the right developers faster
-              </h3>
-              <p className="mt-4 max-w-xl text-sm leading-7 text-[color:rgb(222,213,198)] sm:text-base">
-                Post your opening with confidence, highlight your team and
-                product, and put your opportunity in front of developers
-                actively looking for their next move.
-              </p>
-
-              <div className="mt-8 grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-2xl border border-white/10 bg-black/10 px-4 py-3">
-                  <p className="text-lg font-semibold text-[color:rgb(250,246,239)]">
-                    Faster discovery
+                <div className="rounded-2xl border border-white/10 bg-white/5 dark:bg-slate-950/40 px-4 py-3">
+                  <p className="text-lg font-semibold text-white">
+                    Instant Ranking
                   </p>
-                  <p className="mt-1 text-[color:rgb(222,213,198)]">
-                    Get seen by Skill-focused talent
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-black/10 px-4 py-3">
-                  <p className="text-lg font-semibold text-[color:rgb(250,246,239)]">
-                    Simple posting
-                  </p>
-                  <p className="mt-1 text-[color:rgb(222,213,198)]">
-                    Create and publish jobs with ease
+                  <p className="mt-1 text-slate-300">
+                    Candidates ordered by objective skill benchmarks.
                   </p>
                 </div>
               </div>
@@ -106,11 +54,11 @@ const HomeCards = () => {
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
                   to="/add-job"
-                  className="inline-flex items-center justify-center rounded-xl border border-[color:rgba(245,235,214,0.22)] bg-[color:rgb(231,220,201)] px-5 py-3 text-sm font-semibold text-[color:rgb(49,43,35)] transition duration-200 hover:-translate-y-0.5 hover:bg-[color:rgb(239,230,214)]">
-                  Add Job
+                  className="inline-flex items-center justify-center rounded-xl bg-[#21b8b2] px-5 py-3 text-sm font-semibold text-slate-950 transition duration-200 hover:-translate-y-0.5 hover:bg-[#1da19b] shadow-lg shadow-[#21b8b2]/20">
+                  Create a Posting
                 </Link>
-                <span className="text-sm text-[color:rgb(222,213,198)]">
-                  Start attracting top developer talent today
+                <span className="text-sm text-slate-300">
+                  Find your next key engineer in minutes
                 </span>
               </div>
             </div>
