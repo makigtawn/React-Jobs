@@ -1,34 +1,62 @@
 import { Link } from "react-router-dom";
 import experienceImg from "../assets/images/new images/experience-img.jpg";
 
-const stats = [
-  { label: "Trusted teams", value: "2.5k+" },
-  { label: "Projects delivered", value: "4.8k+" },
-  { label: "Top matches", value: "96%" },
+const features = [
+  {
+    title: "AI-Powered Ranking",
+    desc: "Surfaces top developers instantly by code quality and technical depth.",
+  },
+  {
+    title: "Polished Interface",
+    desc: "Distraction-free layout built to establish immediate professional trust.",
+  },
+  {
+    title: "Effortless Efficiency",
+    desc: "Saves hours of manual review, focus only on your best-matched candidates.",
+  },
 ];
 
 const ExperienceSection = () => {
   return (
     <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
+      {/* Background glows */}
       <div className="pointer-events-none absolute left-0 top-0 h-40 w-40 rounded-full bg-[#21b8b2]/20 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-0 h-48 w-48 rounded-full bg-[#ff515b]/20 blur-3xl" />
+
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-center">
+          {/* ── LEFT CARD ── */}
           <div className="rounded-[2rem] border border-white/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.28)] text-white">
             <div className="max-w-xl">
-              <span className="inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
-                Experience-driven hiring
-              </span>
-              <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-5xl">
-                Best experienced freelancer here
+              {/* Style 1 — Eyebrow pill with teal accent dot */}
+              <h2 className=" text-[#21b8b2] mt-5 text-4xl font-black tracking-tight sm:text-5xl">
+                Built for speed and precision
               </h2>
-              <p className="mt-6 text-base leading-8 text-white/70 sm:text-lg">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-                Create a hiring experience that feels modern, polished, and
-                instantly trustworthy.
+
+              <p className="mt-5 text-base leading-8 text-white/70 sm:text-lg">
+                Spering's AI automatically ranks developers by skill and code
+                quality, so hiring teams only interview the best candidates.
               </p>
 
+              {/* Style 2 — Feature rows with teal left-border accent */}
+              <div className="mt-7 flex flex-col gap-3">
+                {features.map((f) => (
+                  <div
+                    key={f.title}
+                    className="flex items-start gap-4 border-l-[3px] border-[#21b8b2] rounded-r-xl bg-white/5 p-3">
+                    <div>
+                      <p className="text-sm font-semibold text-white">
+                        {f.title}
+                      </p>
+                      <p className="mt-0.5 text-xs leading-5 text-white/55">
+                        {f.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA buttons */}
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link
                   to="/about"
@@ -41,24 +69,10 @@ const ExperienceSection = () => {
                   Hire Now
                 </Link>
               </div>
-
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-3xl border border-white/10 bg-white/5 p-5 text-center">
-                    <p className="text-3xl font-bold text-white">
-                      {stat.value}
-                    </p>
-                    <p className="mt-2 text-sm uppercase tracking-[0.2em] text-white/60">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 
+          {/* ── RIGHT IMAGE CARD ── */}
           <div className="relative rounded-[2rem] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.2)]">
             <img
               src={experienceImg}
@@ -66,14 +80,42 @@ const ExperienceSection = () => {
               className="h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#112027]/90 via-transparent to-transparent" />
-            <div className="absolute left-6 bottom-6 rounded-[1.5rem] border border-white/10 bg-white/10 p-6 backdrop-blur-xl text-white">
-              <p className="text-sm uppercase tracking-[0.3em] text-white/70">
+
+            {/* Bottom overlay card with mini metric row */}
+            <div className="absolute left-6 right-6 bottom-6 rounded-[1.5rem] border border-white/10 bg-white/10 p-6 backdrop-blur-xl text-white">
+              <p className="text-xs uppercase tracking-[0.3em] text-white/70">
                 Spering Gallery
               </p>
-              <h3 className="mt-3 text-2xl font-bold">Top freelance talent</h3>
-              <p className="mt-2 text-sm text-white/70">
-                Browse curated developer talent and make your next hire faster.
+              <h3 className="mt-2 text-2xl font-bold">Top freelance talent</h3>
+              <p className="mt-2 text-sm leading-6 text-white/70">
+                AI-ranked developer profiles. No resume pile, just your next
+                best hire.
               </p>
+
+              {/* Mini metric strip */}
+
+              <div className="mt-4 flex gap-4 border-t border-white/10 pt-4">
+                <div className="text-center">
+                  <p className="text-lg font-bold text-white">2.5k+</p>
+                  <p className="text-[10px] uppercase tracking-widest text-white/50">
+                    Trusted teams
+                  </p>
+                </div>
+                <div className="w-px bg-white/10" />
+                <div className="text-center">
+                  <p className="te   xt-lg font-bold text-white">7.8k+</p>
+                  <p className="text-[10px] uppercase tracking-widest text-white/50">
+                    Projects delivered
+                  </p>
+                </div>
+                <div className="w-px bg-white/10" />
+                <div className="text-center">
+                  <p className="text-lg font-bold text-[#21b8b2]">96%</p>
+                  <p className="text-[10px] uppercase tracking-widest text-white/50">
+                    Top matches
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

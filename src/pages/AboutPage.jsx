@@ -4,7 +4,7 @@ import aboutImg from "../assets/images/new images/about-img.jpg";
 
 const About = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white dark:bg-slate-900/60">
       <div className="mx-auto max-w-5xl px-6 py-12 text-center">
         <div className="flex justify-center">
           <img

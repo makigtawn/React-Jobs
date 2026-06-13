@@ -125,7 +125,7 @@ const EmployerDashboardPage = () => {
   );
 
   return (
-    <section className="min-h-screen bg-[#152a31] px-4 py-12 text-white md:px-8">
+    <section className="min-h-screen bg-[#152a31] dark:bg-slate-900/60 px-4 py-12 text-white md:px-8">
       <div className="mx-auto w-full max-w-7xl">
         {/* Header */}
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-white/10 pb-6">

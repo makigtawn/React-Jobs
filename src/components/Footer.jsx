@@ -34,9 +34,9 @@ const Footer = () => {
         if (!list.includes(trimmed)) list.push(trimmed);
         localStorage.setItem("newsletterSubscribers", JSON.stringify(list));
         setEmail("");
-        toast.success("Thank you for subscribing.");
+        toast.success("Thank you for being a subscriber. we'll keep in-touch.");
       } catch {
-        toast.error("Subscription failed.");
+        toast.error("Subscription failed try again.");
       } finally {
         setLoading(false);
       }
@@ -44,33 +44,35 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#152a31] text-white border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-6 py-10">
+    <footer className="bg-[#152a31] text-gray-300 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
         {/* Top Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start pb-8 border-b border-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start pb-12 border-b border-white/10">
+          
           {/* Brand & Socials */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img src={logo} alt="Spering" className="h-8 w-8" />
-              <h3 className="text-lg font-bold tracking-tight">Spering</h3>
+              <img src={logo} alt="Spering Logo" className="h-8 w-8 object-contain" />
+              <h3 className="text-xl font-bold tracking-tight text-white">Spering</h3>
             </div>
-            <div className="flex items-center gap-4 text-gray-400">
+           
+            <div className="flex items-center gap-4 pt-2">
               <a
                 href="https://x.com/makigtawn"
-                aria-label="X"
-                className="hover:text-white transition">
+                aria-label="Follow us on X"
+                className="p-2 bg-white/5 rounded-full hover:bg-white/10 hover:text-white transition-colors">
                 <FaXTwitter size={18} />
               </a>
               <a
                 href="https://linkedin.com/makigtawn"
-                aria-label="LinkedIn"
-                className="hover:text-white transition">
+                aria-label="Connect on LinkedIn"
+                className="p-2 bg-white/5 rounded-full hover:bg-white/10 hover:text-white transition-colors">
                 <FaLinkedin size={18} />
               </a>
               <a
                 href="https://github.com/makigtawn"
-                aria-label="GitHub"
-                className="hover:text-white transition">
+                aria-label="Check our GitHub"
+                className="p-2 bg-white/5 rounded-full hover:bg-white/10 hover:text-white transition-colors">
                 <FaGithub size={18} />
               </a>
             </div>
@@ -78,71 +80,92 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
-              Links
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Quick Links
             </h4>
-            <ul className="flex flex-col space-y-2 text-sm">
+            <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/" className="hover:underline opacity-90">
+                <Link to="/" className="hover:text-white hover:underline transition-all">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:underline opacity-90">
-                  About
+                <Link to="/about" className="hover:text-white hover:underline transition-all">
+                  About Us
                 </Link>
               </li>
               <li>
-                <Link to="/jobs" className="hover:underline opacity-90">
-                  Jobs
+                <Link to="/jobs" className="hover:text-white hover:underline transition-all">
+                  
                 </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Contact Us
+            </h4>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li className="flex items-start gap-2.5">
+                <FaMapMarkerAlt className="mt-1 flex-shrink-0 text-gray-500" />
+                <span>Bahirdar, Ethiopia</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <FaEnvelope className="flex-shrink-0 text-gray-500" />
+                <a href="mailto:info@spering.com" className="hover:text-white transition-colors">
+                  info@spering.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <FaPhoneAlt className="flex-shrink-0 text-gray-500" />
+                <a href="tel:+251970369110" className="hover:text-white transition-colors">
+                  +251970369110
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
-              Newsletter
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Stay Updated
             </h4>
-            <form className="flex gap-2 max-w-sm" onSubmit={handleSubmit}>
+            <p className="text-sm text-gray-400 mb-3">
+              Subscribe to our newsletter for the latest updates.
+            </p>
+            <form className="flex flex-col sm:flex-row gap-2 max-w-sm" onSubmit={handleSubmit}>
               <input
                 type="email"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="px-3 py-1.5 rounded bg-white/10 text-white placeholder:text-gray-400 text-sm focus:outline-none focus:ring-1 focus:ring-white w-full"
+                className="px-3.5 py-2 rounded bg-white/5 border border-white/10 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 w-full transition-all"
+                required
               />
               <button
                 type="submit"
                 disabled={loading}
-                className={`px-4 py-1.5 rounded text-sm font-medium transition ${
-                  loading ? "bg-gray-600" : "bg-[#ff515b] hover:bg-[#ff515b]/90"
+                className={`px-5 py-2 rounded text-sm font-semibold text-white tracking-wide transition-all shadow-sm ${
+                  loading 
+                    ? "bg-gray-600 cursor-not-allowed" 
+                    : "bg-[#ff515b] hover:bg-[#ff646d] active:scale-[0.98]"
                 }`}>
-                {loading ? "..." : "Join"}
+                {loading ? <span className="sr-only">Loading...</span> : "Join"}
+                {loading && "..."}
               </button>
             </form>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <span className="flex items-center gap-1.5">
-              <FaMapMarkerAlt /> Bahirdar, Ethiopia
-            </span>
-            <a
-              href="mailto:info@spering.com"
-              className="flex items-center gap-1.5 hover:text-white">
-              <FaEnvelope /> info@spering.com
-            </a>
-            <a
-              href="tel:+251970369110"
-              className="flex items-center gap-1.5 hover:text-white">
-              <FaPhoneAlt /> +251970369110
-            </a>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+          <div> &copy; {new Date().getFullYear()} Spering. All rights reserved.</div>
+          <div className="flex gap-4">
+            <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-gray-400 transition-colors">Terms of Service</a>
           </div>
-          <div>&copy; {new Date().getFullYear()} Spering.</div>
         </div>
       </div>
     </footer>
@@ -150,3 +173,8 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+
+
+

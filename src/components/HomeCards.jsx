@@ -54,7 +54,7 @@ const HomeCards = () => {
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
                   to="/add-job"
-                  className="inline-flex items-center justify-center rounded-xl bg-[#21b8b2] px-5 py-3 text-sm font-semibold text-slate-950 transition duration-200 hover:-translate-y-0.5 hover:bg-[#1da19b] shadow-lg shadow-[#21b8b2]/20">
+                  className="inline-flex items-center justify-center rounded-xl bg-[#ff4c57] px-5 py-3 text-sm font-semibold text-slate-950 transition duration-200 hover:-translate-y-0.5 shadow-lg shadow-[#21b8b2]/20">
                   Create a Posting
                 </Link>
                 <span className="text-sm text-slate-300">

@@ -60,16 +60,11 @@ const HeroCarousel = () => {
     pauseAndResume();
   };
 
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-    pauseAndResume();
-  };
-
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2">
-        <div className="bg-[#1f3238]" />
-        <div className="bg-[#21b8b2]" />
+        <div className="bg-[#1f3238] dark:bg-slate-900/60" />
+        <div className="bg-[#21b8b2] dark:bg-teal-700/80" />
       </div>
 
       <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-6 py-16 sm:px-8 lg:px-12 lg:py-24">
@@ -120,20 +115,6 @@ const HeroCarousel = () => {
         </button>
       </div>
 
-      <div className="absolute bottom-10 right-6 z-20 flex flex-col gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`flex h-14 w-14 items-center justify-center rounded-full text-lg font-bold text-white transition ${
-              currentSlide === index
-                ? "border border-white bg-white/20"
-                : "opacity-40 hover:opacity-100"
-            }`}>
-            {String(index + 1).padStart(2, "0")}
-          </button>
-        ))}
-      </div>
     </section>
   );
 };
