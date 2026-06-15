@@ -11,6 +11,20 @@ import { env } from "./config/env.js";
 export const createApp = () => {
   const app = express();
 
+  const allowedOrigins = [
+    'http://localhost:5173', // Default Vite port
+    'https://your-project-name.vercel.app' // Swap this out after Step 4
+  ];
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Blocked by CORS'));
+      }
+    },
+    credentials: true
+  }));
   app.use(helmet());
   app.use(
     cors({
