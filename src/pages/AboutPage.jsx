@@ -16,7 +16,7 @@ const About = () => {
 
         <h2 className="text-2xl font-bold mt-8 mb-4">ABOUT SPERING COMPANY</h2>
 
-        <p className="max-w-3xl mx-auto text-gray-700 mb-8">
+        <p className="max-w-3xl mx-auto text-gray-700 dark:text-white/80 mb-8">
           Spering was founded by a group of passionate technologists who saw the
           need for a better way to connect talent and opportunity. Our journey
           began in a small co-working space, fueled by coffee and big dreams.

@@ -19,10 +19,6 @@ const salaryRanges = [
   "Over $200K",
 ];
 
-// Defined outside the component so the object reference is stable across
-// renders. If this were an inline default in the function signature, React
-// would create a new object every render, making the useEffect dependency
-// change on every keystroke and resetting the form continuously.
 const EMPTY_JOB = {
   title: "",
   type: "Full-Time",
@@ -67,9 +63,10 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
   };
 
   return (
-    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 bg-[#21b8b2]">
+    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 bg-[#21b8b2] dark:bg-teal-700/80">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
+          
           <div className="rounded-[2rem] border border-white/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.24)] text-white">
             <div className="mb-8">
               <p className="text-sm uppercase tracking-[0.3em] text-[#21b8b2]">
@@ -79,13 +76,12 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 Share your role with quality developers
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">
-                Fill in the details and we'll help your listing reach top
-                talent faster with a polished presentation that stands out.
+                Fill in the details and we'll help your listing reach top talent
+                faster with a polished presentation that stands out.
               </p>
             </div>
 
-     <form id="job-form" className="space-y-5" onSubmit={submit}>
-              {/* Job type + Salary */}
+            <form id="job-form" className="space-y-5" onSubmit={submit}>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
                   <span className="text-sm text-white/70">Job type</span>
@@ -115,7 +111,6 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 </label>
               </div>
 
-              {/* Job title */}
               <label className="block">
                 <span className="text-sm text-white/70">Job title</span>
                 <input
@@ -126,7 +121,6 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </label>
 
-              {/* Location */}
               <label className="block">
                 <span className="text-sm text-white/70">Location</span>
                 <input
@@ -137,7 +131,6 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </label>
 
-              {/* ── Job Description (CKEditor) ── */}
               <div className="block">
                 <span className="text-sm text-white/70">Job description</span>
                 <JobDescriptionEditor
@@ -146,7 +139,6 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </div>
 
-              {/* Minimum score */}
               <label className="block">
                 <span className="text-sm text-white/70">
                   Minimum candidate score
@@ -163,15 +155,12 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </label>
 
-              {/* Company name + Email */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
                   <span className="text-sm text-white/70">Company name</span>
                   <input
                     value={job.company.name}
-                    onChange={(e) =>
-                      updateCompanyField("name", e.target.value)
-                    }
+                    onChange={(e) => updateCompanyField("name", e.target.value)}
                     placeholder="Company name"
                     className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                   />
@@ -190,7 +179,6 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 </label>
               </div>
 
-              {/* Company phone */}
               <label className="block">
                 <span className="text-sm text-white/70">Company phone</span>
                 <input
@@ -203,7 +191,6 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </label>
 
-              {/* Company description */}
               <label className="block">
                 <span className="text-sm text-white/70">
                   Company description
@@ -219,13 +206,12 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </label>
 
-<button
-  type="submit"
-  form="job-form"
-  className="w-full rounded-3xl bg-[#21b8b2] px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-[#1aa69f]">
-  {submitLabel}
-</button>
-
+              <button
+                type="submit"
+                form="job-form"
+                className="w-full rounded-3xl bg-[#21b8b2] px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-[#1aa69f]">
+                {submitLabel}
+              </button>
             </form>
           </div>
 
@@ -233,9 +219,9 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
             <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl text-white">
               <h3 className="text-2xl font-bold">Why this form works</h3>
               <p className="mt-4 text-sm leading-7 text-white/70">
-                The new UI helps recruiters and hiring managers quickly scan
-                the job outline, and candidates immediately understand the
-                role, pay, and company fit.
+                The new UI helps recruiters and hiring managers quickly scan the
+                job outline, and candidates immediately understand the role,
+                pay, and company fit.
               </p>
               <ul className="mt-6 space-y-3 text-sm text-white/80">
                 <li>• Clean fields for fast posting</li>

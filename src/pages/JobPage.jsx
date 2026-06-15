@@ -1,11 +1,9 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
+import { FaArrowLeft, FaMapMarker, FaEnvelope, FaPhone, FaBriefcase, FaDollarSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import DOMPurify from "dompurify";
 import Button from "../components/Button";
-import ApplicationForm from "../components/ApplicationForm";
-import { useAuth } from "../context/useAuth";
 
 const RichText = ({ html, className }) => {
   const clean = DOMPurify.sanitize(html || "", {
@@ -15,7 +13,7 @@ const RichText = ({ html, className }) => {
 
   return (
     <div
-      className={`prose-job ${className ?? ""}`}
+      className={`prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-300 ${className ?? ""}`}
       dangerouslySetInnerHTML={{ __html: clean }}
     />
   );
@@ -24,10 +22,9 @@ const RichText = ({ html, className }) => {
 const JobPage = ({ deleteJob }) => {
   const navigate = useNavigate();
   const job = useLoaderData();
-  const { user } = useAuth();
 
   const onDeleteClick = (jobId) => {
-    const confirm = window.confirm("are you sure you want to delete?");
+    const confirm = window.confirm("Are you sure you want to delete this job?");
     if (!confirm) return;
     deleteJob(jobId);
     toast.success("Job deleted successfully");
@@ -35,86 +32,128 @@ const JobPage = ({ deleteJob }) => {
   };
 
   return (
-    <>
-      <section>
-        <div className="container m-auto py-6 px-6">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Back Button */}
+        <div className="mb-6">
           <Link
             to="/jobs"
-            className="text-black hover:text-olive-600 flex items-center">
-            <FaArrowLeft className="mr-2" /> back
+            className="inline-flex items-center text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+          >
+            <FaArrowLeft className="mr-2" /> Back to Jobs
           </Link>
         </div>
-      </section>
 
-      <section className="relative overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-panel-bg)] shadow-2xl shadow-black/20 backdrop-blur-xl">
-        <div className="container m-auto py-10 px-6">
-          <div className="grid grid-cols-1 md:grid-cols-[70%_30%] w-full gap-6">
-            <main>
-              <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md text-center md:text-left">
-                <div className="text-gray-500 dark:text-white mb-4">
-                  {job.type}
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column: Job Details */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Header Card */}
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400 mb-4">
+                <FaBriefcase className="mr-1.5" /> {job.type}
+              </span>
+              <h1 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight mb-3">
+                {job.title}
+              </h1>
+              <div className="flex items-center text-slate-500 dark:text-slate-400">
+                <FaMapMarker className="text-slate-400 dark:text-slate-500 mr-2 shrink-0" />
+                <span className="text-sm">{job.location}</span>
+              </div>
+            </div>
+
+            {/* Description & Salary Card */}
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
+              <div>
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  Job Description
+                </h2>
+                <RichText html={job.description} />
+              </div>
+
+              <hr className="border-slate-200 dark:border-slate-800" />
+
+              <div>
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
+                  Salary & Compensation
+                </h2>
+                <div className="inline-flex items-center gap-2 bg-slate-50 dark:bg-slate-800/50 px-4 py-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
+                  <FaDollarSign className="text-emerald-600 dark:text-emerald-400" />
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">
+                    {job.salary}
+                  </span>
                 </div>
-                <h1 className="text-3xl font-bold mb-4">{job.title}</h1>
-                <div className="text-gray-500 dark:text-white mb-4 flex align-middle justify-center md:justify-start">
-                  <FaMapMarker className="text-orange-700 mr-1" />
-                  <p className="text-orange-700">{job.location}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Company Info & Actions */}
+          <div className="space-y-6">
+            {/* Company Info Card */}
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+              <h2 className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4">
+                Company Info
+              </h2>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                {job.company.name}
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                {job.company.description}
+              </p>
+
+              <div className="space-y-3.5 border-t border-slate-100 dark:border-slate-800 pt-4">
+                <div>
+                  <span className="block text-xs font-medium text-slate-400 dark:text-slate-500 mb-1">
+                    Email Contact
+                  </span>
+                  <a
+                    href={`mailto:${job.company.contactEmail}`}
+                    className="inline-flex items-center text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors break-all"
+                  >
+                    <FaEnvelope className="mr-2 text-slate-400" />
+                    {job.company.contactEmail}
+                  </a>
+                </div>
+
+                <div>
+                  <span className="block text-xs font-medium text-slate-400 dark:text-slate-500 mb-1">
+                    Phone Contact
+                  </span>
+                  <a
+                    href={`tel:${job.company.contactPhone}`}
+                    className="inline-flex items-center text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  >
+                    <FaPhone className="mr-2 text-slate-400" />
+                    {job.company.contactPhone}
+                  </a>
                 </div>
               </div>
+            </div>
 
-              <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md mt-6">
-                <h3 className="text-olive-800 dark:text-white text-lg font-bold mb-6">
-                  job description
-                </h3>
-
-                <RichText
-                  html={job.description}
-                  className="rich-description mb-4"
-                />
-
-                <h3 className="text-olive-800 dark:text-white text-lg font-bold mb-4">
-                  salary compensation
-                </h3>
-                <p className="mb-4">{job.salary}</p>
-              </div>
-
-              {user && <ApplicationForm jobId={job.id} />}
-            </main>
-
-            <aside>
-              <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold mb-6">company info</h3>
-                <h2 className="text-2xl">{job.company.name}</h2>
-                <p className="my-2">{job.company.description}</p>
-                <hr className="my-4" />
-                <h3 className="text-xl">contact email:</h3>
-                <p className="my-2 bg-olive-100 dark:text-olive-800 p-2 font-bold">
-                  {job.company.contactEmail}
-                </p>
-                <h3 className="text-xl">contact phone</h3>
-                <p className="my-2 bg-olive-100 dark:text-olive-800 p-2 font-bold">
-                  {job.company.contactPhone}
-                </p>
-              </div>
-
-              <div className="bg-white dark:bg-black/80 p-6 rounded-lg shadow-md mt-6">
-                <h3 className="text-xl font-bold mb-6">manage job</h3>
+            {/* Actions Card */}
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+              <h2 className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4">
+                Manage Job
+              </h2>
+              <div className="flex flex-col gap-3">
                 <Link
                   to={`/edit-job/${job.id}`}
-                  className="inline-flex min-w-[220px] items-center justify-center rounded-xl bg-white px-6 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-slate-950/20 transition duration-200 hover:scale-[1.02] hover:bg-slate-100 mt-4 w-full">
-                  edit job
+                  className="w-full inline-flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 px-4 py-3 text-sm font-semibold text-white dark:text-slate-950 shadow transition-colors"
+                >
+                  Edit Details
                 </Link>
                 <Button
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                  className="w-full bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/30 dark:hover:bg-rose-950/50 text-rose-600 dark:text-rose-400 font-semibold py-3 px-4 rounded-xl text-sm transition-colors focus:outline-none"
                   onClick={() => onDeleteClick(job.id)}
-                  type="submit"
-                  text="delete Job"
+                  type="button"
+                  text="Delete Job"
                 />
               </div>
-            </aside>
+            </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 };
 

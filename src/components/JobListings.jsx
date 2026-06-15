@@ -12,12 +12,11 @@ const JobListings = ({ isHome = false }) => {
       try {
         let query = supabase.from('jobs').select('*').order('created_at', { ascending: false });
 
-        if (isHome) query = query.limit(3);  // replaces ?_limit=3
+        if (isHome) query = query.limit(3);  
 
         const { data, error } = await query;
         if (error) throw error;
 
-        // reshape flat DB rows → nested shape your components expect
         const shaped = data.map(job => ({
           id:          job.id,
           title:       job.title,

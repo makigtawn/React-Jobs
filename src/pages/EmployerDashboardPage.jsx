@@ -21,7 +21,7 @@ const EmployerDashboardPage = () => {
       setJobs([{ id: "dummy-id", title: "React Developer (Demo Mode)" }]);
     }
     setSelectedJobId("dummy-id");
-    
+
     setApplications([
       {
         id: "mock-1",
@@ -32,8 +32,10 @@ const EmployerDashboardPage = () => {
         github_score: 92,
         final_score: 93,
         status: "Pending",
-        ai_reasoning: "Excellent matching technical profile. Extensive experience building production-ready UIs with React, Next.js, and Tailwind CSS. Demonstrates architectural understanding of efficient state layouts.",
-        github_reasoning: "High code quality across repositories. Active development stream with highly detailed documentation, clean branching habits, and solid structural patterns."
+        ai_reasoning:
+          "Excellent matching technical profile. Extensive experience building production-ready UIs with React, Next.js, and Tailwind CSS. Demonstrates architectural understanding of efficient state layouts.",
+        github_reasoning:
+          "High code quality across repositories. Active development stream with highly detailed documentation, clean branching habits, and solid structural patterns.",
       },
       {
         id: "mock-2",
@@ -44,17 +46,19 @@ const EmployerDashboardPage = () => {
         github_score: 65,
         final_score: 71,
         status: "Accepted",
-        ai_reasoning: "Solid foundational knowledge in core engineering paradigms, but lacks deeper complexity in mid-to-senior framework execution.",
-        github_reasoning: "Basic repository layouts present. Commits are bundled in single blocks rather than distributed cleanly across feature timelines."
-      }
+        ai_reasoning:
+          "Solid foundational knowledge in core engineering paradigms, but lacks deeper complexity in mid-to-senior framework execution.",
+        github_reasoning:
+          "Basic repository layouts present. Commits are bundled in single blocks rather than distributed cleanly across feature timelines.",
+      },
     ]);
 
     setTopCandidates([
       { candidateName: "Meklit Tesfaye", finalScore: 93, status: "Pending" },
-      { candidateName: "John Doe", finalScore: 71, status: "Accepted" }
+      { candidateName: "John Doe", finalScore: 71, status: "Accepted" },
     ]);
-    
-    setLoading(false); 
+
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -62,7 +66,7 @@ const EmployerDashboardPage = () => {
       try {
         const data = await apiRequest("/api/jobs/mine");
         setJobs(data.jobs || []);
-        
+
         if (!data.jobs || data.jobs.length === 0) {
           setJobs([{ id: "dummy-id", title: "React Developer (Demo Mode)" }]);
           setSelectedJobId("dummy-id");
@@ -87,7 +91,11 @@ const EmployerDashboardPage = () => {
       setLoading(true);
       setErrorMsg("");
       try {
-        const params = new URLSearchParams({ status, sort, ...(search ? { search } : {}) });
+        const params = new URLSearchParams({
+          status,
+          sort,
+          ...(search ? { search } : {}),
+        });
         const [applicationData, topData] = await Promise.all([
           apiRequest(`/api/jobs/${selectedJobId}/applications?${params}`),
           apiRequest(`/api/jobs/${selectedJobId}/top-candidates`),
@@ -116,8 +124,8 @@ const EmployerDashboardPage = () => {
         <span className="font-semibold text-white">{score}</span>
       </div>
       <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-        <div 
-          className="h-full bg-[#21b8b2] rounded-full" 
+        <div
+          className="h-full bg-[#21b8b2] rounded-full"
           style={{ width: `${Math.min(Math.max(score, 0), 100)}%` }}
         />
       </div>
@@ -197,7 +205,6 @@ const EmployerDashboardPage = () => {
 
             {/* Main Content Layout */}
             <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_380px]">
-              
               {/* Applications Table */}
               <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1f25] shadow-xl">
                 <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.02] px-6 py-5">
@@ -206,7 +213,10 @@ const EmployerDashboardPage = () => {
                       {selectedJob.title}
                     </h2>
                     <p className="mt-1 text-xs text-white/50">
-                      Required Passing Threshold: <span className="text-white font-medium">{selectedJob.minimum_score_threshold ?? 50}%</span>
+                      Required Passing Threshold:{" "}
+                      <span className="text-white font-medium">
+                        {selectedJob.minimum_score_threshold ?? 50}%
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -218,7 +228,8 @@ const EmployerDashboardPage = () => {
                 ) : applications.length === 0 ? (
                   <div className="flex min-h-[250px] items-center justify-center px-4 py-8">
                     <p className="text-sm text-white/40 text-center">
-                      No applications. Click the orange "Inject Test Data" button above to populate layout!
+                      No applications. Click the orange "Inject Test Data"
+                      button above to populate layout!
                     </p>
                   </div>
                 ) : (
@@ -227,7 +238,9 @@ const EmployerDashboardPage = () => {
                       <thead>
                         <tr className="border-b border-white/10 bg-white/[0.01] text-xs font-semibold uppercase tracking-wider text-white/40">
                           <th className="px-6 py-4">Candidate Information</th>
-                          <th className="px-6 py-4">AI Score Metrics Breakdown</th>
+                          <th className="px-6 py-4">
+                            AI Score Metrics Breakdown
+                          </th>
                           <th className="px-6 py-4 text-center">Match</th>
                           <th className="px-6 py-4 text-center">Status</th>
                           <th className="px-6 py-4 text-right">Action</th>
@@ -235,7 +248,9 @@ const EmployerDashboardPage = () => {
                       </thead>
                       <tbody className="divide-y divide-white/5">
                         {applications.map((application) => (
-                          <tr key={application.id} className="hover:bg-white/[0.02] transition-colors group">
+                          <tr
+                            key={application.id}
+                            className="hover:bg-white/[0.02] transition-colors group">
                             <td className="px-6 py-5">
                               <div className="font-bold text-white group-hover:text-[#21b8b2] transition-colors">
                                 {application.candidate_name}
@@ -246,9 +261,18 @@ const EmployerDashboardPage = () => {
                             </td>
                             <td className="px-6 py-5">
                               <div className="flex flex-wrap gap-x-4 gap-y-2">
-                                <ScoreBar label="Skills" score={application.skills_score} />
-                                <ScoreBar label="Exp." score={application.experience_score} />
-                                <ScoreBar label="GitHub" score={application.github_score} />
+                                <ScoreBar
+                                  label="Skills"
+                                  score={application.skills_score}
+                                />
+                                <ScoreBar
+                                  label="Exp."
+                                  score={application.experience_score}
+                                />
+                                <ScoreBar
+                                  label="GitHub"
+                                  score={application.github_score}
+                                />
                               </div>
                             </td>
                             <td className="px-6 py-5 text-center">
@@ -259,23 +283,32 @@ const EmployerDashboardPage = () => {
                               </div>
                             </td>
                             <td className="px-6 py-5 text-center">
-                              <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium tracking-wide ${
+                              <span
+                                className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium tracking-wide ${
                                   application.status === "Accepted"
                                     ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                                     : application.status === "Rejected"
                                       ? "bg-rose-500/10 text-rose-400 border border-rose-500/20"
                                       : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
                                 }`}>
-                                <span className={`h-1.5 w-1.5 rounded-full mr-1.5 ${
-                                  application.status === "Accepted" ? "bg-emerald-400" : application.status === "Rejected" ? "bg-rose-400" : "bg-amber-400"
-                                }`} />
+                                <span
+                                  className={`h-1.5 w-1.5 rounded-full mr-1.5 ${
+                                    application.status === "Accepted"
+                                      ? "bg-emerald-400"
+                                      : application.status === "Rejected"
+                                        ? "bg-rose-400"
+                                        : "bg-amber-400"
+                                  }`}
+                                />
                                 {application.status}
                               </span>
                             </td>
                             <td className="px-6 py-5 text-right">
                               <button
                                 type="button"
-                                onClick={() => setSelectedReasoning(application)}
+                                onClick={() =>
+                                  setSelectedReasoning(application)
+                                }
                                 className="rounded-xl border border-[#21b8b2]/30 bg-[#21b8b2]/5 px-4 py-2 text-xs font-bold text-[#21b8b2] hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200">
                                 View Report
                               </button>
@@ -293,16 +326,26 @@ const EmployerDashboardPage = () => {
                 <h2 className="text-lg font-bold tracking-tight text-white/90">
                   Top 10 Leaderboard
                 </h2>
-                <p className="text-xs text-white/40 mt-0.5 mb-4">Highest ranking profiles</p>
+                <p className="text-xs text-white/40 mt-0.5 mb-4">
+                  Highest ranking profiles
+                </p>
                 <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
                   {topCandidates.length === 0 ? (
-                    <p className="text-sm text-white/40 py-4 text-center">No candidates indexed yet.</p>
+                    <p className="text-sm text-white/40 py-4 text-center">
+                      No candidates indexed yet.
+                    </p>
                   ) : (
                     topCandidates.map((candidate, index) => (
-                      <div key={index} className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3.5 hover:border-white/10 hover:bg-white/[0.04] transition-all">
+                      <div
+                        key={index}
+                        className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3.5 hover:border-white/10 hover:bg-white/[0.04] transition-all">
                         <div className="min-w-0">
-                          <p className="font-semibold text-sm text-white truncate">{candidate.candidateName}</p>
-                          <p className="text-[11px] text-white/40 mt-0.5">Status: {candidate.status}</p>
+                          <p className="font-semibold text-sm text-white truncate">
+                            {candidate.candidateName}
+                          </p>
+                          <p className="text-[11px] text-white/40 mt-0.5">
+                            Status: {candidate.status}
+                          </p>
                         </div>
                         <span className="text-lg font-black text-[#21b8b2] bg-[#21b8b2]/10 px-2.5 py-1 rounded-lg border border-[#21b8b2]/10">
                           {candidate.finalScore}
@@ -323,9 +366,14 @@ const EmployerDashboardPage = () => {
           <div className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-[#0d1f25] p-6 shadow-2xl">
             <div className="flex items-start justify-between border-b border-white/10 pb-4">
               <div>
-                <h2 className="text-2xl font-black text-white">{selectedReasoning.candidate_name}</h2>
+                <h2 className="text-2xl font-black text-white">
+                  {selectedReasoning.candidate_name}
+                </h2>
                 <p className="text-sm text-white/50 mt-1">
-                  Overall Evaluation Rating: <span className="text-[#21b8b2] font-bold">{selectedReasoning.final_score}/100</span>
+                  Overall Evaluation Rating:{" "}
+                  <span className="text-[#21b8b2] font-bold">
+                    {selectedReasoning.final_score}/100
+                  </span>
                 </p>
               </div>
               <button
@@ -335,16 +383,20 @@ const EmployerDashboardPage = () => {
                 Close Report
               </button>
             </div>
-            
+
             <div className="space-y-6 mt-6">
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#21b8b2]">Resume Analysis Insights</h3>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#21b8b2]">
+                  Resume Analysis Insights
+                </h3>
                 <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-white/80 bg-white/[0.01] border border-white/5 p-4 rounded-xl">
                   {selectedReasoning.ai_reasoning}
                 </p>
               </div>
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#21b8b2]">GitHub Performance Assessment</h3>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#21b8b2]">
+                  GitHub Performance Assessment
+                </h3>
                 <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-white/80 bg-white/[0.01] border border-white/5 p-4 rounded-xl">
                   {selectedReasoning.github_reasoning}
                 </p>

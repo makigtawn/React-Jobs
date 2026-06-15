@@ -123,22 +123,12 @@ const EDITOR_CONFIG = {
   licenseKey: "GPL",
 };
 
-/**
- * JobDescriptionEditor
- *
- * Controlled CKEditor 5 component styled to match the JobForm dark UI.
- *
- * Props:
- *   value    {string}   — current HTML string (controlled)
- *   onChange {function} — called with new HTML string on every change
- */
+
 const JobDescriptionEditor = ({ value, onChange }) => {
   const editorRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState(null);
 
-  // Inject scoped CSS to theme the CKEditor toolbar/body to match
-  // the existing dark panel bg (#0d1f25 / #11212a) and teal accent (#21b8b2).
   useEffect(() => {
     const styleId = "jde-ckeditor-theme";
     if (document.getElementById(styleId)) return;

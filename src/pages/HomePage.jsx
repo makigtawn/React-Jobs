@@ -3,12 +3,12 @@ import HomeCards from "../components/HomeCards";
 import ExperienceSection from "../components/ExperienceSection";
 import JobListings from "../components/JobListings";
 import ViewAllJobs from "../components/ViewAllJobs";
-import HeroCarousel from "../components/HeroCarousel";
+import Hero from "../components/Hero";
 
 const HomePage = () => {
   return (
     <>
-      <HeroCarousel />
+      <Hero />
       <HomeCards />
       <ExperienceSection />
       <JobListings isHome={true} />

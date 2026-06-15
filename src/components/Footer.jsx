@@ -46,10 +46,9 @@ const Footer = () => {
   return (
     <footer className="bg-[#152a31] text-gray-300 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-        {/* Top Section */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start pb-12 border-b border-white/10">
           
-          {/* Brand & Socials */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img src={logo} alt="Spering Logo" className="h-8 w-8 object-contain" />
@@ -78,7 +77,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
               Quick Links
@@ -102,7 +100,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
               Contact Us
@@ -127,7 +124,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
               Stay Updated
@@ -159,7 +155,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Section */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
           <div> &copy; {new Date().getFullYear()} Spering. All rights reserved.</div>
           <div className="flex gap-4">

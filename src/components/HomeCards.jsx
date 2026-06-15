@@ -1,65 +1,77 @@
 import React from "react";
 import Card from "./Card";
-import { Link } from "react-router-dom";
 
 const HomeCards = () => {
+  const testimonials = [
+    {
+      quote:
+        "We used to spend weeks reading hundreds of resumes. This AI engine filtered and ranked the top 5 developers for us instantly based on actual code quality. Truly a game-changer.",
+      author: "Sarah Jenkins",
+      role: "VP of Engineering",
+      company: "TechFlow Dynamics",
+      metric: "Saved 40+ hours per role",
+    },
+    {
+      quote:
+        "The objective skill benchmarking is spot on. It skipped the resume fluff and highlighted candidates with genuine technical skill. We made our core engineering hire in days.",
+      author: "Marcus Chen",
+      role: "Technical Recruiter",
+      company: "DevScale AI",
+      metric: "90% faster time-to-hire",
+    },
+  ];
+
   return (
-    <section className="relative bg-[#1f3238] dark:bg-slate-950 py-14 sm:py-16 text-white min-h-screen transition-colors duration-300">
+    <section className="relative bg-[#1f3238] dark:bg-slate-950 py-16 sm:py-24 text-white min-h-screen transition-colors duration-300">
       <div className="container-xl lg:container m-auto px-4">
-        <div className="mx-auto max-w-3xl text-center">
-
-          
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Built for Hiring Managers and Employers
-
+        {/* Header Section */}
+        <div className="mx-auto max-w-3xl text-center mb-14 sm:mb-18">
+          <span className="text-sm font-semibold tracking-wider text-[#21b8b2] uppercase">
+            Proven Results
+          </span>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Trusted by Teams Cutting Out the Screening Noise
           </h2>
-          <p className="mt-4 text-base leading-7 text-slate-200 sm:text-lg">
-            Automatically rank developers based on their technical skills, background, and code quality to hire the best talent instantly.
+          <p className="mt-4 text-base leading-7 text-slate-300 sm:text-lg">
+            See how forward-thinking hiring managers skip manual resume review
+            entirely and jump straight to the best talent.
           </p>
         </div>
 
-        <div className="mt-10 max-w-2xl mx-auto">
-          <Card bg="bg-black/40 dark:bg-slate-900/60 border border-[#21b8b2]/20 dark:border-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-md">
-            <div className="flex h-full flex-col p-6">
-             
-              <h3 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-[1.8rem]">
-                Rank developers and hire fast
-              </h3>
-              <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
-                Our system parses applicant profiles and source code to bubble up top-tier candidates instantly, saving you dozens of hours.
-              </p>
-
-              <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 text-sm">
-                <div className="rounded-2xl border border-white/10 bg-white/5 dark:bg-slate-950/40 px-4 py-3">
-                  <p className="text-lg font-semibold text-white">
-                    Code Quality Analysis
-                  </p>
-                  <p className="mt-1 text-slate-300">
-                    Deep insights into practical coding history.
+        {/* Testimonials Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          {testimonials.map((item, index) => (
+            <Card
+              key={index}
+              bg="bg-black/30 dark:bg-slate-900/50 border border-white/5 dark:border-slate-800 shadow-2xl backdrop-blur-sm flex flex-col justify-between">
+              <div className="flex flex-col h-full justify-between">
+                {/* Quote Text */}
+                <div>
+                  <span className="text-4xl text-[#21b8b2] font-serif block mb-2">
+                    “
+                  </span>
+                  <p className="text-slate-200 text-base leading-relaxed italic">
+                    {item.quote}
                   </p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 dark:bg-slate-950/40 px-4 py-3">
-                  <p className="text-lg font-semibold text-white">
-                    Instant Ranking
-                  </p>
-                  <p className="mt-1 text-slate-300">
-                    Candidates ordered by objective skill benchmarks.
-                  </p>
+
+                {/* Author Info & Highlight Metric */}
+                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between flex-wrap gap-4">
+                  <div>
+                    <h4 className="font-semibold text-white text-base">
+                      {item.author}
+                    </h4>
+                    <p className="text-xs text-slate-400">
+                      {item.role}, {item.company}
+                    </p>
+                  </div>
+                  <div className="bg-[#21b8b2]/10 border border-[#21b8b2]/30 rounded-lg px-3 py-1.5 text-xs font-medium text-[#21b8b2]">
+                    {item.metric}
+                  </div>
                 </div>
               </div>
-
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link
-                  to="/add-job"
-                  className="inline-flex items-center justify-center rounded-xl bg-[#ff4c57] px-5 py-3 text-sm font-semibold text-slate-950 transition duration-200 hover:-translate-y-0.5 shadow-lg shadow-[#21b8b2]/20">
-                  Create a Posting
-                </Link>
-                <span className="text-sm text-slate-300">
-                  Find your next key engineer in minutes
-                </span>
-              </div>
-            </div>
-          </Card>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

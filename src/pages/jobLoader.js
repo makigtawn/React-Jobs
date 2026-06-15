@@ -1,4 +1,3 @@
-// src/pages/jobLoader.js
 import { supabase } from '../utils/supabase';
 
 const jobLoader = async ({ params }) => {
