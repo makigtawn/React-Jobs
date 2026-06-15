@@ -12,7 +12,7 @@ const required = (name) => {
 
 export const env = {
   nodeEnv: process.env.NODE_ENV || "development",
-  port: Number(process.env.PORT || 5000),
+  port: Number(process.env.PORT || 3000),
   clientOrigin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
   Url: required("SUPABASE_URL"),
   supabaseServiceRoleKey: required("SUPABASE_SERVICE_ROLE_KEY"),

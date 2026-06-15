@@ -1,13 +1,12 @@
 import { createClient } from "@supabase/supabase-js";
-import { env } from "./env.js";
+import dotenv from "dotenv";
+import path from "path";
 
-export const supabaseAdmin = createClient(
-  env.supabaseUrl,
-  env.supabaseServiceRoleKey,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  },
-);
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
