@@ -47,7 +47,7 @@ const JobListings = ({ isHome = false }) => {
   return (
     <section>
       <div className="container-xl lg:container m-auto">
-        <h2 className="text-3xl font-bold text-indigo-900 text-center py-4">
+        <h2 className="text-4xl mb-6 font-bold text-[#ff4c57] text-center py-4">
           {isHome ? 'Recent jobs' : 'Browse jobs'}
         </h2>
         {loading ? (

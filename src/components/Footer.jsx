@@ -96,7 +96,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/jobs" className="hover:text-white hover:underline transition-all">
-                  
+                  Browse jobs
                 </Link>
               </li>
             </ul>

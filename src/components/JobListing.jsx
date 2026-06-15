@@ -31,10 +31,10 @@ const JobListing = ({ job }) => {
     plainText.length > 90 ? plainText.substring(0, 90) + "…" : plainText;
 
   return (
-    <div className="bg-slate-900/50 dark:bg-slate-900/60 rounded-xl shadow-md relative">
-      <div className="p-4">
+    <div className="bg-[#21b8b2] dark:bg-slate-900/60 rounded-xl shadow-md relative">
+      <div className="p-4 ">
         <div className="mb-6">
-          <div className="text-white my-2">{job.type}</div>
+          <div className="text-black my-2">{job.type}</div>
           <h3 className="text-xl font-bold">{job.title}</h3>
         </div>
 
@@ -48,11 +48,11 @@ const JobListing = ({ job }) => {
 
         <button
           onClick={() => setShowFullDescription((prev) => !prev)}
-          className="text-indigo-500 mb-5 hover:text-indigo-600">
+          className="text-black mb-2 hover:bg-green-800/40">
           {showFullDescription ? "less" : "more"}
         </button>
 
-        <h3 className="text-indigo-500 mb-2">{job.salary} / year</h3>
+        <h3 className="text-black mb-5">{job.salary} / year</h3>
 
         <div className="border border-gray-100 mb-5"></div>
 
@@ -63,7 +63,7 @@ const JobListing = ({ job }) => {
           </div>
           <Link
             to={`/jobs/${job.id}`}
-            className="h-[36px] bg-violet-100 hover:bg-indigo-100 text-black px-4 py-2 rounded-lg text-center text-sm">
+            className="h-[36px] bg-green-900/20 hover:bg-green-800/40 text-black px-4 py-2 rounded-lg text-center text-sm">
             Read more
           </Link>
         </div>
