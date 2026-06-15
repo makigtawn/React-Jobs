@@ -104,7 +104,7 @@ const SignupPage = () => {
           <>
             <h1 className="text-3xl font-black">Create account</h1>
             <p className="mt-2 text-sm text-white/65">
-              Join Spering to apply for roles or manage your hiring pipeline.
+              Join Strata to apply for roles or manage your hiring pipeline.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-4">

@@ -51,8 +51,8 @@ const Footer = () => {
           
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img src={logo} alt="Spering Logo" className="h-8 w-8 object-contain" />
-              <h3 className="text-xl font-bold tracking-tight text-white">Spering</h3>
+              <img src={logo} alt="Strata Logo" className="h-8 w-8 object-contain" />
+              <h3 className="text-xl font-bold tracking-tight text-white">Strata</h3>
             </div>
            
             <div className="flex items-center gap-4 pt-2">
@@ -111,8 +111,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <FaEnvelope className="flex-shrink-0 text-gray-500" />
-                <a href="mailto:info@spering.com" className="hover:text-white transition-colors">
-                  info@spering.com
+                <a href="mailto:info@strata.com" className="hover:text-white transition-colors">
+                  info@strata.com
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
@@ -156,7 +156,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <div> &copy; {new Date().getFullYear()} Spering. All rights reserved.</div>
+          <div> &copy; {new Date().getFullYear()} Strata. All rights reserved.</div>
           <div className="flex gap-4">
             <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-gray-400 transition-colors">Terms of Service</a>

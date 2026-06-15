@@ -39,7 +39,7 @@ const ExperienceSection = () => {
 
             <div className="absolute left-6 right-6 bottom-6 rounded-[1.5rem] border border-white/10 bg-white/10 p-6 backdrop-blur-xl text-white">
               <p className="text-xs uppercase tracking-[0.3em] text-white/70">
-                Spering Gallery
+                Strata Gallery
               </p>
               <h3 className="mt-2 text-2xl font-bold">Top freelance talent</h3>
               <p className="mt-2 text-sm leading-6 text-white/70">
@@ -80,7 +80,7 @@ const ExperienceSection = () => {
               </h2>
 
               <p className="mt-5 text-base leading-8 text-white/70 sm:text-lg">
-                Spering's AI automatically ranks developers by skill and code
+                Strata's AI automatically ranks developers by skill and code
                 quality, so hiring teams only interview the best candidates.
               </p>
 

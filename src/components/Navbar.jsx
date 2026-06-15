@@ -93,13 +93,13 @@ const Navbar = () => {
         }`}>
         <div className="flex items-center justify-between gap-3">
           <NavLink to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Spering Logo" className="h-9 w-auto" />
+            <img src={logo} alt="Strata Logo" className="h-9 w-auto" />
             <div className="min-w-0">
               <span
                 className={`block text-lg font-black tracking-[0.2em] sm:text-xl ${
                   isHome ? "text-white" : "text-[var(--color-text-primary)]"
                 }`}>
-                Spering
+                Strata
               </span>
               <span
                 className={`hidden text-xs tracking-[0.24em] sm:block ${
