@@ -7,11 +7,11 @@ const HomeCards = () => {
     <section className="relative bg-[#1f3238] dark:bg-slate-950 py-14 sm:py-16 text-white min-h-screen transition-colors duration-300">
       <div className="container-xl lg:container m-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center rounded-full border border-[#21b8b2]/30 bg-black/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[#21b8b2] shadow-sm backdrop-blur-sm">
-            Built for Hiring Managers and Employers
-          </div>
+
+          
           <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Stop reading hundreds of resumes manually
+            Built for Hiring Managers and Employers
+
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-200 sm:text-lg">
             Automatically rank developers based on their technical skills, background, and code quality to hire the best talent instantly.
@@ -21,10 +21,7 @@ const HomeCards = () => {
         <div className="mt-10 max-w-2xl mx-auto">
           <Card bg="bg-black/40 dark:bg-slate-900/60 border border-[#21b8b2]/20 dark:border-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-md">
             <div className="flex h-full flex-col p-6">
-              <div className="inline-flex max-w-fit rounded-full border border-[#21b8b2]/40 bg-[#21b8b2]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#21b8b2]">
-                Automated Screening
-              </div>
-
+             
               <h3 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-[1.8rem]">
                 Rank developers and hire fast
               </h3>
