@@ -70,7 +70,7 @@ const Hero = () => {
       <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-6 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="grid w-full items-center gap-10 lg:grid-cols-2">
           <div className="max-w-2xl text-white">
-            <h1 className="whitespace-pre-line text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl md:text-7xl">
+            <h1 className="whitespace-pre-line text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl md:text-6xl">
               {slides[currentSlide].heading}
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-white/80 sm:text-lg">

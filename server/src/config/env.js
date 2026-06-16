@@ -12,8 +12,8 @@ const required = (name) => {
 
 export const env = {
   nodeEnv: process.env.NODE_ENV || "development",
-  port: Number(process.env.PORT || 3000),
-  clientOrigin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
+  port: Number(process.env.PORT || "https://strata-backend-ri59.onrender.com"),
+  clientOrigin: process.env.CLIENT_ORIGIN ,
   Url: required("SUPABASE_URL"),
   supabaseServiceRoleKey: required("SUPABASE_SERVICE_ROLE_KEY"),
   geminiApiKey: process.env.GEMINI_API_KEY || "",

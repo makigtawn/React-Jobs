@@ -12,8 +12,7 @@ export const createApp = () => {
   const app = express();
 
   const allowedOrigins = [
-    'http://localhost:5173', // Default Vite port
-    'https://your-project-name.vercel.app' // Swap this out after Step 4
+    'http://strata-backend-ri59.onrender.com', 
   ];
   app.use(cors({
     origin: (origin, callback) => {
