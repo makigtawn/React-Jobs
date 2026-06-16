@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiMoon, FiSun, FiMenu } from "react-icons/fi";
 import logo from "../assets/images/logo.png";
 import { useAuth } from "../context/useAuth";
@@ -15,6 +15,7 @@ const getStoredTheme = () => {
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate(); 
   const [theme, setTheme] = useState(() => getStoredTheme());
   const [hideNavbar, setHideNavbar] = useState(false);
   const lastScrollY = useRef(0);
@@ -65,8 +66,8 @@ const Navbar = () => {
   const handleLogout = async () => {
     await logout();
     setMenuOpen(false);
+    navigate("/"); 
   };
-
   const linkClass = ({ isActive }) =>
     `rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
       isHome
@@ -176,7 +177,7 @@ const Navbar = () => {
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className={`text-sm font-medium transition duration-300 ${
+                    className={`text-sm font-medium cursor-pointer transition duration-300 ${
                       isHome
                         ? "text-white/80 hover:text-white"
                         : "text-[var(--color-text-primary)]"
@@ -196,7 +197,7 @@ const Navbar = () => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]">
+                className="inline-flex cursor-pointer h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]">
                 {theme === "dark" ? <FiSun /> : <FiMoon />}
               </button>
             </div>

@@ -49,7 +49,6 @@ const SignupPage = () => {
     setLoading(false);
 
     if (error) {
-      // Handle specific signup errors
       if (error.message?.includes("already registered")) {
         setErrorMsg("This email is already registered. Try logging in instead.");
       } else {
@@ -58,7 +57,6 @@ const SignupPage = () => {
       return;
     }
 
-    // Success! Show email verification message
     setSignupSuccess(true);
     setUserEmail(form.email);
   };

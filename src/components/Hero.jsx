@@ -66,8 +66,7 @@ const Hero = () => {
         <div className="bg-[#1f3238] dark:bg-slate-900/60" />
         <div className="bg-[#21b8b2] dark:bg-teal-700/80" />
       </div>
-
-      <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-6 py-16 sm:px-8 lg:px-12 lg:py-24">
+    <div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center pt-28 px-6 py-16 sm:px-8 lg:px-12 lg:py-24 lg:pt-16">
         <div className="grid w-full items-center gap-10 lg:grid-cols-2">
           <div className="max-w-2xl text-white">
             <h1 className="whitespace-pre-line text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl md:text-6xl">
