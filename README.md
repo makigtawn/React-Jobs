@@ -1,19 +1,12 @@
-# React Jobs – Job Platform Web App
+# Strata – Job Platform Web App
 
 ## Overview
 
-React Jobs is a full-stack job platform built with the MERN stack. It allows employers to post and manage job listings while developers (job seekers) can browse, view, and apply for jobs. The system is designed with scalability, clean architecture, and role-based functionality in mind.
+strata is a full-stack job platform built with the MERN stack. It allows employers to post and manage job listings while they can browse, view, and compare competator . The system is designed with scalability, clean architecture, and role-based functionality in mind.
 
 ---
 
 ## Features
-
-### For Developers (Job Seekers)
-
-* Browse available job listings
-* View detailed job descriptions
-* Search and filter jobs
-* Apply for jobs (if implemented)
 
 ### For Employers
 
