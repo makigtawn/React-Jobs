@@ -62,8 +62,8 @@ const SignupPage = () => {
   };
 
   return (
-    <section className="min-h-screen bg-[#152a31] px-4 py-24">
-      <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-[#0d1f25] p-8 text-white shadow-2xl">
+    <section className="min-h-screen bg-[#1f3238] dark:bg-[#152a31] px-4 py-24">
+      <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-[#21b8b2] dark:bg-[#0d1f25] p-8 text-white shadow-2xl">
         {signupSuccess ? (
           <>
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-900/30 text-3xl">
@@ -112,7 +112,7 @@ const SignupPage = () => {
                   value={form.fullName}
                   onChange={(e) => updateField("fullName", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
                 />
               </label>
 
@@ -123,7 +123,7 @@ const SignupPage = () => {
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
                 />
               </label>
 
@@ -134,7 +134,7 @@ const SignupPage = () => {
                   value={form.password}
                   onChange={(e) => updateField("password", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
                 />
               </label>
 
@@ -145,7 +145,7 @@ const SignupPage = () => {
                   value={form.confirmPassword}
                   onChange={(e) => updateField("confirmPassword", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
                 />
               </label>
 
@@ -154,14 +154,14 @@ const SignupPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-xl bg-[#21b8b2] px-5 py-3 font-semibold text-slate-950 transition hover:bg-[#1aa69f] disabled:cursor-not-allowed disabled:opacity-70">
+                className="w-full rounded-xl  px-5 py-3 font-semibold text-slate-950 transition hover:bg-[#1aa69f] disabled:cursor-not-allowed disabled:opacity-70">
                 {loading ? "Creating account..." : "Sign up"}
               </button>
             </form>
 
             <p className="mt-6 text-center text-sm text-white/65">
               Already have an account?{" "}
-              <Link to="/login" className="font-semibold text-[#21b8b2]">
+              <Link to="/login" className="font-semibold text-[#1f3238]">
                 Login
               </Link>
             </p>

@@ -68,15 +68,16 @@ const Navbar = () => {
     setMenuOpen(false);
     navigate("/"); 
   };
+
   const linkClass = ({ isActive }) =>
-    `rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
+    `rounded-full px-4 py-2 text-sm font-medium transition duration-300 block text-center ${
       isHome
         ? isActive
           ? "border border-white/30 bg-white/10 text-white"
           : "border border-transparent text-white/80 hover:border-white/20 hover:text-white"
         : isActive
-          ? "rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface-strong)] text-[var(--color-text-primary)]"
-          : "rounded-full border border-transparent text-[var(--color-text-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]"
+          ? "border border-[var(--color-border-strong)] bg-[var(--color-surface-strong)] text-[var(--color-text-primary)]"
+          : "border border-transparent text-[var(--color-text-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]"
     }`;
 
   return (
@@ -168,7 +169,6 @@ const Navbar = () => {
                   </NavLink>
                 </>
               )}
-
               {user && (
                 <>
                   <NavLink to="/dashboard" className={linkClass}>
@@ -205,9 +205,9 @@ const Navbar = () => {
         </div>
 
         {menuOpen && (
-          <div className="mt-4 space-y-3 rounded-[1.5rem] bg-black/10 p-4 lg:hidden">
-            <ul className="space-y-2">
-              <li>
+          <div className="mt-4 space-y-4 rounded-[1.5rem] bg-black/10 p-4 text-center lg:hidden">
+            <ul className="space-y-2 flex flex-col items-center justify-center">
+              <li className="w-full max-w-[200px]">
                 <NavLink
                   to="/"
                   onClick={() => setMenuOpen(false)}
@@ -215,7 +215,7 @@ const Navbar = () => {
                   Home
                 </NavLink>
               </li>
-              <li>
+              <li className="w-full max-w-[200px]">
                 <NavLink
                   to="/about"
                   onClick={() => setMenuOpen(false)}
@@ -223,7 +223,7 @@ const Navbar = () => {
                   About
                 </NavLink>
               </li>
-              <li>
+              <li className="w-full max-w-[200px]">
                 <NavLink
                   to="/jobs"
                   onClick={() => setMenuOpen(false)}
@@ -232,19 +232,20 @@ const Navbar = () => {
                 </NavLink>
               </li>
             </ul>
-            <div className="flex flex-col gap-3 pt-2">
+            
+            <div className="flex flex-col items-center gap-3 pt-2">
               {!user && (
                 <>
                   <NavLink
                     to="/login"
                     onClick={() => setMenuOpen(false)}
-                    className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    className="w-full rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
                     Login
                   </NavLink>
                   <NavLink
                     to="/signup"
                     onClick={() => setMenuOpen(false)}
-                    className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    className="w-full rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
                     Signup
                   </NavLink>
                 </>
@@ -255,23 +256,41 @@ const Navbar = () => {
                   <NavLink
                     to="/dashboard"
                     onClick={() => setMenuOpen(false)}
-                    className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    className="w-full rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
                     Dashboard
                   </NavLink>
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    className="w-full rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
                     Logout
                   </button>
                 </>
               )}
+              
               <NavLink
                 to="/add-job"
                 onClick={() => setMenuOpen(false)}
-                className="rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-4 py-3 text-center text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg transition hover:-translate-y-0.5">
+                className="w-full rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-4 py-3 text-center text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg transition hover:-translate-y-0.5">
                 Add Job
               </NavLink>
+
+              <div className="pt-2 w-full flex justify-center">
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="inline-flex h-12 px-6 items-center justify-center gap-3 rounded-full border border-white/20 bg-white/10 text-white text-sm font-medium shadow-sm transition duration-300">
+                  {theme === "dark" ? (
+                    <>
+                      <FiSun /> Light Mode
+                    </>
+                  ) : (
+                    <>
+                      <FiMoon /> Dark Mode
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         )}
