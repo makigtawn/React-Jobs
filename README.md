@@ -1,55 +1,66 @@
-# Strata – Job Platform Web App
+# Strata – AI-Powered Candidate Screening Platform
 
 ## Overview
 
-strata is a full-stack job platform built with the MERN stack. It allows employers to post and manage job listings while they can browse, view, and compare competator . The system is designed with scalability, clean architecture, and role-based functionality in mind.
+**Strata** is a next-generation, full-stack recruitment platform designed to eliminate the manual effort of resume screening. Instead of forcing employers to read through hundreds of applications, Strata features an **AI-powered candidate screening and filtering engine**.
+
+The core processing engine extracts information from candidate profiles, analyzes technical depth via GitHub activity, and automatically scores and ranks applicants against specific job descriptions. This ensures employers hire faster, cheaper, and with a much higher talent signal.
 
 ---
 
-## Features
+## Architecture & Data Flow
 
-### For Employers
+The screening engine functions as a specialized processing pipeline within the backend API:
 
-* Add new job postings
-* Edit existing jobs
-* Delete job listings
-* Manage job visibility
+```
+[ PDF Resume ]       ──>  ( Text Extraction )    ──╮
+[ GitHub Account ]   ──>  ( GitHub API Fetch )   ──┼─> [ AI Screening Engine ] ──> [ Ranked Lead Table ]
+[ Job Post Data ]    ──>  ( Supabase DB )        ──╯         (Gemini/OpenAI)          (Saved to Supabase)
 
-### General
+```
 
-* Responsive UI (works on desktop and mobile)
-* Role-based views (Employer vs Developer)
-* Clean and structured component architecture
+1. **The Inputs:** * `resumeText`: Extracted raw text from candidate-uploaded documents (PDF/Word).
+* `githubSummary`: Aggregated developer metrics (repos, languages, commit history) pulled directly via the GitHub API.
+* `jobDescription`: Target requirements retrieved straight from your Supabase database.
+
+
+2. **The Processing:** Authenticated securely via environment variables (`.env`), the engine leverages advanced AI models to score, validate, and write tailored breakdown analysis back to the system.
+
+3. **The Output:** Highly organized candidate rankings stored directly in **Supabase** for immediate employer review.
 
 ---
 
 ## Tech Stack
 
-### Frontend
+**Frontend:** React 19, Tailwind CSS, Vite
+**Backend:** Node.js, Express
+**Database & Auth:** Supabase (PostgreSQL)
+**Cloud Infrastructure:** Railway (Backend), Vercel (Frontend)
 
-* React
-* Tailwind CSS
-* React Router
-
-### Backend
-
-* supabase database
-* postgre
 ---
 
 ## Project Structure
 
 ```
-react-jobs/
+spering/ (Strata)
 │
-├── src/             
-│   └── asset/
-│       ├── components/
-│       ├── pages/
-│       └── layouts/
-|       └── assets/
-|
-└── README.md
+├── server/                 # Express Backend API & AI Processing Engine
+│
+├── src/                    # React Frontend Client
+│   ├── assets/             # Images, icons, and static media
+│   ├── components/         # Reusable UI components
+│   ├── context/            # React state context providers
+│   ├── layouts/            # Page shell layouts
+│   ├── pages/              # Application views (Dashboard, Jobs, Profile)
+│   ├── services/           # API clients and backend integration
+│   ├── styles/             # Global CSS & styling configurations
+│   └── utils/              # Client-side helper functions
+│
+├── .env                    # Local environment secrets & API keys
+├── index.html              # Frontend entry document
+├── package.json            # Root project dependencies & scripts
+└── vite.config.js          # Vite build configuration
+
 ```
 
 ---
@@ -58,86 +69,65 @@ react-jobs/
 
 ### 1. Clone the Repository
 
-```
+```bash
 git clone <your-repo-link>
-cd react-jobs
-```
-
-### 2. Install Dependencies
-
-#### Client
+cd spering
 
 ```
-cd client
+
+### 2. Configure Environment Variables
+
+Create a `.env` file in the root directory and populate it with your API keys and configuration:
+
+```env
+PORT=3000
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+GEMINI_API_KEY=your_google_gemini_api_key
+OPENAI_API_KEY=your_openai_api_key
+
+```
+
+### 3. Database Initialization
+
+Before launching the app, apply the required structural schema to your Supabase instance by running the migration script found in your migrations path:
+
+```bash
+# Apply migration to set up the authentication rules and ranking engine schema
+supabase db push
+
+```
+
+*(Alternatively, copy and run the contents of `supabase/migrations/202606110001_auth_ranking.sql` directly into the Supabase SQL Editor).*
+
+### 4. Install Dependencies & Run
+
+Install all project modules from the root:
+
+```bash
 npm install
-```
-
-#### Server
 
 ```
-cd server
-npm install
-```
 
----
+To start the backend API server:
 
-## Running the App
-
-### Start Backend API
-
-```
+```bash
 npm run dev:api
-```
-
-### Start Frontend
 
 ```
+
+To start the frontend developer environment:
+
+```bash
 npm run dev
-```
-
-App will run on:
 
 ```
-http://localhost:5173
-```
 
-The backend API runs on:
-
-```
-http://localhost:3000
-```
-
-Required environment variables are listed in `.env.example`. Apply
-`supabase/migrations/202606110001_auth_ranking.sql` to your Supabase project
-before using candidate ranking.
-
----
-
-## Key Concepts Used
-
-* Component-based architecture
-* State management using React hooks
-* RESTful API design
-* CRUD operations
-* Separation of concerns (frontend vs backend)
-* Role-based UI rendering
-* Supabase Auth session persistence
-* AI-assisted resume and GitHub scoring
-
----
-
-## Future Improvements
-
-* Authorization (Role-based access)
-* Job application tracking system
-* Notifications system
-* Offline/PWA support
-* Advanced filtering and recommendations
+* **Frontend Client:** `http://localhost:5173`
+* **Backend API:** `http://localhost:3000`
 
 ---
 
 ## Author
 
-Meklit Girmaw
-
----
+**Meklit Girmaw**
