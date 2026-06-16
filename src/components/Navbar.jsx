@@ -109,7 +109,7 @@ const Navbar = () => {
                     ? "text-white/70"
                     : "text-[var(--color-text-secondary)]"
                 }`}>
-                PREMIUM DEVELOPER ROLES
+                 fast hire
               </span>
             </div>
           </NavLink>
