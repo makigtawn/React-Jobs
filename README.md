@@ -1,4 +1,4 @@
-# Strata – AI-Powered Candidate Screening Platform
+# Strata - AI Powered Candidate Screening Platform
 
 ## Overview
 
@@ -6,7 +6,6 @@
 
 The core processing engine extracts information from candidate profiles, analyzes technical depth via GitHub activity, and automatically scores and ranks applicants against specific job descriptions. This ensures employers hire faster, cheaper, and with a much higher talent signal.
 
----
 
 ## Architecture & Data Flow
 
@@ -19,7 +18,8 @@ The screening engine functions as a specialized processing pipeline within the b
 
 ```
 
-1. **The Inputs:** * `resumeText`: Extracted raw text from candidate-uploaded documents (PDF/Word).
+1. **The Inputs:** 
+* `resumeText`: Extracted raw text from candidate-uploaded documents (PDF/Word).
 * `githubSummary`: Aggregated developer metrics (repos, languages, commit history) pulled directly via the GitHub API.
 * `jobDescription`: Target requirements retrieved straight from your Supabase database.
 
@@ -32,17 +32,17 @@ The screening engine functions as a specialized processing pipeline within the b
 
 ## Tech Stack
 
-**Frontend:** React 19, Tailwind CSS, Vite
+**Frontend:** React, Tailwind CSS, Vite
 **Backend:** Node.js, Express
 **Database & Auth:** Supabase (PostgreSQL)
-**Cloud Infrastructure:** Railway (Backend), Vercel (Frontend)
+**Cloud Infrastructure:** Render (Backend), Vercel (Frontend)
 
 ---
 
 ## Project Structure
 
 ```
-spering/ (Strata)
+Strata
 │
 ├── server/                 # Express Backend API & AI Processing Engine
 │
@@ -70,8 +70,8 @@ spering/ (Strata)
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-link>
-cd spering
+git clone https://github.com/makigtawn/strata.git
+cd strata
 
 ```
 
@@ -105,7 +105,7 @@ supabase db push
 Install all project modules from the root:
 
 ```bash
-npm install
+npm install or npm install --legacy-peer-deps
 
 ```
 
@@ -128,6 +128,6 @@ npm run dev
 
 ---
 
-## Author
+## Author/Developer
 
 **Meklit Girmaw**
