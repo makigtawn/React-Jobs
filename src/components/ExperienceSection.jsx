@@ -19,7 +19,6 @@ const features = [
 const ExperienceSection = () => {
   return (
     <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
-      {/* Background glows */}
     
       <div className="pointer-events-none absolute left-0 top-0 h-40 w-40 rounded-full bg-[#21b8b2]/20 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-0 h-48 w-48 rounded-full bg-[#ff515b]/20 blur-3xl" />
@@ -27,7 +26,6 @@ const ExperienceSection = () => {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-center">
         
-          {/* left card */}
 
           <div className="relative rounded-[2rem] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.2)]">
             <img
@@ -72,7 +70,6 @@ const ExperienceSection = () => {
               </div>
             </div>
           </div>
-          {/* right Card */}
           <div className="rounded-[2rem] border border-white/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.28)] text-white">
             <div className="max-w-xl">
               <h2 className=" text-[#21b8b2] mt-5 text-4xl font-black tracking-tight sm:text-5xl">

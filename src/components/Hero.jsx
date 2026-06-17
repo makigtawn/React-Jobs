@@ -62,7 +62,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex flex-col justify-center">
+    <section className="relative overflow-hidden min-h-screen flex flex-col justify-center lg:-mt-20">
       <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2">
         <div className="bg-[#1f3238] dark:bg-slate-900/60" />
         <div className="hidden lg:block bg-[#21b8b2] dark:bg-teal-700/80" />
