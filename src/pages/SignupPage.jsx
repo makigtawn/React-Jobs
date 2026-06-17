@@ -75,7 +75,7 @@ const SignupPage = () => {
             </p>
             <div className="mt-6 rounded-lg bg-blue-900/20 border border-blue-700/30 p-4">
               <p className="text-sm text-blue-200">
-                <strong>📧 Next steps:</strong>
+                <strong>Next steps:</strong>
               </p>
               <ol className="mt-2 text-sm text-blue-200 space-y-2 list-decimal list-inside">
                 <li>Check your email inbox</li>
@@ -85,7 +85,7 @@ const SignupPage = () => {
             </div>
             <p className="mt-6 text-center text-sm text-white/65">
               Already verified?{" "}
-              <Link to="/login" className="font-semibold text-[#21b8b2]">
+              <Link to="/login" className="font-semibold text-white">
                 Log in here
               </Link>
             </p>
