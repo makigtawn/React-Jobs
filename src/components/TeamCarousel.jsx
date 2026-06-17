@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import member1 from "../assets/images/team/member1.jpg";
 import member2 from "../assets/images/team/member2.jpg";
 import member3 from "../assets/images/team/member3.jpg";
-
+import Button from "./Button";
 const teamMembers = [
   {
     name: "Alice Johnson",
@@ -41,7 +41,6 @@ const TeamCarousel = () => {
       <div
         key={member.name}
         className="flex flex-col items-center gap-6 rounded-2xl border border-white/10 bg-[#0d1f25] p-8 md:p-10 shadow-2xl text-white transition-all duration-200">
-        
         <div className="relative">
           <img
             src={member.image}
@@ -51,7 +50,9 @@ const TeamCarousel = () => {
         </div>
 
         <div>
-          <h3 className="text-2xl font-black tracking-tight text-white">{member.name}</h3>
+          <h3 className="text-2xl font-black tracking-tight text-white">
+            {member.name}
+          </h3>
           <p className="text-sm uppercase tracking-[0.15em] text-[#21b8b2] font-bold mt-2">
             {member.position}
           </p>
@@ -62,18 +63,21 @@ const TeamCarousel = () => {
         </p>
 
         <div className="flex gap-5 mt-2">
-          <button
+          <Button
             onClick={prev}
             type="button"
-            className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-lg text-white hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold">
+            className="rounded-xl border border-white/10 bg-white/5 text-lg text-white hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold"
+            style={{ padding: "12px 20px" }}>
             &#8592;
-          </button>
-          <button
+          </Button>
+
+          <Button
             onClick={next}
             type="button"
-            className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-lg text-white hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold">
+            className="rounded-xl border border-white/10 bg-white/5 text-lg text-white hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold"
+            style={{ padding: "12px 20px" }}>
             &#8594;
-          </button>
+          </Button>
         </div>
       </div>
 

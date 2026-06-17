@@ -3,7 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiMoon, FiSun, FiMenu } from "react-icons/fi";
 import logo from "../assets/images/logo.png";
 import { useAuth } from "../context/useAuth";
-
+import Button from "./Button";
 const getStoredTheme = () => {
   if (typeof window === "undefined") return "dark";
   const savedTheme = localStorage.getItem("theme");
@@ -15,7 +15,7 @@ const getStoredTheme = () => {
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [theme, setTheme] = useState(() => getStoredTheme());
   const [hideNavbar, setHideNavbar] = useState(false);
   const lastScrollY = useRef(0);
@@ -63,7 +63,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     await logout();
     setMenuOpen(false);
-    navigate("/"); 
+    navigate("/");
   };
 
   const linkClass = ({ isActive }) =>
@@ -78,8 +78,7 @@ const Navbar = () => {
       className="sticky top-0 z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4"
       aria-hidden={hideNavbar}
       inert={hideNavbar ? "" : undefined}>
-      <nav
-        className="mx-auto flex max-w-7xl flex-col rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] px-3 py-3 shadow-xl shadow-black/10 transition duration-300 sm:px-4 lg:px-6">
+      <nav className="mx-auto flex max-w-7xl flex-col rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] px-3 py-3 shadow-xl shadow-black/10 transition duration-300 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between gap-3">
           <NavLink to="/" className="flex items-center gap-3">
             <img src={logo} alt="Strata Logo" className="h-9 w-auto" />
@@ -88,19 +87,21 @@ const Navbar = () => {
                 Strata
               </span>
               <span className="hidden text-xs tracking-[0.24em] sm:block text-[var(--color-text-secondary)]">
-                 fast hire
+                less ,hire fast
               </span>
             </div>
           </NavLink>
 
           <div className="flex items-center gap-3">
-            <button
+            <Button
               type="button"
               aria-label="Toggle menu"
               onClick={toggleMenu}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] px-3 text-xl transition duration-300 lg:hidden">
+              className="inline-flex h-11 w-11 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] text-xl transition duration-300 lg:hidden"
+              style={{ padding: 0 }} // Resets default padding so the menu icon centers perfectly
+            >
               <FiMenu />
-            </button>
+            </Button>
 
             <div className="hidden items-center gap-3 lg:flex">
               <ul className="flex items-center gap-2">
@@ -123,11 +124,15 @@ const Navbar = () => {
 
               {!user && (
                 <>
-                  <NavLink to="/login" className="text-sm font-medium transition duration-300 text-[var(--color-text-primary)]">
+                  <NavLink
+                    to="/login"
+                    className="text-sm font-medium transition duration-300 text-[var(--color-text-primary)]">
                     Login
                   </NavLink>
 
-                  <NavLink to="/signup" className="text-sm font-medium transition duration-300 text-[var(--color-text-primary)]">
+                  <NavLink
+                    to="/signup"
+                    className="text-sm font-medium transition duration-300 text-[var(--color-text-primary)]">
                     Signup
                   </NavLink>
                 </>
@@ -137,12 +142,13 @@ const Navbar = () => {
                   <NavLink to="/dashboard" className={linkClass}>
                     Dashboard
                   </NavLink>
-                  <button
+
+                  <Button
                     type="button"
                     onClick={handleLogout}
-                    className="text-sm font-medium cursor-pointer transition duration-300 text-[var(--color-text-primary)]">
-                    Logout
-                  </button>
+                    className="text-sm bg-[none] font-medium cursor-pointer transition duration-300 text-[var(--color-text-primary)]"
+                  >  Logout
+                  </Button>
                 </>
               )}
 
@@ -153,12 +159,13 @@ const Navbar = () => {
                 <FiArrowRight />
               </NavLink>
 
-              <button
+              <Button
                 type="button"
                 onClick={toggleTheme}
-                className="inline-flex cursor-pointer h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]">
+                className="inline-flex cursor-pointer h-11 w-11 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]"
+                style={{ padding: 0 }}>
                 {theme === "dark" ? <FiSun /> : <FiMoon />}
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -167,22 +174,31 @@ const Navbar = () => {
           <div className="mt-4 space-y-4 rounded-[1.5rem] bg-black/10 p-4 text-center lg:hidden">
             <ul className="space-y-2 flex flex-col items-center justify-center">
               <li className="w-full max-w-[200px]">
-                <NavLink to="/" onClick={() => setMenuOpen(false)} className={linkClass}>
+                <NavLink
+                  to="/"
+                  onClick={() => setMenuOpen(false)}
+                  className={linkClass}>
                   Home
                 </NavLink>
               </li>
               <li className="w-full max-w-[200px]">
-                <NavLink to="/about" onClick={() => setMenuOpen(false)} className={linkClass}>
+                <NavLink
+                  to="/about"
+                  onClick={() => setMenuOpen(false)}
+                  className={linkClass}>
                   About
                 </NavLink>
               </li>
               <li className="w-full max-w-[200px]">
-                <NavLink to="/jobs" onClick={() => setMenuOpen(false)} className={linkClass}>
+                <NavLink
+                  to="/jobs"
+                  onClick={() => setMenuOpen(false)}
+                  className={linkClass}>
                   Jobs
                 </NavLink>
               </li>
             </ul>
-            
+
             <div className="flex flex-col items-center gap-3 pt-2">
               {!user && (
                 <>
@@ -209,15 +225,16 @@ const Navbar = () => {
                     className="w-full rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
                     Dashboard
                   </NavLink>
-                  <button
+                  <Button
                     type="button"
                     onClick={handleLogout}
-                    className="w-full rounded-full border border-white/20 px-4 py-3 text-center text-sm font-medium text-white/90 transition hover:bg-white/10">
+                    className="bg-white/10 w-full rounded-full border border-white/20 text-center text-sm font-medium text-white/90 hover:bg-white/10"
+                    style={{ padding: "12px 16px" }}>
                     Logout
-                  </button>
+                  </Button>
                 </>
               )}
-              
+
               <NavLink
                 to="/add-job"
                 onClick={() => setMenuOpen(false)}
@@ -226,10 +243,11 @@ const Navbar = () => {
               </NavLink>
 
               <div className="pt-2 w-full flex justify-center">
-                <button
+                <Button
                   type="button"
                   onClick={toggleTheme}
-                  className="inline-flex h-12 px-6 items-center justify-center gap-3 rounded-full border border-white/20 bg-white/10 text-white text-sm font-medium shadow-sm transition duration-300">
+                  className="inline-flex h-12 items-center justify-center gap-3 rounded-full border border-white/20 bg-white/10 text-white text-sm font-medium shadow-sm transition duration-300"
+                  style={{ padding: "0 24px" }}>
                   {theme === "dark" ? (
                     <>
                       <FiSun /> Light Mode
@@ -239,7 +257,7 @@ const Navbar = () => {
                       <FiMoon /> Dark Mode
                     </>
                   )}
-                </button>
+                </Button>
               </div>
             </div>
           </div>

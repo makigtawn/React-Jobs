@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
+import Button from "./Button";
 
 const stripHtml = (html) => {
   const div = document.createElement("div");
@@ -30,7 +31,7 @@ const JobListing = ({ job }) => {
     plainText.length > 90 ? plainText.substring(0, 90) + "…" : plainText;
 
   return (
-    <div className="bg-[#21b8b2] p-5 sm:p-6 md:p-8 lg:p-10 dark:bg-slate-900/60 rounded-xl shadow-md border border-neutral-200/20 dark:border-slate-800">
+    <div className="bg-white p-5 sm:p-6 md:p-8 lg:p-10 dark:bg-slate-900/60 rounded-xl shadow-md border border-neutral-200/20 dark:border-slate-800">
       
       <div className="mb-4 sm:mb-6 md:mb-8 lg:mb-10">
         <div className="text-black/80 dark:text-white/80 text-sm mb-1">{job.type}</div>
@@ -46,11 +47,13 @@ const JobListing = ({ job }) => {
           )}
         </div>
 
-        <button
-          onClick={() => setShowFullDescription((prev) => !prev)}
-          className="text-black dark:text-white text-xs px-2 py-1 bg-green-800/10 hover:bg-green-800/20 rounded-md transition-colors">
-          {showFullDescription ? "less" : "more"}
-        </button>
+        <Button
+  onClick={() => setShowFullDescription((prev) => !prev)}
+  className="text-black dark:text-white text-xs bg-green-800/10 hover:bg-green-800/20 rounded-md transition-colors"
+  style={{ padding: '4px 8px' }} 
+>
+  {showFullDescription ? "less" : "more"}
+</Button>
       </div>
 
       <h3 className="text-xl font-bold text-black dark:text-white mb-4 sm:mb-5 lg:mb-6">{job.salary} / year</h3>

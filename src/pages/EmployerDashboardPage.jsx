@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiRequest } from "../services/api";
 import Spinner from "../components/Spinner";
+import Button from "../components/Button";
 
 const statusOptions = ["All", "Pending", "Accepted", "Rejected"];
 
@@ -142,23 +143,22 @@ const EmployerDashboardPage = () => {
               Employer Dashboard
             </p>
             <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
-              Candidate Rankings
+              Rankings
             </h1>
           </div>
 
           <div className="flex items-center gap-3 w-full md:w-auto">
-            {/* The Safe Inject Button */}
-            <button
+            <Button
               type="button"
               onClick={handleInjectTestData}
-              className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs px-4 py-3 rounded-xl transition shadow-md whitespace-nowrap">
-              ⚡ Inject Test Data
-            </button>
-
+              className="bg-[#21b8b2] hover:bg-green-100 text-slate-950 font-bold text-xs rounded-xl shadow-md whitespace-nowrap"
+              style={{ padding: "12px 16px" }}>
+              Inject Test Data
+            </Button>
             <select
               value={selectedJobId}
               onChange={(e) => setSelectedJobId(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-[#0d1f25] px-4 py-3 text-sm text-white outline-none focus:border-[#21b8b2] md:w-72 transition cursor-pointer">
+              className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm text-white outline-none focus:border-[#21b8b2] md:w-72 transition cursor-pointer">
               {jobs.map((job) => (
                 <option key={job.id} value={job.id}>
                   {job.title}
@@ -304,14 +304,15 @@ const EmployerDashboardPage = () => {
                               </span>
                             </td>
                             <td className="px-6 py-5 text-right">
-                              <button
+                              <Button
                                 type="button"
                                 onClick={() =>
                                   setSelectedReasoning(application)
                                 }
-                                className="rounded-xl border border-[#21b8b2]/30 bg-[#21b8b2]/5 px-4 py-2 text-xs font-bold text-[#21b8b2] hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200">
+                                className="rounded-xl border border-[#21b8b2]/30 bg-[#21b8b2]/5 text-xs font-bold text-[#21b8b2] hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200"
+                                style={{ padding: "8px 16px" }}>
                                 View Report
-                              </button>
+                              </Button>
                             </td>
                           </tr>
                         ))}
@@ -376,12 +377,13 @@ const EmployerDashboardPage = () => {
                   </span>
                 </p>
               </div>
-              <button
+              <Button
                 type="button"
                 onClick={() => setSelectedReasoning(null)}
-                className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold hover:bg-white/10 transition">
+                className="rounded-xl border border-white/10 bg-white/5 text-xs font-bold hover:bg-white/10 transition"
+                style={{ padding: "8px 16px" }}>
                 Close Report
-              </button>
+              </Button>
             </div>
 
             <div className="space-y-6 mt-6">

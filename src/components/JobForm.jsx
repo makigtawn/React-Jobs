@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import freelanceImg from "../assets/images/new images/freelance-img.jpg";
 import JobDescriptionEditor from "./editor/JobDescriptionEditor";
-
+import Button from "./Button";
 const jobTypes = [
   "Full-Time",
   "Part-Time",
@@ -206,12 +206,15 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </label>
 
-              <button
-                type="submit"
-                form="job-form"
-                className="w-full rounded-3xl bg-[#21b8b2] px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-[#1aa69f]">
-                {submitLabel}
-              </button>
+              
+              <Button
+  type="submit"
+  form="job-form"
+  className="w-full rounded-3xl bg-[#21b8b2] text-base font-semibold text-slate-950 hover:bg-[#1aa69f]"
+  style={{ padding: '16px 24px' }} 
+>
+  {submitLabel}
+</Button>
             </form>
           </div>
 

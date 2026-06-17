@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import Button from "../components/Button";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -24,9 +25,12 @@ const SignupPage = () => {
 
   const validate = () => {
     if (form.fullName.trim().length < 2) return "Full name is required.";
-    if (!emailRegex.test(form.email)) return "Please enter a valid email address.";
-    if (form.password.length < 6) return "Password must be at least 6 characters.";
-    if (form.password !== form.confirmPassword) return "Passwords do not match.";
+    if (!emailRegex.test(form.email))
+      return "Please enter a valid email address.";
+    if (form.password.length < 6)
+      return "Password must be at least 6 characters.";
+    if (form.password !== form.confirmPassword)
+      return "Passwords do not match.";
     return "";
   };
 
@@ -50,7 +54,9 @@ const SignupPage = () => {
 
     if (error) {
       if (error.message?.includes("already registered")) {
-        setErrorMsg("This email is already registered. Try logging in instead.");
+        setErrorMsg(
+          "This email is already registered. Try logging in instead.",
+        );
       } else {
         setErrorMsg(error.message || "Unable to create your account.");
       }
@@ -71,7 +77,8 @@ const SignupPage = () => {
             </div>
             <h1 className="text-3xl font-black">Check your email</h1>
             <p className="mt-4 text-sm text-white/75 leading-relaxed">
-              We've sent a verification link to <span className="font-semibold text-white">{userEmail}</span>
+              We've sent a verification link to{" "}
+              <span className="font-semibold text-white">{userEmail}</span>
             </p>
             <div className="mt-6 rounded-lg bg-blue-900/20 border border-blue-700/30 p-4">
               <p className="text-sm text-blue-200">
@@ -89,14 +96,20 @@ const SignupPage = () => {
                 Log in here
               </Link>
             </p>
-            <button
+            <Button
               onClick={() => {
                 setSignupSuccess(false);
-                setForm({ fullName: "", email: "", password: "", confirmPassword: "" });
+                setForm({
+                  fullName: "",
+                  email: "",
+                  password: "",
+                  confirmPassword: "",
+                });
               }}
-              className="mt-4 w-full rounded-xl bg-white/10 px-5 py-3 font-semibold text-white transition hover:bg-white/20">
+              className="mt-4 w-full rounded-xl bg-white/10 font-semibold text-white transition hover:bg-white/20"
+              style={{ padding: "12px 20px" }}>
               Create another account
-            </button>
+            </Button>
           </>
         ) : (
           <>
@@ -143,7 +156,9 @@ const SignupPage = () => {
                 <input
                   type="password"
                   value={form.confirmPassword}
-                  onChange={(e) => updateField("confirmPassword", e.target.value)}
+                  onChange={(e) =>
+                    updateField("confirmPassword", e.target.value)
+                  }
                   disabled={loading}
                   className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
                 />
@@ -151,12 +166,13 @@ const SignupPage = () => {
 
               {errorMsg && <p className="text-sm text-red-300">{errorMsg}</p>}
 
-              <button
+              <Button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-xl  px-5 py-3 font-semibold text-slate-950 transition hover:bg-[#1aa69f] disabled:cursor-not-allowed disabled:opacity-70">
+                className="w-full rounded-xl font-semibold text-slate-950 hover:bg-[#1aa69f] disabled:cursor-not-allowed"
+                style={{ padding: "12px 20px" }}>
                 {loading ? "Creating account..." : "Sign up"}
-              </button>
+              </Button>
             </form>
 
             <p className="mt-6 text-center text-sm text-white/65">

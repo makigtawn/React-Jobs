@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import nextIcon from "../assets/images/new images/next.png";
 import prevIcon from "../assets/images/new images/prev.png";
 import sliderImage from "../assets/images/new images/slider-img.png";
+import Button from "./Button";
 
 const slides = [
   {
@@ -69,7 +70,6 @@ const Hero = () => {
 
       <div className="relative mx-auto w-full max-w-7xl px-4 py-12 pt-24 sm:px-6 md:py-16 lg:px-8 lg:py-24">
         <div className="grid grid-cols-1 gap-10 items-center lg:grid-cols-2">
-          
           <div className="text-center lg:text-left text-white z-10">
             <h1 className="whitespace-pre-line text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               {slides[currentSlide].heading}
@@ -99,22 +99,23 @@ const Hero = () => {
               className="h-auto max-h-[300px] w-auto object-contain sm:max-h-[450px] lg:max-h-[550px]"
             />
           </div>
-
-        </div> 
+        </div>
       </div>
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 lg:left-8 lg:translate-x-0 lg:bottom-10">
-        <button
+        
+        <Button
           onClick={prevSlide}
-          className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#21b8b2] text-white transition hover:scale-105 active:scale-95">
+          className="flex h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#21b8b2] hover:bg-[#1fa39d] transition hover:scale-105 active:scale-95"
+          style={{ padding: 0 }}>
           <img src={prevIcon} alt="Previous" className="h-4 w-4" />
-        </button>
-
-        <button
+        </Button>
+        <Button
           onClick={nextSlide}
-          className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#21b8b2] text-white transition hover:scale-105 active:scale-95">
+          className="flex h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#21b8b2] hover:bg-[#1fa39d] transition hover:scale-105 active:scale-95"
+          style={{ padding: 0 }}>
           <img src={nextIcon} alt="Next" className="h-4 w-4" />
-        </button>
+        </Button>
       </div>
 
       <div className="absolute bottom-1 left-1/2 -translate-x-1/2 z-20 flex justify-center gap-2.5 lg:left-77 lg:translate-x-0 lg:bottom-30 md:bottom-1 ">
@@ -126,8 +127,7 @@ const Hero = () => {
             }`}
           />
         ))}
-      </div> 
-      
+      </div>
     </section>
   );
 };

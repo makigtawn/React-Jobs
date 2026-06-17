@@ -98,12 +98,13 @@ const LoginPage = () => {
             </div>
           )}
 
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-[#21b8b2] px-5 py-3 font-semibold text-slate-950 transition hover:bg-[#1aa69f] disabled:cursor-not-allowed disabled:opacity-70">
+            className="w-full rounded-xl bg-[#21b8b2] font-semibold text-slate-950 hover:bg-[#1aa69f] disabled:cursor-not-allowed"
+            style={{ padding: "12px 20px" }}>
             {loading ? "Logging in..." : "Login"}
-          </button>
+          </Button>
         </form>
 
         <div className="mt-6 rounded-lg bg-blue-900/20 border border-blue-700/30 p-4">
@@ -116,7 +117,9 @@ const LoginPage = () => {
 
         <p className="mt-6 text-center text-sm text-white/65">
           Need an account?{" "}
-          <Link to="/signup" className="font-semibold text-white hover:text-[#1f3238]">
+          <Link
+            to="/signup"
+            className="font-semibold text-white hover:text-[#1f3238]">
             Sign up
           </Link>
         </p>
