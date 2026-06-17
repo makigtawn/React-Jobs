@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; 
-
+import { Link } from "react-router-dom";
 import nextIcon from "../assets/images/new images/next.png";
 import prevIcon from "../assets/images/new images/prev.png";
 import sliderImage from "../assets/images/new images/slider-img.png";
@@ -63,7 +62,7 @@ const Hero = () => {
 
   return (
     <section className="relative overflow-hidden min-h-screen flex flex-col justify-center">
-      <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2-none lg:grid-cols-2">
+      <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2">
         <div className="bg-[#1f3238] dark:bg-slate-900/60" />
         <div className="hidden lg:block bg-[#21b8b2] dark:bg-teal-700/80" />
       </div>
@@ -100,7 +99,8 @@ const Hero = () => {
               className="h-auto max-h-[300px] w-auto object-contain sm:max-h-[450px] lg:max-h-[550px]"
             />
           </div>
-        </div>
+
+        </div> 
       </div>
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 lg:left-8 lg:translate-x-0 lg:bottom-10">
@@ -116,6 +116,18 @@ const Hero = () => {
           <img src={nextIcon} alt="Next" className="h-4 w-4" />
         </button>
       </div>
+
+      <div className="absolute bottom-1 left-1/2 -translate-x-1/2 z-20 flex justify-center gap-2.5 lg:left-77 lg:translate-x-0 lg:bottom-30 md:bottom-1 ">
+        {slides.map((_, idx) => (
+          <span
+            key={idx}
+            className={`inline-block h-2.5 rounded-full transition-all duration-200 ${
+              idx === currentSlide ? "w-8 bg-[#21b8b2]" : "w-2.5 bg-white/40"
+            }`}
+          />
+        ))}
+      </div> 
+      
     </section>
   );
 };
