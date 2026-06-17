@@ -44,11 +44,8 @@ const JobPage = ({ deleteJob }) => {
           </Link>
         </div>
 
-        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column: Job Details */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Header Card */}
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400 mb-4">
                 <FaBriefcase className="mr-1.5" /> {job.type}
@@ -62,7 +59,6 @@ const JobPage = ({ deleteJob }) => {
               </div>
             </div>
 
-            {/* Description & Salary Card */}
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
@@ -87,9 +83,7 @@ const JobPage = ({ deleteJob }) => {
             </div>
           </div>
 
-          {/* Right Column: Company Info & Actions */}
           <div className="space-y-6">
-            {/* Company Info Card */}
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
               <h2 className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4">
                 Company Info
@@ -130,7 +124,6 @@ const JobPage = ({ deleteJob }) => {
               </div>
             </div>
 
-            {/* Actions Card */}
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
               <h2 className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4">
                 Manage Job

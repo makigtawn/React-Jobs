@@ -80,7 +80,7 @@ const Hero = () => {
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
               <a
-                href="#about"
+                href="/about"
                 className="inline-flex items-center justify-center rounded-full bg-[#ff515b] px-8 py-3 text-sm font-semibold text-white shadow-xl shadow-[#ff4c57]/20 transition hover:bg-[#ff6b77]">
                 About Us
               </a>

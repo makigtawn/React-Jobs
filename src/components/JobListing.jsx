@@ -65,7 +65,7 @@ const JobListing = ({ job }) => {
         
         <Link
           to={`/jobs/${job.id}`}
-          className="w-full sm:w-auto md:w-44 lg:w-48 h-[44px] md:h-[42px] lg:h-[46px] flex items-center justify-center bg-green-900/20 hover:bg-green-800/30 text-black px-6 rounded-lg text-center text-sm md:text-base font-semibold transition-all">
+          className="w-full sm:w-auto md:w-44 lg:w-48 h-[44px] md:h-[42px] lg:h-[46px] flex items-center justify-center bg-green-900/20 dark:text-white hover:bg-green-800/30 text-black px-6 rounded-lg text-center text-sm md:text-base font-semibold transition-all">
           Read more
         </Link>
       </div>

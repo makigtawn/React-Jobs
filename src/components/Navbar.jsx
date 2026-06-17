@@ -19,6 +19,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState(() => getStoredTheme());
   const [hideNavbar, setHideNavbar] = useState(false);
   const lastScrollY = useRef(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -51,10 +52,6 @@ const Navbar = () => {
     };
   }, []);
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
-  const isHome = location.pathname === "/";
-
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
@@ -71,44 +68,26 @@ const Navbar = () => {
 
   const linkClass = ({ isActive }) =>
     `rounded-full px-4 py-2 text-sm font-medium transition duration-300 block text-center ${
-      isHome
-        ? isActive
-          ? "border border-white/30 bg-white/10 text-white"
-          : "border border-transparent text-white/80 hover:border-white/20 hover:text-white"
-        : isActive
-          ? "border border-[var(--color-border-strong)] bg-[var(--color-surface-strong)] text-[var(--color-text-primary)]"
-          : "border border-transparent text-[var(--color-text-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]"
+      isActive
+        ? "border border-[var(--color-border-strong)] bg-[var(--color-surface-strong)] text-[var(--color-text-primary)]"
+        : "border border-transparent text-[var(--color-text-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]"
     }`;
 
   return (
     <header
-      className={`${
-        isHome ? "fixed inset-x-0 top-0" : "sticky top-0"
-      } z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4`}
+      className="sticky top-0 z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4"
       aria-hidden={hideNavbar}
       inert={hideNavbar ? "" : undefined}>
       <nav
-        className={`mx-auto flex max-w-7xl flex-col rounded-[1.75rem] border border-transparent px-3 py-3 shadow-xl shadow-black/10 transition duration-300 sm:px-4 lg:px-6 ${
-          isHome
-            ? "bg-[#12242f]/90 backdrop-blur-xl border-white/15"
-            : "bg-[var(--color-nav-bg)] border-[var(--color-border)]"
-        }`}>
+        className="mx-auto flex max-w-7xl flex-col rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] px-3 py-3 shadow-xl shadow-black/10 transition duration-300 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between gap-3">
           <NavLink to="/" className="flex items-center gap-3">
             <img src={logo} alt="Strata Logo" className="h-9 w-auto" />
             <div className="min-w-0">
-              <span
-                className={`block text-lg font-black tracking-[0.2em] sm:text-xl ${
-                  isHome ? "text-white" : "text-[var(--color-text-primary)]"
-                }`}>
+              <span className="block text-lg font-black tracking-[0.2em] sm:text-xl text-[var(--color-text-primary)]">
                 Strata
               </span>
-              <span
-                className={`hidden text-xs tracking-[0.24em] sm:block ${
-                  isHome
-                    ? "text-white/70"
-                    : "text-[var(--color-text-secondary)]"
-                }`}>
+              <span className="hidden text-xs tracking-[0.24em] sm:block text-[var(--color-text-secondary)]">
                  fast hire
               </span>
             </div>
@@ -119,11 +98,7 @@ const Navbar = () => {
               type="button"
               aria-label="Toggle menu"
               onClick={toggleMenu}
-              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border px-3 text-xl transition duration-300 lg:hidden ${
-                isHome
-                  ? "border-white/20 bg-white/10 text-white"
-                  : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)]"
-              }`}>
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] px-3 text-xl transition duration-300 lg:hidden">
               <FiMenu />
             </button>
 
@@ -148,23 +123,11 @@ const Navbar = () => {
 
               {!user && (
                 <>
-                  <NavLink
-                    to="/login"
-                    className={`text-sm font-medium transition duration-300 ${
-                      isHome
-                        ? "text-white/80 hover:text-white"
-                        : "text-[var(--color-text-primary)]"
-                    }`}>
+                  <NavLink to="/login" className="text-sm font-medium transition duration-300 text-[var(--color-text-primary)]">
                     Login
                   </NavLink>
 
-                  <NavLink
-                    to="/signup"
-                    className={`text-sm font-medium transition duration-300 ${
-                      isHome
-                        ? "text-white/80 hover:text-white"
-                        : "text-[var(--color-text-primary)]"
-                    }`}>
+                  <NavLink to="/signup" className="text-sm font-medium transition duration-300 text-[var(--color-text-primary)]">
                     Signup
                   </NavLink>
                 </>
@@ -177,11 +140,7 @@ const Navbar = () => {
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className={`text-sm font-medium cursor-pointer transition duration-300 ${
-                      isHome
-                        ? "text-white/80 hover:text-white"
-                        : "text-[var(--color-text-primary)]"
-                    }`}>
+                    className="text-sm font-medium cursor-pointer transition duration-300 text-[var(--color-text-primary)]">
                     Logout
                   </button>
                 </>
@@ -208,26 +167,17 @@ const Navbar = () => {
           <div className="mt-4 space-y-4 rounded-[1.5rem] bg-black/10 p-4 text-center lg:hidden">
             <ul className="space-y-2 flex flex-col items-center justify-center">
               <li className="w-full max-w-[200px]">
-                <NavLink
-                  to="/"
-                  onClick={() => setMenuOpen(false)}
-                  className={linkClass}>
+                <NavLink to="/" onClick={() => setMenuOpen(false)} className={linkClass}>
                   Home
                 </NavLink>
               </li>
               <li className="w-full max-w-[200px]">
-                <NavLink
-                  to="/about"
-                  onClick={() => setMenuOpen(false)}
-                  className={linkClass}>
+                <NavLink to="/about" onClick={() => setMenuOpen(false)} className={linkClass}>
                   About
                 </NavLink>
               </li>
               <li className="w-full max-w-[200px]">
-                <NavLink
-                  to="/jobs"
-                  onClick={() => setMenuOpen(false)}
-                  className={linkClass}>
+                <NavLink to="/jobs" onClick={() => setMenuOpen(false)} className={linkClass}>
                   Jobs
                 </NavLink>
               </li>
