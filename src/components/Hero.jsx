@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import nextIcon from "../assets/images/new images/next.png";
-import prevIcon from "../assets/images/new images/prev.png";
-import sliderImage from "../assets/images/new images/slider-img.png";
+import nextIcon from "../assets/images/new-images/next.png";
+import prevIcon from "../assets/images/new-images/prev.png";
+import sliderImage from "../assets/images/new-images/slider-img.png";
 import Button from "./Button";
 
 const slides = [
@@ -103,7 +103,6 @@ const Hero = () => {
       </div>
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 lg:left-8 lg:translate-x-0 lg:bottom-10">
-        
         <Button
           onClick={prevSlide}
           className="flex h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#21b8b2] hover:bg-[#1fa39d] transition hover:scale-105 active:scale-95"

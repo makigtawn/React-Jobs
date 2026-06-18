@@ -1,6 +1,6 @@
 import React from "react";
 import TeamCarousel from "../components/TeamCarousel";
-import aboutImg from "../assets/images/new images/about-img.svg";
+import aboutImg from "../assets/images/new-images/about-img.svg";
 
 const About = () => {
   return (

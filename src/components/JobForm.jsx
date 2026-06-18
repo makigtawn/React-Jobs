@@ -1,6 +1,6 @@
 // src/components/JobForm.jsx
 import { useEffect, useState } from "react";
-import freelanceImg from "../assets/images/new images/freelance-img.jpg";
+import freelanceImg from "../assets/images/new-images/freelance-img.jpg";
 import JobDescriptionEditor from "./editor/JobDescriptionEditor";
 import Button from "./Button";
 const jobTypes = [
@@ -66,7 +66,6 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
     <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 bg-[#21b8b2] dark:bg-teal-700/80">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
-          
           <div className="rounded-[2rem] border border-white/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.24)] text-white">
             <div className="mb-8">
               <p className="text-sm uppercase tracking-[0.3em] text-[#21b8b2]">
@@ -206,15 +205,13 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </label>
 
-              
               <Button
-  type="submit"
-  form="job-form"
-  className="w-full rounded-3xl bg-[#21b8b2] text-base font-semibold text-slate-950 hover:bg-[#1aa69f]"
-  style={{ padding: '16px 24px' }} 
->
-  {submitLabel}
-</Button>
+                type="submit"
+                form="job-form"
+                className="w-full rounded-3xl bg-[#21b8b2] text-base font-semibold text-slate-950 hover:bg-[#1aa69f]"
+                style={{ padding: "16px 24px" }}>
+                {submitLabel}
+              </Button>
             </form>
           </div>
 
