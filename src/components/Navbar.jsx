@@ -38,6 +38,7 @@ const Navbar = () => {
         setHideNavbar(false);
       } else if (scrollDifference > 4) {
         setHideNavbar(true);
+        setMenuOpen(false); 
       } else if (scrollDifference < -4) {
         setHideNavbar(false);
       }
@@ -75,7 +76,9 @@ const Navbar = () => {
 
   return (
     <header
-      className="sticky top-0 z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4"
+      className={`sticky top-0 z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4 ${
+        hideNavbar ? "-translate-y-full" : "translate-y-0"
+      }`}
       aria-hidden={hideNavbar}
       inert={hideNavbar ? "" : undefined}>
       <nav className="mx-auto flex max-w-7xl flex-col rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] px-3 py-3 shadow-xl shadow-black/10 transition duration-300 sm:px-4 lg:px-6">
@@ -87,7 +90,7 @@ const Navbar = () => {
                 Strata
               </span>
               <span className="hidden text-xs tracking-[0.24em] sm:block text-[var(--color-text-secondary)]">
-                less ,hire fast
+                hire fast and smart
               </span>
             </div>
           </NavLink>
