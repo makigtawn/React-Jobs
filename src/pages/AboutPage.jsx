@@ -1,6 +1,6 @@
 import React from "react";
 import TeamCarousel from "../components/TeamCarousel";
-import teams from "../assets/images/new images/teams.svg";
+import teamsImage from "../assets/images/new images/teams-img.svg";
 
 const About = () => {
   return (
@@ -15,7 +15,7 @@ const About = () => {
           
           <div className="flex justify-center w-full">
             <img
-              src={teams}
+              src={teamsImage}
               alt="About"
               className="w-full max-w-xl object-contain"
             />
