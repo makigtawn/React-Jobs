@@ -3,14 +3,23 @@ import React, { useState } from "react";
 import member1 from "../assets/images/team/member1.jpg";
 import member2 from "../assets/images/team/member2.jpg";
 import member3 from "../assets/images/team/member3.jpg";
+import member4 from "../assets/images/team/member4.jpg";
 import Button from "./Button";
+
 const teamMembers = [
   {
-    name: "Alice Johnson",
+    name: "Meklit Girmaw",
+    position: "C.E.O",
+    image: member4,
+    story:
+      "As a leader, Meklit builds from the ground up, ensuring every layer supports the whole structure.",
+  },
+  {
+    name: "Fikirte Yalew",
     position: "Frontend Developer",
     image: member1,
     story:
-      "Alice is passionate about building beautiful and accessible UIs. She loves React and has 5+ years of experience in web development.",
+      "Fikirte is passionate about building beautiful and accessible UIs. She loves React and has 5+ years of experience in web development.",
   },
   {
     name: "Bob Smith",
@@ -20,11 +29,11 @@ const teamMembers = [
       "Bob specializes in scalable backend systems and cloud infrastructure. He ensures our platform is fast and reliable.",
   },
   {
-    name: "Carol Lee",
+    name: "Muna Jemal",
     position: "Product Designer",
     image: member3,
     story:
-      "Carol crafts user experiences that delight. She bridges the gap between design and development with a keen eye for detail.",
+      "Muna crafts user experiences that delight. She bridges the gap between design and development with a keen eye for detail.",
   },
 ];
 
@@ -40,15 +49,14 @@ const TeamCarousel = () => {
     <div className="w-full max-w-lg mx-auto text-center py-10 px-4">
       <div
         key={member.name}
-        className="flex flex-col items-center gap-6 rounded-2xl border border-white/10 bg-[#0d1f25] p-8 md:p-10 shadow-2xl text-white transition-all duration-200">
+        className="dark:bg-[#0d1f25] bg-slate-700 flex flex-col items-center gap-6 rounded-2xl border border-white/10  p-8 md:p-10 shadow-2xl text-white transition-all duration-200">
         <div className="relative">
           <img
             src={member.image}
             alt={member.name}
-            className="w-40 h-40 rounded-full object-cover border-2 border-[#21b8b2]/40 p-1.5 shadow-xl transition-colors duration-200"
+            className="w-64 h-77 rounded-3xl object-cover border-2 border-[#21b8b2]/40 p-1"
           />
         </div>
-
         <div>
           <h3 className="text-2xl font-black tracking-tight text-white">
             {member.name}

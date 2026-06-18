@@ -25,7 +25,7 @@ const About = () => {
         </p>
 
         <div className="mt-8">
-          <h3 className="text-2xl font-bold text-center mb-6">Meet Our Team</h3>
+          <h3 className="text-4xl py-14 text-[#21b8b2] font-bold text-center">Meet Our Team</h3>
           <TeamCarousel />
         </div>
       </div>

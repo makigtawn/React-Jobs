@@ -98,7 +98,7 @@ const Navbar = () => {
               aria-label="Toggle menu"
               onClick={toggleMenu}
               className="inline-flex h-11 w-11 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] text-xl transition duration-300 lg:hidden"
-              style={{ padding: 0 }} // Resets default padding so the menu icon centers perfectly
+              style={{ padding: 0 }} 
             >
               <FiMenu />
             </Button>

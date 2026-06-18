@@ -26,8 +26,8 @@ const EmployerDashboardPage = () => {
     setApplications([
       {
         id: "mock-1",
-        candidate_name: "Meklit Tesfaye",
-        candidate_email: "meklit@example.com",
+        candidate_name: "Melat Tesfaye",
+        candidate_email: "melat@example.com",
         skills_score: 95,
         experience_score: 88,
         github_score: 92,
@@ -55,7 +55,7 @@ const EmployerDashboardPage = () => {
     ]);
 
     setTopCandidates([
-      { candidateName: "Meklit Tesfaye", finalScore: 93, status: "Pending" },
+      { candidateName: "Melat Tesfaye", finalScore: 93, status: "Pending" },
       { candidateName: "John Doe", finalScore: 71, status: "Accepted" },
     ]);
 

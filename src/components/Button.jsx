@@ -14,9 +14,9 @@ const Button = ({
   const baseStyles = 'inline-flex items-center justify-center font-medium transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none';
   
   const variants = {
-    primary: 'bg-green-600 text-white hover:bg-blue-700 rounded-[5px]',
-    secondary: 'bg-green-100 text-gray-900 hover:bg-gray-200 rounded-[5px]',
-    outline: 'border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-[5px]',
+    primary: 'rounded-[5px]',
+    secondary: 'rounded-[5px]',
+    outline: 'border rounded-[5px]',
   };
 
   return (
