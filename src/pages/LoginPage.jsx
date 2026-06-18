@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import Button from "../components/Button";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -109,7 +110,7 @@ const LoginPage = () => {
 
         <div className="mt-6 rounded-lg bg-blue-900/20 border border-blue-700/30 p-4">
           <p className="text-xs text-blue-200">
-            <strong>💡 Tip:</strong> After signing up, check your email for a
+            <strong> Tip:</strong> After signing up, check your email for a
             verification link. You'll need to verify your email before you can
             log in.
           </p>
