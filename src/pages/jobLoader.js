@@ -5,7 +5,7 @@ const jobLoader = async ({ params }) => {
     .from('jobs')
     .select('*')
     .eq('id', params.id)
-    .single(); // returns one object, not an array
+    .single(); 
 
   if (error) throw new Error('Job not found');
 
