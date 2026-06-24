@@ -101,7 +101,7 @@ const ExperienceSection = () => {
                   Read More
                 </Link>
                 <Link
-                  to="/jobs"
+                  to="/add-job"
                   className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-3 text-sm font-semibold text-white transition hover:border-white hover:bg-white/15">
                   Hire Now
                 </Link>
