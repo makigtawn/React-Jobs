@@ -8,7 +8,7 @@ import Button from "./Button";
 const slides = [
   {
     id: 1,
-    heading: "You Can\nHire Freelancer\nHere",
+    heading: "You Can\nHire Faster\n",
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page.",
     image: sliderImage,
