@@ -10,7 +10,7 @@ const slides = [
     id: 1,
     heading: "You Can\nHire Faster\n",
     description:
-      "It is a long established fact that a reader will be distracted by the readable content of a page.",
+    "Go from open role to perfect hire with in hours, not weeks.",
     image: sliderImage,
   },
   {
