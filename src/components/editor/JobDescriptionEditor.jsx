@@ -90,9 +90,24 @@ const EDITOR_CONFIG = {
   heading: {
     options: [
       { model: "paragraph", title: "Paragraph", class: "ck-heading_paragraph" },
-      { model: "heading1", view: "h1", title: "Heading 1", class: "ck-heading_heading1" },
-      { model: "heading2", view: "h2", title: "Heading 2", class: "ck-heading_heading2" },
-      { model: "heading3", view: "h3", title: "Heading 3", class: "ck-heading_heading3" },
+      {
+        model: "heading1",
+        view: "h1",
+        title: "Heading 1",
+        class: "ck-heading_heading1",
+      },
+      {
+        model: "heading2",
+        view: "h2",
+        title: "Heading 2",
+        class: "ck-heading_heading2",
+      },
+      {
+        model: "heading3",
+        view: "h3",
+        title: "Heading 3",
+        class: "ck-heading_heading3",
+      },
     ],
   },
   table: {
@@ -122,7 +137,6 @@ const EDITOR_CONFIG = {
   },
   licenseKey: "GPL",
 };
-
 
 const JobDescriptionEditor = ({ value, onChange }) => {
   const editorRef = useRef(null);
@@ -298,14 +312,17 @@ const JobDescriptionEditor = ({ value, onChange }) => {
   return (
     <div className="jde-wrapper relative">
       {!isReady && (
-        <div className="mt-2 flex h-[220px] items-center justify-center rounded-3xl border border-white/10 bg-[#11212a]">
-          <span className="text-sm text-white/40 animate-pulse">
+        <div className="mt-2 flex h-[220px] items-center justify-center rounded-3xl border border-surface/10 bg-[#11212a]">
+          <span className="text-sm text-surface/40 animate-pulse">
             Loading editor…
           </span>
         </div>
       )}
 
-      <div className={isReady ? "block" : "invisible absolute inset-0 h-0 overflow-hidden"}>
+      <div
+        className={
+          isReady ? "block" : "invisible absolute inset-0 h-0 overflow-hidden"
+        }>
         <CKEditor
           editor={ClassicEditor}
           config={EDITOR_CONFIG}

@@ -49,7 +49,7 @@ const TeamCarousel = () => {
     <div className="w-full max-w-lg mx-auto text-center py-10 px-4">
       <div
         key={member.name}
-        className="dark:bg-[#0d1f25] bg-slate-700 flex flex-col items-center gap-6 rounded-2xl border border-white/10  p-8 md:p-10 shadow-2xl text-white transition-all duration-200">
+        className="dark:bg-[#0d1f25] bg-slate-700 flex flex-col items-center gap-6 rounded-2xl border border-surface/10  p-8 md:p-10 shadow-2xl text-surfacetransition-all duration-200">
         <div className="relative">
           <img
             src={member.image}
@@ -66,7 +66,7 @@ const TeamCarousel = () => {
           </p>
         </div>
 
-        <p className="text-base leading-relaxed text-white/80 min-h-[84px] max-w-sm px-2">
+        <p className="text-base leading-relaxed text-surface/80 min-h-[84px] max-w-sm px-2">
           {member.story}
         </p>
 
@@ -74,7 +74,7 @@ const TeamCarousel = () => {
           <Button
             onClick={prev}
             type="button"
-            className="rounded-xl border border-white/10 bg-white/5 text-lg text-white hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold"
+            className="rounded-xl border border-surface/10 bg-surface/5 text-lg text-surfacehover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold"
             style={{ padding: "12px 20px" }}>
             &#8592;
           </Button>
@@ -82,7 +82,7 @@ const TeamCarousel = () => {
           <Button
             onClick={next}
             type="button"
-            className="rounded-xl border border-white/10 bg-white/5 text-lg text-white hover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold"
+            className="rounded-xl border border-surface/10 bg-surface/5 text-lg text-surfacehover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold"
             style={{ padding: "12px 20px" }}>
             &#8594;
           </Button>
@@ -94,7 +94,7 @@ const TeamCarousel = () => {
           <span
             key={idx}
             className={`inline-block h-2.5 rounded-full transition-all duration-200 ${
-              idx === current ? "w-8 bg-[#21b8b2]" : "w-2.5 bg-white/20"
+              idx === current ? "w-8 bg-[#21b8b2]" : "w-2.5 bg-surface/20"
             }`}></span>
         ))}
       </div>

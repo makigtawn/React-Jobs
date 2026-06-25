@@ -7,7 +7,7 @@ const DashboardHeader = ({
   onInjectClick,
 }) => {
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-white/10 pb-6">
+    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-surface/10 pb-6">
       <div>
         <p className="text-xs uppercase tracking-[0.3em] text-[#21b8b2] font-semibold">
           Employer Dashboard
@@ -28,7 +28,7 @@ const DashboardHeader = ({
         <select
           value={selectedJobId}
           onChange={(e) => setSelectedJobId(e.target.value)}
-          className="w-full rounded-xl border border-white/10 px-4 py-3 text-sm text-white outline-none focus:border-[#21b8b2] md:w-72 transition cursor-pointer bg-transparent">
+          className="w-full rounded-xl border border-surface/10 px-4 py-3 text-sm text-surfaceoutline-none focus:border-[#21b8b2] md:w-72 transition cursor-pointer bg-transparent">
           {jobs.map((job) => (
             <option key={job.id} value={job.id} className="bg-[#0d1f25]">
               {job.title}

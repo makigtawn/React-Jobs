@@ -7,7 +7,7 @@ const ProfilePage = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     full_name: "",
     company_name: "",
@@ -20,7 +20,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       if (!user) return;
-      
+
       try {
         setLoading(true);
         const data = await getProfile();
@@ -73,8 +73,8 @@ const ProfilePage = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">
+      <div className="max-w-3xl mx-auto bg-surfacedark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-surfacemb-1">
           Employer Profile
         </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
@@ -92,7 +92,7 @@ const ProfilePage = () => {
                 name="full_name"
                 value={formData.full_name}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-white outline-none focus:border-indigo-500"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
                 placeholder="John Doe"
               />
             </div>
@@ -105,7 +105,7 @@ const ProfilePage = () => {
                 name="company_name"
                 value={formData.company_name}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-white outline-none focus:border-indigo-500"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
                 placeholder="Strata AI"
               />
             </div>
@@ -121,7 +121,7 @@ const ProfilePage = () => {
                 name="contact_email"
                 value={formData.contact_email}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-white outline-none focus:border-indigo-500"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
                 placeholder="hiring@company.com"
               />
             </div>
@@ -134,7 +134,7 @@ const ProfilePage = () => {
                 name="contact_phone"
                 value={formData.contact_phone}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-white outline-none focus:border-indigo-500"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
                 placeholder="+1 234 567 890"
               />
             </div>
@@ -149,7 +149,7 @@ const ProfilePage = () => {
               name="website"
               value={formData.website}
               onChange={handleChange}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-white outline-none focus:border-indigo-500"
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
               placeholder="https://company.com"
             />
           </div>
@@ -163,17 +163,15 @@ const ProfilePage = () => {
               value={formData.company_description}
               onChange={handleChange}
               rows="4"
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-white outline-none focus:border-indigo-500 resize-none"
-              placeholder="Tell applicants about your organization..."
-            ></textarea>
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500 resize-none"
+              placeholder="Tell applicants about your organization..."></textarea>
           </div>
 
           <div className="flex justify-end pt-2">
             <button
               type="submit"
               disabled={saving}
-              className="rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 px-5 py-2.5 text-sm font-semibold text-white dark:text-slate-950 shadow transition-colors disabled:opacity-50"
-            >
+              className="rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-surfacedark:hover:bg-slate-100 px-5 py-2.5 text-sm font-semibold text-surfacedark:text-slate-950 shadow transition-colors disabled:opacity-50">
               {saving ? "Saving Updates..." : "Save Changes"}
             </button>
           </div>

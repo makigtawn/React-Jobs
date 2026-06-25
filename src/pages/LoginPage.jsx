@@ -64,32 +64,32 @@ const LoginPage = () => {
 
   return (
     <section className="min-h-screen bg-[#1f3238] dark:bg-[#152a31] px-4 py-24">
-      <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-[#21b8b2] dark:bg-[#0d1f25] p-8 text-white shadow-2xl">
+      <div className="mx-auto max-w-md rounded-2xl border border-surface/10 bg-[#21b8b2] dark:bg-[#0d1f25] p-8 text-surfaceshadow-2xl">
         <h1 className="text-3xl font-black">Welcome back</h1>
-        <p className="mt-2 text-sm text-white/65">
+        <p className="mt-2 text-sm text-surface/65">
           Log in to post jobs, apply, and review candidates.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <label className="block">
-            <span className="text-sm text-white/75">Email</span>
+            <span className="text-sm text-surface/75">Email</span>
             <input
               type="email"
               value={form.email}
               onChange={(e) => updateField("email", e.target.value)}
               disabled={loading}
-              className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+              className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
             />
           </label>
 
           <label className="block">
-            <span className="text-sm text-white/75">Password</span>
+            <span className="text-sm text-surface/75">Password</span>
             <input
               type="password"
               value={form.password}
               onChange={(e) => updateField("password", e.target.value)}
               disabled={loading}
-              className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+              className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
             />
           </label>
 
@@ -116,11 +116,11 @@ const LoginPage = () => {
           </p>
         </div>
 
-        <p className="mt-6 text-center text-sm text-white/65">
+        <p className="mt-6 text-center text-sm text-surface/65">
           Need an account?{" "}
           <Link
             to="/signup"
-            className="font-semibold text-white hover:text-[#1f3238]">
+            className="font-semibold text-surfacehover:text-[#1f3238]">
             Sign up
           </Link>
         </p>

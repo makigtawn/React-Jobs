@@ -22,14 +22,13 @@ const HomeCards = () => {
   ];
 
   return (
-    <section className="relative bg-[#1f3238] dark:bg-slate-950 py-16 sm:py-24 text-white min-h-screen transition-colors duration-300">
+    <section className="relative bg-[#1f3238] dark:bg-slate-950 py-16 sm:py-24 text-surfacemin-h-screen transition-colors duration-300">
       <div className="container-xl lg:container m-auto px-4">
-        {/* Header Section */}
         <div className="mx-auto max-w-3xl text-center mb-14 sm:mb-18">
           <span className="text-sm font-semibold tracking-wider text-[#21b8b2] uppercase">
             Proven Results
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-surfacesm:text-4xl">
             Trusted by Teams Cutting Out the Screening Noise
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300 sm:text-lg">
@@ -38,14 +37,12 @@ const HomeCards = () => {
           </p>
         </div>
 
-        {/* Testimonials Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {testimonials.map((item, index) => (
             <Card
               key={index}
-              bg="bg-black/30 dark:bg-slate-900/50 border border-white/5 dark:border-slate-800 shadow-2xl backdrop-blur-sm flex flex-col justify-between">
+              bg="bg-black/30 dark:bg-slate-900/50 border border-surface/5 dark:border-slate-800 shadow-2xl backdrop-blur-sm flex flex-col justify-between">
               <div className="flex flex-col h-full justify-between">
-                {/* Quote Text */}
                 <div>
                   <span className="text-4xl text-[#21b8b2] font-serif block mb-2">
                     “
@@ -55,10 +52,9 @@ const HomeCards = () => {
                   </p>
                 </div>
 
-                {/* Author Info & Highlight Metric */}
-                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between flex-wrap gap-4">
+                <div className="mt-8 pt-6 border-t border-surface/10 flex items-center justify-between flex-wrap gap-4">
                   <div>
-                    <h4 className="font-semibold text-white text-base">
+                    <h4 className="font-semibold text-surfacetext-base">
                       {item.author}
                     </h4>
                     <p className="text-xs text-slate-400">

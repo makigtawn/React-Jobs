@@ -1,4 +1,3 @@
-// src/components/JobForm.jsx
 import { useEffect, useState } from "react";
 import freelanceImg from "../assets/images/new-images/freelance-img.jpg";
 import JobDescriptionEditor from "./editor/JobDescriptionEditor";
@@ -66,7 +65,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
     <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 bg-[#21b8b2] dark:bg-teal-700/80">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
-          <div className="rounded-[2rem] border border-white/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.24)] text-white">
+          <div className="rounded-[2rem] border border-surface/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.24)] text-white">
             <div className="mb-8">
               <p className="text-sm uppercase tracking-[0.3em] text-[#21b8b2]">
                 {heading}
@@ -74,7 +73,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
               <h2 className="mt-4 text-4xl font-black sm:text-5xl">
                 Share your role with quality developers
               </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-surface/70">
                 Fill in the details and we'll help your listing reach top talent
                 faster with a polished presentation that stands out.
               </p>
@@ -83,11 +82,11 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
             <form id="job-form" className="space-y-5" onSubmit={submit}>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
-                  <span className="text-sm text-white/70">Job type</span>
+                  <span className="text-sm text-surface/70">Job type</span>
                   <select
                     value={job.type}
                     onChange={(e) => updateField("type", e.target.value)}
-                    className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
+                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
                     {jobTypes.map((option) => (
                       <option key={option} value={option}>
                         {option}
@@ -96,11 +95,11 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-sm text-white/70">Salary range</span>
+                  <span className="text-sm text-surface/70">Salary range</span>
                   <select
                     value={job.salary}
                     onChange={(e) => updateField("salary", e.target.value)}
-                    className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
+                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
                     {salaryRanges.map((range) => (
                       <option key={range} value={range}>
                         {range}
@@ -111,27 +110,27 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
               </div>
 
               <label className="block">
-                <span className="text-sm text-white/70">Job title</span>
+                <span className="text-sm text-surface/70">Job title</span>
                 <input
                   value={job.title}
                   onChange={(e) => updateField("title", e.target.value)}
                   placeholder="Backend developer"
-                  className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
               <label className="block">
-                <span className="text-sm text-white/70">Location</span>
+                <span className="text-sm text-surface/70">Location</span>
                 <input
                   value={job.location}
                   onChange={(e) => updateField("location", e.target.value)}
                   placeholder="Remote / New York"
-                  className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
               <div className="block">
-                <span className="text-sm text-white/70">Job description</span>
+                <span className="text-sm text-surface/70">Job description</span>
                 <JobDescriptionEditor
                   value={job.description}
                   onChange={(html) => updateField("description", html)}
@@ -139,7 +138,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
               </div>
 
               <label className="block">
-                <span className="text-sm text-white/70">
+                <span className="text-sm text-surface/70">
                   Minimum candidate score
                 </span>
                 <input
@@ -150,22 +149,22 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   onChange={(e) =>
                     updateField("minimumScoreThreshold", e.target.value)
                   }
-                  className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
-                  <span className="text-sm text-white/70">Company name</span>
+                  <span className="text-sm text-surface/70">Company name</span>
                   <input
                     value={job.company.name}
                     onChange={(e) => updateCompanyField("name", e.target.value)}
                     placeholder="Company name"
-                    className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                   />
                 </label>
                 <label className="block">
-                  <span className="text-sm text-white/70">Company email</span>
+                  <span className="text-sm text-surface/70">Company email</span>
                   <input
                     value={job.company.contactEmail}
                     onChange={(e) =>
@@ -173,25 +172,25 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                     }
                     placeholder="email@example.com"
                     type="email"
-                    className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                   />
                 </label>
               </div>
 
               <label className="block">
-                <span className="text-sm text-white/70">Company phone</span>
+                <span className="text-sm text-surface/70">Company phone</span>
                 <input
                   value={job.company.contactPhone}
                   onChange={(e) =>
                     updateCompanyField("contactPhone", e.target.value)
                   }
                   placeholder="Optional phone"
-                  className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
               <label className="block">
-                <span className="text-sm text-white/70">
+                <span className="text-sm text-surface/70">
                   Company description
                 </span>
                 <textarea
@@ -201,7 +200,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   }
                   rows={4}
                   placeholder="A short summary of your product or team"
-                  className="mt-2 w-full rounded-3xl border border-white/10 bg-[#11212a] px-4 py-3 text-white outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
@@ -216,20 +215,20 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl text-white">
+            <div className="rounded-[2rem] border border-surface/10 bg-surface/5 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl text-white">
               <h3 className="text-2xl font-bold">Why this form works</h3>
-              <p className="mt-4 text-sm leading-7 text-white/70">
+              <p className="mt-4 text-sm leading-7 text-surface/70">
                 The new UI helps recruiters and hiring managers quickly scan the
                 job outline, and candidates immediately understand the role,
                 pay, and company fit.
               </p>
-              <ul className="mt-6 space-y-3 text-sm text-white/80">
+              <ul className="mt-6 space-y-3 text-sm text-surface/80">
                 <li>• Clean fields for fast posting</li>
                 <li>• Highlighted salary and role details</li>
                 <li>• Company info grouped for trust</li>
               </ul>
             </div>
-            <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#0c2028]">
+            <div className="overflow-hidden rounded-[2rem] border border-surface/10 bg-[#0c2028]">
               <img
                 src={freelanceImg}
                 alt="Freelance illustration"

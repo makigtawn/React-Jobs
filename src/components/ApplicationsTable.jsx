@@ -9,15 +9,15 @@ const ApplicationsTable = ({
   onViewReport,
 }) => {
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1f25] shadow-xl">
-      <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.02] px-6 py-5">
+    <div className="overflow-hidden rounded-2xl border border-surface/10 bg-[#0d1f25] shadow-xl">
+      <div className="flex items-center justify-between border-b border-surface/10 bg-surface/[0.02] px-6 py-5">
         <div>
           <h2 className="text-xl font-bold tracking-tight text-[#21b8b2]">
             {selectedJob.title}
           </h2>
-          <p className="mt-1 text-xs text-white/50">
+          <p className="mt-1 text-xs text-surface/50">
             Required Passing Threshold:{" "}
-            <span className="text-white font-medium">
+            <span className="text-surfacefont-medium">
               {selectedJob.minimum_score_threshold ?? 50}%
             </span>
           </p>
@@ -30,7 +30,7 @@ const ApplicationsTable = ({
         </div>
       ) : applications.length === 0 ? (
         <div className="flex min-h-[250px] items-center justify-center px-4 py-8">
-          <p className="text-sm text-white/40 text-center">
+          <p className="text-sm text-surface/40 text-center">
             No applications. Click "Inject Test Data" button above to populate
             layout!
           </p>
@@ -39,7 +39,7 @@ const ApplicationsTable = ({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm border-collapse">
             <thead>
-              <tr className="border-b border-white/10 bg-white/[0.01] text-xs font-semibold uppercase tracking-wider text-white/40">
+              <tr className="border-b border-surface/10 bg-surface/[0.01] text-xs font-semibold uppercase tracking-wider text-surface/40">
                 <th className="px-6 py-4">Candidate Information</th>
                 <th className="px-6 py-4">AI Score Metrics Breakdown</th>
                 <th className="px-6 py-4 text-center">Match</th>
@@ -47,16 +47,16 @@ const ApplicationsTable = ({
                 <th className="px-6 py-4 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-surface/5">
               {applications.map((application) => (
                 <tr
                   key={application.id}
-                  className="hover:bg-white/[0.02] transition-colors group">
+                  className="hover:bg-surface/[0.02] transition-colors group">
                   <td className="px-6 py-5">
-                    <div className="font-bold text-white group-hover:text-[#21b8b2] transition-colors">
+                    <div className="font-bold text-surfacegroup-hover:text-[#21b8b2] transition-colors">
                       {application.candidate_name}
                     </div>
-                    <div className="text-xs text-white/50 mt-0.5">
+                    <div className="text-xs text-surface/50 mt-0.5">
                       {application.candidate_email}
                     </div>
                   </td>

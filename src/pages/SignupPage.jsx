@@ -69,14 +69,14 @@ const SignupPage = () => {
 
   return (
     <section className="min-h-screen bg-[#1f3238] dark:bg-[#152a31] px-4 py-24">
-      <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-[#21b8b2] dark:bg-[#0d1f25] p-8 text-white shadow-2xl">
+      <div className="mx-auto max-w-md rounded-2xl border border-surface/10 bg-[#21b8b2] dark:bg-[#0d1f25] p-8 text-surfaceshadow-2xl">
         {signupSuccess ? (
           <>
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-900/30 text-3xl">
               ✓
             </div>
             <h1 className="text-3xl font-black">Check your email</h1>
-            <p className="mt-4 text-sm text-white/75 leading-relaxed">
+            <p className="mt-4 text-sm text-surface/75 leading-relaxed">
               We've sent a verification link to{" "}
               <span className="font-semibold text-white">{userEmail}</span>
             </p>
@@ -90,7 +90,7 @@ const SignupPage = () => {
                 <li>Return here and log in</li>
               </ol>
             </div>
-            <p className="mt-6 text-center text-sm text-white/65">
+            <p className="mt-6 text-center text-sm text-surface/65">
               Already verified?{" "}
               <Link to="/login" className="font-semibold text-white">
                 Log in here
@@ -106,7 +106,7 @@ const SignupPage = () => {
                   confirmPassword: "",
                 });
               }}
-              className="mt-4 w-full rounded-xl bg-white/10 font-semibold text-white transition hover:bg-white/20"
+              className="mt-4 w-full rounded-xl bg-surface/10 font-semibold text-surfacetransition hover:bg-surface/20"
               style={{ padding: "12px 20px" }}>
               Create another account
             </Button>
@@ -114,45 +114,47 @@ const SignupPage = () => {
         ) : (
           <>
             <h1 className="text-3xl font-black">Create account</h1>
-            <p className="mt-2 text-sm text-white/65">
+            <p className="mt-2 text-sm text-surface/65">
               Join Strata to apply for roles or manage your hiring pipeline.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-4">
               <label className="block">
-                <span className="text-sm text-white/75">Full name</span>
+                <span className="text-sm text-surface/75">Full name</span>
                 <input
                   value={form.fullName}
                   onChange={(e) => updateField("fullName", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
                 />
               </label>
 
               <label className="block">
-                <span className="text-sm text-white/75">Email</span>
+                <span className="text-sm text-surface/75">Email</span>
                 <input
                   type="email"
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
                 />
               </label>
 
               <label className="block">
-                <span className="text-sm text-white/75">Password</span>
+                <span className="text-sm text-surface/75">Password</span>
                 <input
                   type="password"
                   value={form.password}
                   onChange={(e) => updateField("password", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
                 />
               </label>
 
               <label className="block">
-                <span className="text-sm text-white/75">Confirm password</span>
+                <span className="text-sm text-surface/75">
+                  Confirm password
+                </span>
                 <input
                   type="password"
                   value={form.confirmPassword}
@@ -160,7 +162,7 @@ const SignupPage = () => {
                     updateField("confirmPassword", e.target.value)
                   }
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#1f3238] px-4 py-3 text-white outline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
                 />
               </label>
 
@@ -175,7 +177,7 @@ const SignupPage = () => {
               </Button>
             </form>
 
-            <p className="mt-6 text-center text-sm text-white/65">
+            <p className="mt-6 text-center text-sm text-surface/65">
               Already have an account?{" "}
               <Link to="/login" className="font-semibold text-[#1f3238]">
                 Login

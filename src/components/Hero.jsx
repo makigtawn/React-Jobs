@@ -9,8 +9,7 @@ const slides = [
   {
     id: 1,
     heading: "You Can\nHire Faster\n",
-    description:
-    "Go from open role to perfect hire with in hours, not weeks.",
+    description: "Go from open role to perfect hire with in hours, not weeks.",
     image: sliderImage,
   },
   {
@@ -70,23 +69,23 @@ const Hero = () => {
 
       <div className="relative mx-auto w-full max-w-7xl px-4 py-12 pt-24 sm:px-6 md:py-16 lg:px-8 lg:py-24">
         <div className="grid grid-cols-1 gap-10 items-center lg:grid-cols-2">
-          <div className="text-center lg:text-left text-white z-10">
+          <div className="text-center lg:text-left text-surfacez-10">
             <h1 className="whitespace-pre-line text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               {slides[currentSlide].heading}
             </h1>
-            <p className="mt-4 mx-auto lg:mx-0 max-w-md text-sm leading-relaxed text-white/80 sm:text-base md:mt-6 md:text-lg">
+            <p className="mt-4 mx-auto lg:mx-0 max-w-md text-sm leading-relaxed text-surface/80 sm:text-base md:mt-6 md:text-lg">
               {slides[currentSlide].description}
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
               <Link
                 to="/about"
-                className="inline-flex items-center justify-center rounded-full bg-[#ff515b] px-8 py-3 text-sm font-semibold text-white shadow-xl shadow-[#ff4c57]/20 transition hover:bg-[#ff6b77]">
+                className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-3 text-sm font-semibold text-surfaceshadow-xl shadow-accent/20 transition hover:bg-accent">
                 About Us
               </Link>
               <Link
                 to="/jobs"
-                className="inline-flex items-center justify-center rounded-full border border-white bg-white px-8 py-3 text-sm font-semibold text-[#152a31] transition hover:bg-white/90">
+                className="inline-flex items-center justify-center rounded-full border border-surfacebg-surfacepx-8 py-3 text-sm font-semibold text-[#152a31] transition hover:bg-surface/90">
                 Explore Jobs
               </Link>
             </div>
@@ -122,7 +121,7 @@ const Hero = () => {
           <span
             key={idx}
             className={`inline-block h-2.5 rounded-full transition-all duration-200 ${
-              idx === currentSlide ? "w-8 bg-[#21b8b2]" : "w-2.5 bg-white/40"
+              idx === currentSlide ? "w-8 bg-[#21b8b2]" : "w-2.5 bg-surface/40"
             }`}
           />
         ))}
