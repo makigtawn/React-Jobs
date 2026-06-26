@@ -92,7 +92,7 @@ const ProfilePage = () => {
                 name="full_name"
                 value={formData.full_name}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surface outline-none focus:border-indigo-500"
                 placeholder="John Doe"
               />
             </div>
@@ -105,7 +105,7 @@ const ProfilePage = () => {
                 name="company_name"
                 value={formData.company_name}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surface outline-none focus:border-indigo-500"
                 placeholder="Strata AI"
               />
             </div>
@@ -121,7 +121,7 @@ const ProfilePage = () => {
                 name="contact_email"
                 value={formData.contact_email}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surface outline-none focus:border-indigo-500"
                 placeholder="hiring@company.com"
               />
             </div>
@@ -134,7 +134,7 @@ const ProfilePage = () => {
                 name="contact_phone"
                 value={formData.contact_phone}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surface outline-none focus:border-indigo-500"
                 placeholder="+1 234 567 890"
               />
             </div>
@@ -149,7 +149,7 @@ const ProfilePage = () => {
               name="website"
               value={formData.website}
               onChange={handleChange}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500"
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surface outline-none focus:border-indigo-500"
               placeholder="https://company.com"
             />
           </div>
@@ -163,7 +163,7 @@ const ProfilePage = () => {
               value={formData.company_description}
               onChange={handleChange}
               rows="4"
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surfaceoutline-none focus:border-indigo-500 resize-none"
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-4 py-2.5 text-sm dark:text-surface outline-none focus:border-indigo-500 resize-none"
               placeholder="Tell applicants about your organization..."></textarea>
           </div>
 

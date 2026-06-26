@@ -86,7 +86,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   <select
                     value={job.type}
                     onChange={(e) => updateField("type", e.target.value)}
-                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
+                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
                     {jobTypes.map((option) => (
                       <option key={option} value={option}>
                         {option}
@@ -99,7 +99,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   <select
                     value={job.salary}
                     onChange={(e) => updateField("salary", e.target.value)}
-                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
+                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
                     {salaryRanges.map((range) => (
                       <option key={range} value={range}>
                         {range}
@@ -115,7 +115,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   value={job.title}
                   onChange={(e) => updateField("title", e.target.value)}
                   placeholder="Backend developer"
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
@@ -125,7 +125,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   value={job.location}
                   onChange={(e) => updateField("location", e.target.value)}
                   placeholder="Remote / New York"
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
@@ -149,7 +149,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   onChange={(e) =>
                     updateField("minimumScoreThreshold", e.target.value)
                   }
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
@@ -160,7 +160,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                     value={job.company.name}
                     onChange={(e) => updateCompanyField("name", e.target.value)}
                     placeholder="Company name"
-                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                   />
                 </label>
                 <label className="block">
@@ -172,7 +172,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                     }
                     placeholder="email@example.com"
                     type="email"
-                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                   />
                 </label>
               </div>
@@ -185,7 +185,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                     updateCompanyField("contactPhone", e.target.value)
                   }
                   placeholder="Optional phone"
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 
@@ -200,7 +200,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   }
                   rows={4}
                   placeholder="A short summary of your product or team"
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
                 />
               </label>
 

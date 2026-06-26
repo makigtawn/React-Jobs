@@ -97,12 +97,12 @@ const ExperienceSection = () => {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link
                   to="/about"
-                  className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-3 text-sm font-semibold text-surfaceshadow-lg shadow-accent/30 shadow-[var(--color-accent)]/30 transition hover:bg-accent">
+                  className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-3 text-sm font-semibold text-surface shadow-lg shadow-accent/30 shadow-[var(--color-accent)]/30 transition hover:bg-accent">
                   Read More
                 </Link>
                 <Link
                   to="/add-job"
-                  className="inline-flex items-center justify-center rounded-full border border-surface/20 bg-surface/10 px-8 py-3 text-sm font-semibold text-surfacetransition hover:border-surfacehover:bg-surface/15">
+                  className="inline-flex items-center justify-center rounded-full border border-surface/20 bg-surface/10 px-8 py-3 text-sm font-semibold text-surface transition hover:border-surfacehover:bg-surface/15">
                   Hire Now
                 </Link>
               </div>

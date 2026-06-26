@@ -32,7 +32,7 @@ const DashboardFilters = ({
               value={localSearch}
               onChange={(e) => setLocalSearch(e.target.value)}
               placeholder="Search candidate name..."
-              className="w-full rounded-xl border border-surface/10 bg-[#0d1f25] pl-4 pr-10 py-2.5 text-sm text-surfaceoutline-none focus:border-[#21b8b2] placeholder:text-surface/40 transition"
+              className="w-full rounded-xl border border-surface/10 bg-[#0d1f25] pl-4 pr-10 py-2.5 text-sm text-surface outline-none focus:border-[#21b8b2] placeholder:text-surface/40 transition"
             />
             {localSearch && (
               <button
@@ -41,7 +41,7 @@ const DashboardFilters = ({
                   setLocalSearch("");
                   setSearch("");
                 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-surface/40 hover:text-surfacetext-xs">
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-surface/40 hover:text-surface text-xs">
                 ✕
               </button>
             )}
@@ -71,7 +71,7 @@ const DashboardFilters = ({
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="w-full rounded-xl border border-surface/10 bg-[#0d1f25] px-4 py-2.5 text-sm text-surfaceoutline-none focus:border-[#21b8b2] transition cursor-pointer">
+            className="w-full rounded-xl border border-surface/10 bg-[#0d1f25] px-4 py-2.5 text-sm text-surface outline-none focus:border-[#21b8b2] transition cursor-pointer">
             <option value="highest">Highest Score</option>
             <option value="lowest">Lowest Score</option>
           </select>
@@ -89,7 +89,7 @@ const DashboardFilters = ({
               className={`px-4 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap ${
                 isActive
                   ? "bg-[#21b8b2] text-slate-950 shadow-sm"
-                  : "text-surface/60 hover:text-surfacehover:bg-surface/5"
+                  : "text-surface/60 hover:text-surface hover:bg-surface/5"
               }`}>
               {option}
             </button>

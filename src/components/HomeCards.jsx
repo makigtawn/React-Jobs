@@ -22,13 +22,13 @@ const HomeCards = () => {
   ];
 
   return (
-    <section className="relative bg-[#1f3238] dark:bg-slate-950 py-16 sm:py-24 text-surfacemin-h-screen transition-colors duration-300">
+    <section className="relative bg-[#1f3238] dark:bg-slate-950 py-16 sm:py-24 text-surface min-h-screen transition-colors duration-300">
       <div className="container-xl lg:container m-auto px-4">
         <div className="mx-auto max-w-3xl text-center mb-14 sm:mb-18">
           <span className="text-sm font-semibold tracking-wider text-[#21b8b2] uppercase">
             Proven Results
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-surfacesm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-surface sm:text-4xl">
             Trusted by Teams Cutting Out the Screening Noise
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300 sm:text-lg">
@@ -54,7 +54,7 @@ const HomeCards = () => {
 
                 <div className="mt-8 pt-6 border-t border-surface/10 flex items-center justify-between flex-wrap gap-4">
                   <div>
-                    <h4 className="font-semibold text-surfacetext-base">
+                    <h4 className="font-semibold text-surface text-base">
                       {item.author}
                     </h4>
                     <p className="text-xs text-slate-400">

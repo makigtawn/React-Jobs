@@ -28,7 +28,7 @@ const DashboardHeader = ({
         <select
           value={selectedJobId}
           onChange={(e) => setSelectedJobId(e.target.value)}
-          className="w-full rounded-xl border border-surface/10 px-4 py-3 text-sm text-surfaceoutline-none focus:border-[#21b8b2] md:w-72 transition cursor-pointer bg-transparent">
+          className="w-full rounded-xl border border-surface/10 px-4 py-3 text-sm text-surface outline-none focus:border-[#21b8b2] md:w-72 transition cursor-pointer bg-transparent">
           {jobs.map((job) => (
             <option key={job.id} value={job.id} className="bg-[#0d1f25]">
               {job.title}

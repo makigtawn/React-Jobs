@@ -17,7 +17,7 @@ const ApplicationsTable = ({
           </h2>
           <p className="mt-1 text-xs text-surface/50">
             Required Passing Threshold:{" "}
-            <span className="text-surfacefont-medium">
+            <span className="text-surface font-medium">
               {selectedJob.minimum_score_threshold ?? 50}%
             </span>
           </p>
@@ -53,7 +53,7 @@ const ApplicationsTable = ({
                   key={application.id}
                   className="hover:bg-surface/[0.02] transition-colors group">
                   <td className="px-6 py-5">
-                    <div className="font-bold text-surfacegroup-hover:text-[#21b8b2] transition-colors">
+                    <div className="font-bold text-surface group-hover:text-[#21b8b2] transition-colors">
                       {application.candidate_name}
                     </div>
                     <div className="text-xs text-surface/50 mt-0.5">

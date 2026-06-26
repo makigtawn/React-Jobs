@@ -78,7 +78,7 @@ const LoginPage = () => {
               value={form.email}
               onChange={(e) => updateField("email", e.target.value)}
               disabled={loading}
-              className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
+              className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surface outline-none focus:border-[#21b8b2]"
             />
           </label>
 
@@ -89,7 +89,7 @@ const LoginPage = () => {
               value={form.password}
               onChange={(e) => updateField("password", e.target.value)}
               disabled={loading}
-              className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
+              className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surface outline-none focus:border-[#21b8b2]"
             />
           </label>
 

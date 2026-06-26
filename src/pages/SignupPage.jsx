@@ -69,7 +69,7 @@ const SignupPage = () => {
 
   return (
     <section className="min-h-screen bg-[#1f3238] dark:bg-[#152a31] px-4 py-24">
-      <div className="mx-auto max-w-md rounded-2xl border border-surface/10 bg-[#21b8b2] dark:bg-[#0d1f25] p-8 text-surfaceshadow-2xl">
+      <div className="mx-auto max-w-md rounded-2xl border border-surface/10 bg-[#21b8b2] dark:bg-[#0d1f25] p-8 text-surface shadow-2xl">
         {signupSuccess ? (
           <>
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-900/30 text-3xl">
@@ -106,7 +106,7 @@ const SignupPage = () => {
                   confirmPassword: "",
                 });
               }}
-              className="mt-4 w-full rounded-xl bg-surface/10 font-semibold text-surfacetransition hover:bg-surface/20"
+              className="mt-4 w-full rounded-xl bg-surface/10 font-semibold text-surface transition hover:bg-surface/20"
               style={{ padding: "12px 20px" }}>
               Create another account
             </Button>
@@ -125,7 +125,7 @@ const SignupPage = () => {
                   value={form.fullName}
                   onChange={(e) => updateField("fullName", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surface outline-none focus:border-[#21b8b2]"
                 />
               </label>
 
@@ -136,7 +136,7 @@ const SignupPage = () => {
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surface outline-none focus:border-[#21b8b2]"
                 />
               </label>
 
@@ -147,7 +147,7 @@ const SignupPage = () => {
                   value={form.password}
                   onChange={(e) => updateField("password", e.target.value)}
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surface outline-none focus:border-[#21b8b2]"
                 />
               </label>
 
@@ -162,7 +162,7 @@ const SignupPage = () => {
                     updateField("confirmPassword", e.target.value)
                   }
                   disabled={loading}
-                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surfaceoutline-none focus:border-[#21b8b2]"
+                  className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surface outline-none focus:border-[#21b8b2]"
                 />
               </label>
 
