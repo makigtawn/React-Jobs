@@ -19,7 +19,7 @@ const About = () => {
             />
           </div>
 
-          <p className="text-surfacedark:text-surfacetext-center md:text-left text-base leading-relaxed">
+          <p className="text-surface dark:text-surface text-center md:text-left text-base leading-relaxed">
             Strata was founded by a group of passionate innovators who saw how
             broken and time-consuming the traditional hiring process had become.
             Our journey began with a mission to eliminate the manual grind of
