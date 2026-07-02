@@ -3,9 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import authRoutes from "./routes/authRoutes.js";
-// import applicationRoutes from "./routes/applicationRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
-import profileRoutes from "./routes/profileRoutes.js"; 
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import { env } from "./config/env.js";
 
@@ -40,8 +38,8 @@ export const createApp = () => {
   });
 
   app.use("/api/auth", authRoutes);
-  // app.use("/api/applications", applicationRoutes);
   app.use("/api/jobs", jobRoutes);
+
 
   app.use(notFound);
   app.use(errorHandler);

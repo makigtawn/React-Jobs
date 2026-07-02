@@ -31,12 +31,12 @@ const JobListing = ({ job }) => {
     plainText.length > 90 ? plainText.substring(0, 90) + "…" : plainText;
 
   return (
-    <div className="bg-surfacep-5 sm:p-6 md:p-8 lg:p-10 dark:bg-slate-900/60 rounded-xl shadow-md border border-neutral-200/20 dark:border-slate-800">
+    <div className="bg-surface/40 p-5 sm:p-6 md:p-8 lg:p-10 dark:bg-slate-900/60 rounded-xl shadow-md border border-neutral-200/20 dark:border-slate-800">
       <div className="mb-4 sm:mb-6 md:mb-8 lg:mb-10">
         <div className="text-black/80 dark:text-surface/80 text-sm mb-1">
           {job.type}
         </div>
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-black dark:text-white">
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold dark:text-white">
           {job.title}
         </h3>
       </div>

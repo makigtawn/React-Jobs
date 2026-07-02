@@ -32,16 +32,3 @@ export const apiRequest = async (path, options = {}) => {
   return data;
 };
 
-export const getProfile = async () => {
-  return await apiRequest("/api/profile", {
-    method: "GET",
-  });
-};
-
-
-export const updateProfile = async (profileData) => {
-  return await apiRequest("/api/profile", {
-    method: "PUT",
-    body: JSON.stringify(profileData),
-  });
-};

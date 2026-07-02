@@ -146,9 +146,7 @@ const Navbar = () => {
                     Dashboard
                   </NavLink>
 
-                  <NavLink to="/profile" className={linkClass}>
-                    Profile
-                  </NavLink>
+                  
 
                   <Button
                     type="button"
@@ -234,12 +232,7 @@ const Navbar = () => {
                     Dashboard
                   </NavLink>
 
-                  <NavLink
-                    to="/profile"
-                    onClick={() => setMenuOpen(false)}
-                    className="w-full rounded-full border border-surface/20 px-4 py-3 text-center text-sm font-medium text-surface/90 transition hover:bg-surface/10">
-                    Profile
-                  </NavLink>
+                  
 
                   <Button
                     type="button"

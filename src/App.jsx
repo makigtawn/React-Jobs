@@ -21,9 +21,8 @@ import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import EmployerDashboardPage from "./pages/EmployerDashboardPage";
-import ProfilePage from "./pages/ProfilePage"
 import { supabase } from "./utils/supabase";
-import { apiRequest } from "./services/api";
+// import { apiRequest } from "./services/api";
 
 const App = () => {
   const addJob = async (newJob) => {
@@ -145,14 +144,6 @@ const App = () => {
   element={
     <ProtectedRoute allowedRoles={["admin", "user"]}>
       <EmployerDashboardPage />
-    </ProtectedRoute>
-  }
-/>
-<Route
-  path="/profile"
-  element={
-    <ProtectedRoute allowedRoles={["admin", "user"]}>
-      <ProfilePage />
     </ProtectedRoute>
   }
 />
