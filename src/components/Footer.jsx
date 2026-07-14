@@ -45,105 +45,91 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#152a31] dark:bg-[var(--color-nav-bg)] text-gray-300 border-t border-white/10">
+    <footer className=" dark:bg-nav-bg bg-nav-bg text-text-primary dark:text-text-primary  border border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start pb-12 border-b border-white/10">
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <img
-                src={logo}
-                alt="Strata Logo"
-                className="h-8 w-8 object-contain"
-              />
-              <h3 className="text-xl font-bold tracking-tight text-white">
+            <Link to="/" className="flex items-center gap-3">
+              <img src={logo} alt="Strata Logo" className="h-9 w-auto" />
+              <h3 className="text-xl font-bold tracking-tight text-text-primary dark:text-text-primary ">
                 Strata
               </h3>
-            </div>
+            </Link>
 
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex items-center gap-4 pt-2 lg:py-4">
               <a
                 href="https://x.com/makigtawn"
                 aria-label="Follow us on X"
-                className="p-2 bg-white/5 rounded-full hover:bg-white/10 hover:text-white transition-colors">
+                className="p-2 bg-white/5 rounded-full hover:bg-black/10 hover:text-black transition-colors">
                 <FaXTwitter size={18} />
               </a>
               <a
                 href="https://linkedin.com/makigtawn"
                 aria-label="Connect on LinkedIn"
-                className="p-2 bg-white/5 rounded-full hover:bg-white/10 hover:text-white transition-colors">
+                className="p-2 bg-white/5 rounded-full hover:bg-black/10 hover:text-black transition-colors">
                 <FaLinkedin size={18} />
               </a>
               <a
                 href="https://github.com/makigtawn"
                 aria-label="Check our GitHub"
-                className="p-2 bg-white/5 rounded-full hover:bg-white/10 hover:text-white transition-colors">
+                className="p-2 bg-white/5 rounded-full hover:bg-black/10 hover:text-black transition-colors">
                 <FaGithub size={18} />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider  mb-4">
               Quick Links
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2.5 text-sm text-text-secondary ">
               <li>
-                <Link
-                  to="/"
-                  className="hover:text-white hover:underline transition-all">
+                <Link to="/" className="hover:text-text-primary ">
                   Home
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/about"
-                  className="hover:text-white hover:underline transition-all">
+                <Link to="/about" className="hover:text-text-primary ">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/jobs"
-                  className="hover:text-white hover:underline transition-all">
+                <Link to="/jobs" className=" hover:text-text-primary">
                   Browse jobs
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+          <div className="text-text-secondary">
+            <h4 className="text-xs font-bold uppercase tracking-wider mb-4">
               Contact Us
             </h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li className="flex items-start gap-2.5">
-                <FaMapMarkerAlt className="mt-1 flex-shrink-0 text-gray-500" />
+            <ul className="space-y-3 text-sm ">
+              <li className="flex items-start gap-2.5 hover:text-text-primary">
+                <FaMapMarkerAlt className="mt-1 flex-shrink-0 " />
                 <span>Bahirdar, Ethiopia</span>
               </li>
-              <li className="flex items-center gap-2.5">
+              <li className="flex items-center gap-2.5 hover:text-text-primary">
                 <FaEnvelope className="flex-shrink-0 text-gray-500" />
-                <a
-                  href="mailto:info@strata.com"
-                  className="hover:text-white transition-colors">
+                <a href="mailto:info@strata.com" className=" transition-colors">
                   info@strata.com
                 </a>
               </li>
-              <li className="flex items-center gap-2.5">
+              <li className="flex items-center gap-2.5 hover:text-text-primary">
                 <FaPhoneAlt className="flex-shrink-0 text-gray-500" />
-                <a
-                  href="tel:+251970369110"
-                  className="hover:text-white transition-colors">
+                <a href="tel:+251970369110" className=" transition-colors">
                   +251970369110
                 </a>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+          <div className="">
+            <h4 className="text-xs text-center font-bold uppercase tracking-wider text-text-primary dark:text-text-primary  mb-4">
               Stay Updated
             </h4>
-            <p className="text-sm text-gray-400 mb-3">
+            <p className="text-sm text-text-secondary mb-3">
               Subscribe to our newsletter for the latest updates.
             </p>
             <form
@@ -154,14 +140,14 @@ const Footer = () => {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="px-3.5 py-2 rounded bg-white/5 border border-white/10 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 w-full transition-all"
+                className="px-3.5 py-2 rounded bg-black/10 border border-white/10 text-text-primary dark:text-text-primary  placeholder:text-text-secondary text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 w-full transition-all"
                 required
               />
               <Button
                 type="submit"
                 disabled={loading}
                 className={`text-sm tracking-wide shadow-sm active:scale-[0.98] ${
-                  loading ? "bg-gray-600" : "bg-[#ff515b] hover:bg-[#ff646d]"
+                  loading ? "bg-gray-600" : "bg-[#21b8b2] hover:bg-[#21b8b2]/50"
                 }`}>
                 {loading ? (
                   <>
@@ -176,7 +162,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-secondary">
           <div>
             {" "}
             &copy; {new Date().getFullYear()} Strata. All rights reserved.

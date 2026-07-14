@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
 import member1 from "../assets/images/team/member1.jpg";
 import member2 from "../assets/images/team/member2.jpg";
 import member3 from "../assets/images/team/member3.jpg";
@@ -49,24 +48,22 @@ const TeamCarousel = () => {
     <div className="w-full max-w-lg mx-auto text-center py-10 px-4">
       <div
         key={member.name}
-        className="dark:bg-[#0d1f25] bg-slate-700 flex flex-col items-center gap-6 rounded-2xl border border-surface/10  p-8 md:p-10 shadow-2xl text-surfacetransition-all duration-200">
+        className="bg-white/30 dark:bg-white-100 flex flex-col items-center gap-6 rounded-2xl border border-border  p-8 md:p-10 shadow-2xl text-text-primary transition-all duration-200">
         <div className="relative">
           <img
             src={member.image}
             alt={member.name}
-            className="w-64 h-77 rounded-3xl object-cover border-2 border-[#21b8b2]/40 p-1"
+            className="w-64 h-77 rounded-3xl object-cover border-2 border-border/40 p-1"
           />
         </div>
         <div>
-          <h3 className="text-2xl font-black tracking-tight text-white">
-            {member.name}
-          </h3>
-          <p className="text-sm uppercase tracking-[0.15em] text-[#21b8b2] font-bold mt-2">
+          <h3 className="text-2xl tracking-tight ">{member.name}</h3>
+          <p className="text-sm uppercase tracking-[0.15em] text-accent font-bold mt-2">
             {member.position}
           </p>
         </div>
 
-        <p className="text-base leading-relaxed text-surface/80 min-h-[84px] max-w-sm px-2">
+        <p className="text-base leading-relaxed min-h-[84px] max-w-sm px-2">
           {member.story}
         </p>
 
@@ -74,7 +71,7 @@ const TeamCarousel = () => {
           <Button
             onClick={prev}
             type="button"
-            className="rounded-xl border border-surface/10 bg-surface/5 text-lg text-surfacehover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold"
+            className="rounded-xl border border-border dark:border-border/50 text-lg text-text-primary hover:bg-accent transition-all duration-200 font-bold"
             style={{ padding: "12px 20px" }}>
             &#8592;
           </Button>
@@ -82,7 +79,7 @@ const TeamCarousel = () => {
           <Button
             onClick={next}
             type="button"
-            className="rounded-xl border border-surface/10 bg-surface/5 text-lg text-surfacehover:bg-[#21b8b2] hover:text-slate-950 transition-all duration-200 font-bold"
+            className="rounded-xl border border-border dark:border-border/50 text-lg text-text-primary hover:bg-accent transition-all duration-200 font-bold"
             style={{ padding: "12px 20px" }}>
             &#8594;
           </Button>
@@ -94,7 +91,7 @@ const TeamCarousel = () => {
           <span
             key={idx}
             className={`inline-block h-2.5 rounded-full transition-all duration-200 ${
-              idx === current ? "w-8 bg-[#21b8b2]" : "w-2.5 bg-surface/20"
+              idx === current ? "w-8 bg-accent" : "w-2.5 bg-surface/40"
             }`}></span>
         ))}
       </div>

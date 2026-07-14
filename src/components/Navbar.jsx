@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FiArrowRight, FiMoon, FiSun, FiMenu } from "react-icons/fi";
 import logo from "../assets/images/logo.png";
 import { useAuth } from "../context/useAuth";
@@ -68,44 +68,50 @@ const Navbar = () => {
     navigate("/");
   };
 
+  // const linkClass = ({ isActive }) =>
+  //   `rounded-[0.2rem] px-4 py-2 text-sm font-medium transition duration-300 block text-center ${
+  //     isActive
+  //       ? " hover:border-border hover:bg-surface-muted text-text-primary dark:text-text-primary "
+  //       : " text-text-primary dark:text-text-primary  hover:border-border hover:bg-surface-muted hover:text-text-primary"
+  //   }`;
+
   const linkClass = ({ isActive }) =>
-    `rounded-full px-4 py-2 text-sm font-medium transition duration-300 block text-center ${
+    `rounded-[0.5rem] px-4 py-2 text-sm font-medium transition duration-300 block text-center ${
       isActive
-        ? "border border-[var(--color-border-strong)] bg-[var(--color-surface-strong)] text-[var(--color-text-primary)]"
-        : "border border-transparent text-[var(--color-text-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]"
+        ? "border border-border-strong bg-surface-strong text-text-primary dark:text-text-primary "
+        : "border border-transparent text-text-secondary hover:border-border hover:bg-surface-muted hover:text-text-primary"
     }`;
 
   return (
     <header
-      className={`sticky top-0 z-50 px-2 pt-2 transition-transform duration-300 sm:px-6 lg:px-4 ${
-        hideNavbar ? "-translate-y-full" : "translate-y-0"
-      }`}
+      className={`sticky top-0 z-50 lg:px-4 ${hideNavbar ? "-translate-y-full" : "translate-y-0 bg-page-bg"}`}
       aria-hidden={hideNavbar}
       inert={hideNavbar ? "" : undefined}>
-      <nav className="mx-auto flex max-w-7xl flex-col rounded-[1.75rem] border border-[var(--color-border)] bg-[var(--color-nav-bg)] px-3 py-3 shadow-xl shadow-black/10 transition duration-300 sm:px-4 lg:px-6">
+      <nav className="mx-auto flex max-w-7xl flex-col lg:rounded-[1.6rem] bg-nav-bg px-3 shadow py-3 transition duration-300 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between gap-3">
           <NavLink to="/" className="flex items-center gap-3">
             <img src={logo} alt="Strata Logo" className="h-9 w-auto" />
             <div className="min-w-0">
-              <span className="block text-lg font-black tracking-[0.2em] sm:text-xl text-[var(--color-text-primary)]">
+              <span className="block text-lg font-black tracking-[0.2em] sm:text-xl text-text-primary dark:text-text-primary ">
                 Strata
               </span>
-              <span className="hidden text-xs tracking-[0.24em] sm:block text-[var(--color-text-secondary)]">
+              <span className="hidden text-xs tracking-[0.24em] sm:block text-text-secondary">
                 hire fast and smart
               </span>
             </div>
           </NavLink>
 
-          <div className="flex items-center gap-3">
+          <div>
+            {/* the hamburger menu button */}
             <Button
               type="button"
               aria-label="Toggle menu"
               onClick={toggleMenu}
-              className="inline-flex h-11 w-11 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] text-xl transition duration-300 lg:hidden"
+              className="inline-flex h-11 w-11 rounded-full border border-border  text-text-primary dark:text-text-primary  text-xl transition duration-300 lg:hidden"
               style={{ padding: 0 }}>
               <FiMenu />
             </Button>
-
+            {/* the menu lists */}
             <div className="hidden items-center gap-3 lg:flex">
               <ul className="flex items-center gap-2">
                 <li>
@@ -129,13 +135,15 @@ const Navbar = () => {
                 <>
                   <NavLink
                     to="/login"
-                    className="text-sm font-medium transition duration-300 text-[var(--color-text-primary)]">
+                    // className="text-sm font-medium transition duration-300 text-text-primary dark:text-text-primary ">
+                    className={linkClass}>
                     Login
                   </NavLink>
 
                   <NavLink
                     to="/signup"
-                    className="text-sm font-medium transition duration-300 text-[var(--color-text-primary)]">
+                    // className="text-sm font-medium transition duration-300 text-text-primary dark:text-text-primary ">
+                    className={linkClass}>
                     Signup
                   </NavLink>
                 </>
@@ -146,29 +154,27 @@ const Navbar = () => {
                     Dashboard
                   </NavLink>
 
-                  
+                  <NavLink
+                    to="/add-job"
+                    className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground shadow-lg transition duration-300 ">
+                    Add Job
+                    <FiArrowRight />
+                  </NavLink>
 
                   <Button
                     type="button"
                     onClick={handleLogout}
-                    className="text-sm bg-[none] font-medium cursor-pointer transition duration-300 text-[var(--color-text-primary)]">
+                    className="text-text-secondary">
                     {" "}
                     Logout
                   </Button>
                 </>
               )}
 
-              <NavLink
-                to="/add-job"
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-4 py-2 text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg transition duration-300 hover:-translate-y-0.5">
-                Add Job
-                <FiArrowRight />
-              </NavLink>
-
               <Button
                 type="button"
                 onClick={toggleTheme}
-                className="inline-flex cursor-pointer h-11 w-11 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-surface-strong)]"
+                className="inline-flex cursor-pointer h-11 w-11 rounded-full border border-border bg-surface text-text-primary dark:text-text-primary  shadow-sm transition duration-300  hover:bg-surface-strong"
                 style={{ padding: 0 }}>
                 {theme === "dark" ? <FiSun /> : <FiMoon />}
               </Button>
@@ -217,7 +223,7 @@ const Navbar = () => {
                   <NavLink
                     to="/signup"
                     onClick={() => setMenuOpen(false)}
-                    className="w-full rounded-full border border-surface/20 px-4 py-3 text-center text-sm font-medium text-surface/90 transition hover:bg-surface/10">
+                    className="w-full rounded-full border border-surface/20 px-4 py-3 text-center text-sm font-medium text-surface/90  transition hover:bg-surface/10">
                     Signup
                   </NavLink>
                 </>
@@ -232,24 +238,22 @@ const Navbar = () => {
                     Dashboard
                   </NavLink>
 
-                  
+                  <NavLink
+                    to="/add-job"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full rounded-full border border-border-strong bg-accent px-4 py-3 text-center text-sm font-semibold text-accent-foreground shadow-lg transition hover:-translate-y-0.5">
+                    Add Job
+                  </NavLink>
 
                   <Button
                     type="button"
                     onClick={handleLogout}
-                    className="bg-surface/10 w-full rounded-full border border-surface/20 text-center text-sm font-medium text-surface/90 hover:bg-surface/10"
+                    className="bg-surface/10 w-full rounded-full dark:text-surface border border-surface/20 text-center text-sm font-medium text-surface/90 hover:bg-surface/10"
                     style={{ padding: "12px 16px" }}>
                     Logout
                   </Button>
                 </>
               )}
-
-              <NavLink
-                to="/add-job"
-                onClick={() => setMenuOpen(false)}
-                className="w-full rounded-full border border-[var(--color-border-strong)] bg-[var(--color-accent)] px-4 py-3 text-center text-sm font-semibold text-[var(--color-accent-foreground)] shadow-lg transition hover:-translate-y-0.5">
-                Add Job
-              </NavLink>
 
               <div className="pt-2 w-full flex justify-center">
                 <Button
