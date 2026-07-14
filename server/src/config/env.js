@@ -1,21 +1,9 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const required = (name) => {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-  return value;
-};
-
 export const env = {
   nodeEnv: process.env.NODE_ENV || "development",
-  port: Number(process.env.PORT || "https://strata-backend-ri59.onrender.com"),
-  clientOrigin: process.env.CLIENT_ORIGIN ,
-  Url: required("SUPABASE_URL"),
-  supabaseServiceRoleKey: required("SUPABASE_SERVICE_ROLE_KEY"),
+  port: Number(process.env.PORT || 3000),
+  clientOrigin: process.env.CLIENT_ORIGIN,
+  Url: process.env.SUPABASE_URL,
+  supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
   geminiApiKey: process.env.GEMINI_API_KEY || "",
   openaiApiKey: process.env.OPENAI_API_KEY || "",
   githubToken: process.env.GITHUB_TOKEN || "",

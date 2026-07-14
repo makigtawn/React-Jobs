@@ -1,40 +1,38 @@
-import { supabaseAdmin } from "../config/supabase.js";
-import { HttpError } from "../utils/httpError.js";
+// import jwt from 'jsonwebtoken';
 
-export const requireAuth = async (req, res, next) => {
-  try {
-    const header = req.headers.authorization || "";
-    const token = header.startsWith("Bearer ") ? header.slice(7) : "";
+// export const authenticateToken = (req, res, next) => {
+//   // Grab the token from cookies
+//   const token = req.cookies.token; 
 
-    if (!token) {
-      throw new HttpError(401, "Authentication token is required");
-    }
+//   if (!token) {
+//     return res.status(401).json({ message: "Access denied. Please log in." });
+//   }
 
-    const { data, error } = await supabaseAdmin.auth.getUser(token);
+//   try {
+//     // Verify using the secret from your environment variables
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     req.user = decoded; 
+//     next();             
+//   } catch (error) {
+//     return res.status(403).json({ message: "Invalid or expired token." });
+//   }
+// };
 
-    if (error || !data.user) {
-      throw new HttpError(401, "Invalid or expired authentication token");
-    }
 
-    req.user = data.user; 
-    next();
-  } catch (error) {
-    next(error);
+import jwt from 'jsonwebtoken';
+
+export function requireAuth(req, res, next) {
+  const token = req.cookies?.access_token;
+
+  if (!token) {
+    return res.status(401).json({ error: 'Not authenticated' });
   }
-};
 
-export const authorizeRoles = (...allowedRoles) => {
-  return (req, res, next) => {
-    try {
-      const userRole = req.user?.app_metadata?.role || "user";
-
-      if (!allowedRoles.includes(userRole)) {
-        throw new HttpError(403, "Forbidden: You do not have permission to access this resource");
-      }
-
-      next();
-    } catch (error) {
-      next(error);
-    }
-  };
-};
+  try {
+    const payload = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+    req.user = payload; 
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Token invalid or expired' });
+  }
+}

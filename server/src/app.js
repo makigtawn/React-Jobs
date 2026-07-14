@@ -2,8 +2,9 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import authRoutes from "./routes/authRoutes.js";
+import cookieParser from "cookie-parser";
 import jobRoutes from "./routes/jobRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import { env } from "./config/env.js";
 
@@ -11,8 +12,12 @@ export const createApp = () => {
   const app = express();
 
   const allowedOrigins = [
-    'http://strata-backend-ri59.onrender.com', 
-  ];
+    'https://strata-backend-ri59.onrender.com',
+    'http://localhost:5173',
+    'http://localhost:3000',
+    env.clientOrigin,
+  ].filter(Boolean);
+
   app.use(cors({
     origin: (origin, callback) => {
       if (!origin || allowedOrigins.includes(origin)) {
@@ -21,16 +26,19 @@ export const createApp = () => {
         callback(new Error('Blocked by CORS'));
       }
     },
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }));
+
+  app.options(/(.*)/, cors());
+
   app.use(helmet());
-  app.use(
-    cors({
-      origin: env.clientOrigin,
-      credentials: true,
-    }),
-  );
+
   app.use(express.json({ limit: "1mb" }));
+  app.use(cookieParser());
+
+
   app.use(morgan(env.nodeEnv === "production" ? "combined" : "dev"));
 
   app.get("/api/health", (req, res) => {
@@ -39,7 +47,6 @@ export const createApp = () => {
 
   app.use("/api/auth", authRoutes);
   app.use("/api/jobs", jobRoutes);
-
 
   app.use(notFound);
   app.use(errorHandler);
