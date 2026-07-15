@@ -3,13 +3,13 @@ import { useAuth } from "../context/useAuth";
 import Spinner from "./Spinner";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
-  const { user, loading } = useAuth();
+  const { user, isLoading } = useAuth();
   const location = useLocation();
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <Spinner loading={loading} />
+        <Spinner loading={isLoading} />
       </div>
     );
   }

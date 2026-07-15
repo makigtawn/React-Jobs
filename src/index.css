@@ -1,34 +1,41 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --nav-bg: #e0e7ee;
-  --text-primary: #111827;
-  --border: #e5e7eb;
-  --accent: #ff4c57;
-  --accent-foreground: #ffffff;
+  --page-bg: #f7f9fa;
+  --nav-bg: #ffffff;
   --surface: #ffffff;
-  --surface-strong: #f8fafc;
+  --surface-strong: #eef0f3;
   --surface-muted: #f3f4f6;
-  --page-bg: #152a31;
+  --border: #e5e7eb;
+  --border-strong: #cbd1db;
+  --text-primary: #111827;
+  --text-secondary: #56585e;
+  --accent: #21b8b2;
+  --accent-foreground: #ffffff;
 }
 
 .dark {
-  --nav-bg: #0f172a;
-  --text-primary: #f9fafb;
-  --border: #334155;
-  --accent: #ff4c57; 
-  --accent-foreground: #ffffff;
-  --surface: #0f172a;
-  --surface-strong: #111827;
-  --surface-muted: #1e293b;
-  --page-bg: #0f172a; 
+  --page-bg: #1f3238;
+  --nav-bg: #12161c;
+  --surface: #171c24;
+  --surface-strong: #232a35;
+  --surface-muted: #1a2029;
+  --border: #262d38;
+  --border-strong: #3a4352;
+  --text-primary: #e7e9ee;
+  --text-secondary: #9aa3b2;
+  --accent: #35d6cf;
+  --accent-foreground: #0d1117;
 }
-
 
 @theme {
   --color-nav-bg: var(--nav-bg);
   --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-surface: var(--surface);
