@@ -22,16 +22,16 @@ const HomeCards = () => {
   ];
 
   return (
-    <section className="relative bg-[#1f3238] dark:bg-slate-950 py-16 sm:py-24 text-surface min-h-screen transition-colors duration-300">
+    <section className="relative bg-page-bg dark:bg-[#1f3238] py-16 sm:py-24 text-text-primary min-h-screen transition-colors duration-300">
       <div className="container-xl lg:container m-auto px-4">
         <div className="mx-auto max-w-3xl text-center mb-14 sm:mb-18">
           <span className="text-sm font-semibold tracking-wider text-[#21b8b2] uppercase">
             Proven Results
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-surface sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-text-primary dark:text-text-primary  sm:text-4xl">
             Trusted by Teams Cutting Out the Screening Noise
           </h2>
-          <p className="mt-4 text-base leading-7 text-slate-300 sm:text-lg">
+          <p className="mt-4 text-base leading-7 text-text-secondary dark:text-text-secondary  sm:text-lg">
             See how forward-thinking hiring managers skip manual resume review
             entirely and jump straight to the best talent.
           </p>
@@ -41,27 +41,27 @@ const HomeCards = () => {
           {testimonials.map((item, index) => (
             <Card
               key={index}
-              bg="bg-black/30 dark:bg-slate-900/50 border border-surface/5 dark:border-slate-800 shadow-2xl backdrop-blur-sm flex flex-col justify-between">
+              bg="bg-white/30 dark:bg-surface border border-border dark:border-border shadow-2xl backdrop-blur-sm flex flex-col justify-between">
               <div className="flex flex-col h-full justify-between">
                 <div>
-                  <span className="text-4xl text-[#21b8b2] font-serif block mb-2">
+                  <span className="text-4xl text-accent font-serif block mb-2">
                     “
                   </span>
-                  <p className="text-slate-200 text-base leading-relaxed italic">
+                  <p className="text-text-secondary dark:text-text-secondary text-base leading-relaxed italic">
                     {item.quote}
                   </p>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-surface/10 flex items-center justify-between flex-wrap gap-4">
+                <div className="mt-8 pt-6 border-t border-border flex items-center justify-between flex-wrap gap-4">
                   <div>
-                    <h4 className="font-semibold text-surface text-base">
+                    <h4 className="font-semibold text-text-secondary text-base">
                       {item.author}
                     </h4>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-text-secondary/60">
                       {item.role}, {item.company}
                     </p>
                   </div>
-                  <div className="bg-[#21b8b2]/10 border border-[#21b8b2]/30 rounded-lg px-3 py-1.5 text-xs font-medium text-[#21b8b2]">
+                  <div className="bg-accent/10 border border-accent/30 rounded-lg px-3 py-1.5 text-xs font-medium text-accent/70">
                     {item.metric}
                   </div>
                 </div>

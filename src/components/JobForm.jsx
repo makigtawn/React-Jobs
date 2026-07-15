@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import freelanceImg from "../assets/images/new-images/freelance-img.jpg";
+import { useState } from "react";
 import JobDescriptionEditor from "./editor/JobDescriptionEditor";
 import Button from "./Button";
+
 const jobTypes = [
   "Full-Time",
   "Part-Time",
@@ -9,6 +9,7 @@ const jobTypes = [
   "Paid Internship",
   "Internship",
 ];
+
 const salaryRanges = [
   "Under $50K",
   "$50K - $90K",
@@ -33,14 +34,52 @@ const EMPTY_JOB = {
   },
 };
 
-const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
-  const [job, setJob] = useState(initialJob ?? EMPTY_JOB);
+const clampScore = (value) =>
+  Math.min(100, Math.max(0, Number.isNaN(value) ? 0 : value));
 
-  useEffect(() => {
-    if (initialJob) {
-      setJob(initialJob);
-    }
-  }, [initialJob]);
+const inputClasses =
+  "w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-primary outline-none transition-colors placeholder:text-slate-400 focus:border-accent focus:ring-1 focus:ring-accent";
+
+const selectClasses =
+  "w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent";
+
+/** Label + input wrapper, stacked on every breakpoint so it never crowds on mobile. */
+const Field = ({ label, required, hint, children }) => (
+  <label className="block">
+    <span className="flex items-center gap-1 text-sm font-medium text-text-primary">
+      {label}
+      {required && <span className="text-red-500">*</span>}
+    </span>
+    {hint && (
+      <span className="mt-0.5 block text-xs text-slate-500 dark:text-slate-400">
+        {hint}
+      </span>
+    )}
+    <div className="mt-2">{children}</div>
+  </label>
+);
+
+const Section = ({ title, children }) => (
+  <div className="rounded-2xl border border-border bg-surface p-5 sm:p-7">
+    <h3 className="mb-5 text-base font-semibold text-text-primary sm:text-lg">
+      {title}
+    </h3>
+    <div className="space-y-5">{children}</div>
+  </div>
+);
+
+const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
+  const [job, setJob] = useState(() => {
+    if (!initialJob) return EMPTY_JOB;
+    return {
+      ...EMPTY_JOB,
+      ...initialJob,
+      company: {
+        ...EMPTY_JOB.company,
+        ...(initialJob.company || {}),
+      },
+    };
+  });
 
   const updateField = (field, value) => {
     setJob((prev) => ({ ...prev, [field]: value }));
@@ -62,181 +101,164 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
   };
 
   return (
-    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 bg-[#21b8b2] dark:bg-teal-700/80">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 xl:grid-cols-[1.2fr_0.8fr] xl:items-start">
-          <div className="rounded-[2rem] border border-surface/10 bg-[#0d1f25] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.24)] text-white">
-            <div className="mb-8">
-              <p className="text-sm uppercase tracking-[0.3em] text-[#21b8b2]">
-                {heading}
-              </p>
-              <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-                Share your role with quality developers
-              </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-surface/70">
-                Fill in the details and we'll help your listing reach top talent
-                faster with a polished presentation that stands out.
-              </p>
+    <section className="relative overflow-hidden bg-page-bg px-4 py-12 text-text-primary sm:px-6 sm:py-16 lg:px-8">
+      <div className="mx-auto max-w-3xl">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
+            {heading}
+          </h1>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            Fields marked <span className="text-red-500">*</span> are required.
+          </p>
+        </div>
+
+        <form id="job-form" className="space-y-6" onSubmit={submit}>
+          <Section title="Role details">
+            <Field label="Job title" required>
+              <input
+                value={job.title}
+                onChange={(e) => updateField("title", e.target.value)}
+                placeholder="e.g. Senior Product Designer"
+                className={inputClasses}
+              />
+            </Field>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Field label="Job type" required>
+                <select
+                  value={job.type}
+                  onChange={(e) => updateField("type", e.target.value)}
+                  className={selectClasses}
+                >
+                  {jobTypes.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+
+              <Field label="Salary range" required>
+                <select
+                  value={job.salary}
+                  onChange={(e) => updateField("salary", e.target.value)}
+                  className={selectClasses}
+                >
+                  {salaryRanges.map((range) => (
+                    <option key={range} value={range}>
+                      {range}
+                    </option>
+                  ))}
+                </select>
+              </Field>
             </div>
 
-            <form id="job-form" className="space-y-5" onSubmit={submit}>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block">
-                  <span className="text-sm text-surface/70">Job type</span>
-                  <select
-                    value={job.type}
-                    onChange={(e) => updateField("type", e.target.value)}
-                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
-                    {jobTypes.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="block">
-                  <span className="text-sm text-surface/70">Salary range</span>
-                  <select
-                    value={job.salary}
-                    onChange={(e) => updateField("salary", e.target.value)}
-                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20">
-                    {salaryRanges.map((range) => (
-                      <option key={range} value={range}>
-                        {range}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
+            <Field label="Location" required>
+              <input
+                value={job.location}
+                onChange={(e) => updateField("location", e.target.value)}
+                placeholder="Remote / New York, NY"
+                className={inputClasses}
+              />
+            </Field>
+          </Section>
 
-              <label className="block">
-                <span className="text-sm text-surface/70">Job title</span>
+          <Section title="Description">
+            <Field label="Job description">
+              <JobDescriptionEditor
+                value={job.description}
+                onChange={(html) => updateField("description", html)}
+              />
+            </Field>
+          </Section>
+
+          <Section title="Candidate screening">
+            <Field
+              label="Minimum candidate score"
+              hint="Only applicants scoring at or above this threshold will be shown."
+            >
+              <div className="flex items-center gap-4">
                 <input
-                  value={job.title}
-                  onChange={(e) => updateField("title", e.target.value)}
-                  placeholder="Backend developer"
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
-                />
-              </label>
-
-              <label className="block">
-                <span className="text-sm text-surface/70">Location</span>
-                <input
-                  value={job.location}
-                  onChange={(e) => updateField("location", e.target.value)}
-                  placeholder="Remote / New York"
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
-                />
-              </label>
-
-              <div className="block">
-                <span className="text-sm text-surface/70">Job description</span>
-                <JobDescriptionEditor
-                  value={job.description}
-                  onChange={(html) => updateField("description", html)}
-                />
-              </div>
-
-              <label className="block">
-                <span className="text-sm text-surface/70">
-                  Minimum candidate score
-                </span>
-                <input
-                  type="number"
+                  type="range"
                   min="0"
                   max="100"
                   value={job.minimumScoreThreshold}
                   onChange={(e) =>
-                    updateField("minimumScoreThreshold", e.target.value)
+                    updateField(
+                      "minimumScoreThreshold",
+                      clampScore(parseInt(e.target.value, 10)),
+                    )
                   }
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full bg-border accent-accent"
                 />
-              </label>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block">
-                  <span className="text-sm text-surface/70">Company name</span>
+                <div className="flex items-center gap-1.5">
                   <input
-                    value={job.company.name}
-                    onChange={(e) => updateCompanyField("name", e.target.value)}
-                    placeholder="Company name"
-                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
-                  />
-                </label>
-                <label className="block">
-                  <span className="text-sm text-surface/70">Company email</span>
-                  <input
-                    value={job.company.contactEmail}
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={job.minimumScoreThreshold}
                     onChange={(e) =>
-                      updateCompanyField("contactEmail", e.target.value)
+                      updateField(
+                        "minimumScoreThreshold",
+                        clampScore(parseInt(e.target.value, 10)),
+                      )
                     }
-                    placeholder="email@example.com"
-                    type="email"
-                    className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                    className="w-16 rounded-lg border border-border bg-surface px-2 py-1.5 text-center text-sm text-text-primary outline-none focus:border-accent focus:ring-1 focus:ring-accent"
                   />
-                </label>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">
+                    / 100
+                  </span>
+                </div>
               </div>
+            </Field>
+          </Section>
 
-              <label className="block">
-                <span className="text-sm text-surface/70">Company phone</span>
+          <Section title="Company information">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Field label="Company name">
                 <input
-                  value={job.company.contactPhone}
-                  onChange={(e) =>
-                    updateCompanyField("contactPhone", e.target.value)
-                  }
-                  placeholder="Optional phone"
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  value={job.company.name}
+                  onChange={(e) => updateCompanyField("name", e.target.value)}
+                  placeholder="Company name"
+                  className={inputClasses}
                 />
-              </label>
+              </Field>
 
-              <label className="block">
-                <span className="text-sm text-surface/70">
-                  Company description
-                </span>
-                <textarea
-                  value={job.company.description}
+              <Field label="Company email" required>
+                <input
+                  value={job.company.contactEmail}
                   onChange={(e) =>
-                    updateCompanyField("description", e.target.value)
+                    updateCompanyField("contactEmail", e.target.value)
                   }
-                  rows={4}
-                  placeholder="A short summary of your product or team"
-                  className="mt-2 w-full rounded-3xl border border-surface/10 bg-[#11212a] px-4 py-3 text-surface outline-none focus:border-[#21b8b2] focus:ring-2 focus:ring-[#21b8b2]/20"
+                  placeholder="email@example.com"
+                  type="email"
+                  className={inputClasses}
                 />
-              </label>
-
-              <Button
-                type="submit"
-                form="job-form"
-                className="w-full rounded-3xl bg-[#21b8b2] text-base font-semibold text-slate-950 hover:bg-[#1aa69f]"
-                style={{ padding: "16px 24px" }}>
-                {submitLabel}
-              </Button>
-            </form>
-          </div>
-
-          <aside className="space-y-6">
-            <div className="rounded-[2rem] border border-surface/10 bg-surface/5 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl text-white">
-              <h3 className="text-2xl font-bold">Why this form works</h3>
-              <p className="mt-4 text-sm leading-7 text-surface/70">
-                The new UI helps recruiters and hiring managers quickly scan the
-                job outline, and candidates immediately understand the role,
-                pay, and company fit.
-              </p>
-              <ul className="mt-6 space-y-3 text-sm text-surface/80">
-                <li>• Clean fields for fast posting</li>
-                <li>• Highlighted salary and role details</li>
-                <li>• Company info grouped for trust</li>
-              </ul>
+              </Field>
             </div>
-            <div className="overflow-hidden rounded-[2rem] border border-surface/10 bg-[#0c2028]">
-              <img
-                src={freelanceImg}
-                alt="Freelance illustration"
-                className="h-full w-full object-cover"
+
+            <Field label="Company description">
+              <textarea
+                value={job.company.description}
+                onChange={(e) =>
+                  updateCompanyField("description", e.target.value)
+                }
+                rows={4}
+                placeholder="A short summary of your product or team"
+                className={`${inputClasses} resize-none`}
               />
-            </div>
-          </aside>
-        </div>
+            </Field>
+          </Section>
+
+          <div className="flex justify-end">
+            <Button
+              type="submit"
+              className="w-full bg-accent hover:bg-accent/70 sm:w-auto"
+            >
+              {submitLabel}
+            </Button>
+          </div>
+        </form>
       </div>
     </section>
   );

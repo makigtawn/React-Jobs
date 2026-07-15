@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import {
   ClassicEditor,
@@ -8,7 +8,6 @@ import {
   BlockQuote,
   Bold,
   Code,
-  CodeBlock,
   Essentials,
   GeneralHtmlSupport,
   Heading,
@@ -20,12 +19,6 @@ import {
   List,
   ListProperties,
   Paragraph,
-  Table,
-  TableCaption,
-  TableCellProperties,
-  TableColumnResize,
-  TableProperties,
-  TableToolbar,
   Underline,
   Undo,
 } from "ckeditor5";
@@ -40,7 +33,6 @@ const EDITOR_CONFIG = {
     BlockQuote,
     Bold,
     Code,
-    CodeBlock,
     Essentials,
     GeneralHtmlSupport,
     Heading,
@@ -52,12 +44,6 @@ const EDITOR_CONFIG = {
     List,
     ListProperties,
     Paragraph,
-    Table,
-    TableCaption,
-    TableCellProperties,
-    TableColumnResize,
-    TableProperties,
-    TableToolbar,
     Underline,
     Undo,
   ],
@@ -66,8 +52,6 @@ const EDITOR_CONFIG = {
       "undo",
       "redo",
       "|",
-      "heading",
-      "|",
       "bold",
       "italic",
       "underline",
@@ -75,58 +59,15 @@ const EDITOR_CONFIG = {
       "|",
       "link",
       "blockQuote",
-      "codeBlock",
+      "horizontalLine",
       "|",
       "bulletedList",
       "numberedList",
       "outdent",
       "indent",
       "|",
-      "insertTable",
-      "horizontalLine",
     ],
     shouldNotGroupWhenFull: false,
-  },
-  heading: {
-    options: [
-      { model: "paragraph", title: "Paragraph", class: "ck-heading_paragraph" },
-      {
-        model: "heading1",
-        view: "h1",
-        title: "Heading 1",
-        class: "ck-heading_heading1",
-      },
-      {
-        model: "heading2",
-        view: "h2",
-        title: "Heading 2",
-        class: "ck-heading_heading2",
-      },
-      {
-        model: "heading3",
-        view: "h3",
-        title: "Heading 3",
-        class: "ck-heading_heading3",
-      },
-    ],
-  },
-  table: {
-    contentToolbar: [
-      "tableColumn",
-      "tableRow",
-      "mergeTableCells",
-      "tableProperties",
-      "tableCellProperties",
-    ],
-  },
-  codeBlock: {
-    languages: [
-      { language: "plaintext", label: "Plain text" },
-      { language: "javascript", label: "JavaScript" },
-      { language: "python", label: "Python" },
-      { language: "bash", label: "Bash" },
-      { language: "sql", label: "SQL" },
-    ],
   },
   link: {
     addTargetToExternalLinks: true,
@@ -139,7 +80,6 @@ const EDITOR_CONFIG = {
 };
 
 const JobDescriptionEditor = ({ value, onChange }) => {
-  const editorRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState(null);
 
@@ -152,10 +92,8 @@ const JobDescriptionEditor = ({ value, onChange }) => {
     style.textContent = `
       /* ── Toolbar ── */
       .jde-wrapper .ck.ck-toolbar {
-        background: #11212a !important;
-        border: 1px solid rgba(255,255,255,0.10) !important;
-        border-bottom: none !important;
-        border-radius: 1.5rem 1.5rem 0 0 !important;
+        background: #21b8b2 !important;
+        border: 1px solid rgba(27, 27, 27, 0.1) !important;
         padding: 6px 8px !important;
       }
       .jde-wrapper .ck.ck-toolbar .ck-toolbar__separator {
@@ -206,8 +144,8 @@ const JobDescriptionEditor = ({ value, onChange }) => {
 
       /* ── Editable area ── */
       .jde-wrapper .ck.ck-editor__editable {
-        background: #11212a !important;
-        color: rgba(255,255,255,0.90) !important;
+        background: #eef0f3 !important;
+        color: #111827 !important;
         border: 1px solid rgba(255,255,255,0.10) !important;
         border-top: none !important;
         border-radius: 0 0 1.5rem 1.5rem !important;
@@ -256,26 +194,6 @@ const JobDescriptionEditor = ({ value, onChange }) => {
         font-family: monospace;
         color: #21b8b2;
       }
-      .jde-wrapper .ck-content pre {
-        background: rgba(0,0,0,0.35) !important;
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 0.75rem;
-        padding: 1rem;
-      }
-      .jde-wrapper .ck-content table {
-        border-collapse: collapse;
-        width: 100%;
-        margin: 0.75rem 0;
-      }
-      .jde-wrapper .ck-content td,
-      .jde-wrapper .ck-content th {
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        padding: 0.4rem 0.75rem;
-      }
-      .jde-wrapper .ck-content th {
-        background: rgba(33,184,178,0.12) !important;
-        color: #fff;
-      }
 
       /* ── Balloon / tooltip ── */
       .ck.ck-balloon-panel {
@@ -285,13 +203,7 @@ const JobDescriptionEditor = ({ value, onChange }) => {
         color: rgba(255,255,255,0.85) !important;
       }
 
-      /* ── Scrollbar ── */
-      .jde-wrapper .ck.ck-editor__editable::-webkit-scrollbar { width: 5px; }
-      .jde-wrapper .ck.ck-editor__editable::-webkit-scrollbar-track { background: transparent; }
-      .jde-wrapper .ck.ck-editor__editable::-webkit-scrollbar-thumb {
-        background: rgba(33,184,178,0.35);
-        border-radius: 3px;
-      }
+      
     `;
     document.head.appendChild(style);
     return () => {
@@ -302,7 +214,7 @@ const JobDescriptionEditor = ({ value, onChange }) => {
 
   if (error) {
     return (
-      <div className="mt-2 rounded-3xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+      <div className="mt-2  border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
         Editor failed to load. Please refresh the page.
         <span className="ml-2 opacity-60 text-xs">{error}</span>
       </div>
@@ -312,7 +224,7 @@ const JobDescriptionEditor = ({ value, onChange }) => {
   return (
     <div className="jde-wrapper relative">
       {!isReady && (
-        <div className="mt-2 flex h-[220px] items-center justify-center rounded-3xl border border-surface/10 bg-[#11212a]">
+        <div className="mt-2 flex h-[220px] items-center justify-center  border border-border">
           <span className="text-sm text-surface/40 animate-pulse">
             Loading editor…
           </span>
@@ -327,8 +239,7 @@ const JobDescriptionEditor = ({ value, onChange }) => {
           editor={ClassicEditor}
           config={EDITOR_CONFIG}
           data={value || ""}
-          onReady={(editor) => {
-            editorRef.current = editor;
+          onReady={() => {
             setIsReady(true);
           }}
           onChange={(_, editor) => {
@@ -346,3 +257,14 @@ const JobDescriptionEditor = ({ value, onChange }) => {
 };
 
 export default JobDescriptionEditor;
+
+
+
+
+
+
+
+
+
+
+

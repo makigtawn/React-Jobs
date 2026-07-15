@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import nextIcon from "../assets/images/new-images/next.png";
-import prevIcon from "../assets/images/new-images/prev.png";
-import sliderImage from "../assets/images/new-images/slider-img.png";
+import sliderImage from "../assets/images/new-images/undraw.svg";
 import Button from "./Button";
 
 const slides = [
+  // {
+  //
+  //   id: 1,
+  //   heading: "You Can\nHire Faster\n",
+  //   description: "Go from open role to perfect hire with in hours, not weeks.",
+  //   image: sliderImage,
+  // },
   {
     id: 1,
-    heading: "You Can\nHire Faster\n",
-    description: "Go from open role to perfect hire with in hours, not weeks.",
+    heading: "Rank developers automatically",
+    description: " from resumes, skills, and code quality.",
     image: sliderImage,
   },
   {
@@ -61,32 +66,35 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex flex-col justify-center lg:-mt-20">
+    <section className="bg-page-bg dark:bg-page-pg relative overflow-hidden min-h-screen flex flex-col justify-center lg:-mt-20 ">
       <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2">
-        <div className="bg-[#1f3238] dark:bg-slate-900/60" />
-        <div className="hidden lg:block bg-[#21b8b2] dark:bg-teal-700/80" />
+        <div />
+        <div
+          className="hidden lg:block  dark:bg-accent transition-transform
+          duration-300"
+        />
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-4 py-12 pt-24 sm:px-6 md:py-16 lg:px-8 lg:py-24">
         <div className="grid grid-cols-1 gap-10 items-center lg:grid-cols-2">
-          <div className="text-center lg:text-left text-surface z-10">
+          <div className="text-center text-text-primary lg:text-left z-10">
             <h1 className="whitespace-pre-line text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               {slides[currentSlide].heading}
             </h1>
-            <p className="mt-4 mx-auto lg:mx-0 max-w-md text-sm leading-relaxed text-surface/80 sm:text-base md:mt-6 md:text-lg">
+            <p className="mt-4 mx-auto lg:mx-0 max-w-md text-sm leading-relaxed sm:text-base md:mt-6 md:text-lg">
               {slides[currentSlide].description}
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
               <Link
-                to="/about"
-                className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-3 text-sm font-semibold text-surface shadow-xl shadow-accent/20 transition hover:bg-accent">
-                About Us
+                to="/add-job"
+                className="inline-flex items-center justify-center rounded-full bg-accent border-border dark:bg-accent/80 px-8 py-3 text-sm font-semibold text-text-primary transition hover:bg-accent/60">
+                Upload Jobs
               </Link>
               <Link
                 to="/jobs"
-                className="inline-flex items-center justify-center rounded-full border border-surface px-8 py-3 text-sm font-semibold text-[#] transition hover:bg-surface/10">
-                Explore Jobs
+                className="inline-flex items-center justify-center rounded-full border border-border dark:border-white/20 px-8 py-3 text-sm font-semibold text-text-primary transition bg-surface/20 hover:bg-surface/40">
+                Compare Market Offers
               </Link>
             </div>
           </div>
@@ -101,27 +109,12 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 lg:left-8 lg:translate-x-0 lg:bottom-10">
-        <Button
-          onClick={prevSlide}
-          className="flex h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#21b8b2] hover:bg-[#1fa39d] transition hover:scale-105 active:scale-95"
-          style={{ padding: 0 }}>
-          <img src={prevIcon} alt="Previous" className="h-4 w-4" />
-        </Button>
-        <Button
-          onClick={nextSlide}
-          className="flex h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#21b8b2] hover:bg-[#1fa39d] transition hover:scale-105 active:scale-95"
-          style={{ padding: 0 }}>
-          <img src={nextIcon} alt="Next" className="h-4 w-4" />
-        </Button>
-      </div>
-
       <div className="absolute bottom-1 left-1/2 -translate-x-1/2 z-20 flex justify-center gap-2.5 lg:left-77 lg:translate-x-0 lg:bottom-30 md:bottom-1 ">
         {slides.map((_, idx) => (
           <span
             key={idx}
             className={`inline-block h-2.5 rounded-full transition-all duration-200 ${
-              idx === currentSlide ? "w-8 bg-[#21b8b2]" : "w-2.5 bg-surface/40"
+              idx === currentSlide ? "w-8 bg-accent" : "w-2.5 bg-surface"
             }`}
           />
         ))}
