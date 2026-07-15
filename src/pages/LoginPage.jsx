@@ -121,14 +121,6 @@ const LoginPage = () => {
           </Button>
         </form>
 
-        <div className="mt-6 text-text-secondary rounded-lg bg-blue-900/20 border border-blue-700/30 p-4">
-          <p className="text-xs ">
-            <strong> Tip:</strong> After signing up, check your email for a
-            verification link. You'll need to verify your email before you can
-            log in.
-          </p>
-        </div>
-
         <p className="mt-6 text-center text-text-secondary text-sm ">
           Need an account?{" "}
           <Link to="/signup" className="font-semibold hover:font-bold">
