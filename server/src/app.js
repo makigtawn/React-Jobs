@@ -3,7 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import jobRoutes from "./routes/jobRoutes.js";
+import jobsRoutes from "./routes/jobRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import { env } from "./config/env.js";
@@ -13,7 +13,7 @@ export const createApp = () => {
 
   const allowedOrigins = [
     'https://strata-backend-ri59.onrender.com',
-    'http://localhost:5173',
+    // 'http://localhost:5173',
     'http://localhost:3000',
     env.clientOrigin,
   ].filter(Boolean);
@@ -46,7 +46,7 @@ export const createApp = () => {
   });
 
   app.use("/api/auth", authRoutes);
-  app.use("/api/jobs", jobRoutes);
+  app.use("/api/jobs", jobsRoutes);
 
   app.use(notFound);
   app.use(errorHandler);

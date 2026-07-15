@@ -1,23 +1,14 @@
-// import { Router } from "express";
-// import {
-//   createJobPost,
-//   listEmployerJobs,
-//   listJobApplications,
-//   listTopCandidates,
-// } from "../controllers/jobController.js";
-// import { requireAuth } from "../middleware/auth.js";
-
-// const router = Router();
-
-// router.post("/", requireAuth, createJobPost);
-// router.get("/mine", requireAuth, listEmployerJobs);
-// router.get("/:jobId/applications", requireAuth, listJobApplications);
-// router.get("/:jobId/top-candidates", requireAuth, listTopCandidates);
-
-// export default router;
-
 import express from "express";
 import pool from "../db/pool.js";
+import {
+  createJobPost,
+  listEmployerJobs,
+  listJobApplications,
+  listTopCandidates,
+  updateJobPost,
+  deleteJobPost,
+} from "../controllers/jobController.js";
+import { requireAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -41,6 +32,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// POST /api/jobs - Create a new job
+// router.post("/", requireAuth, createJobPost);
+router.post("/", createJobPost);
+
+
+
+
+// GET /api/jobs/mine - List employer's jobs
+router.get("/mine", requireAuth, listEmployerJobs);
+
 // GET /api/jobs/:id
 router.get('/:id', async (req, res, next) => {
   try {
@@ -56,5 +57,17 @@ router.get('/:id', async (req, res, next) => {
     next(error);
   }
 });
+
+// PUT /api/jobs/:id - Update a job
+router.put("/:id", requireAuth, updateJobPost);
+
+// DELETE /api/jobs/:id - Delete a job
+router.delete("/:id", requireAuth, deleteJobPost);
+
+// GET /api/jobs/:jobId/applications
+router.get("/:jobId/applications", requireAuth, listJobApplications);
+
+// GET /api/jobs/:jobId/top-candidates
+router.get("/:jobId/top-candidates", requireAuth, listTopCandidates);
 
 export default router;

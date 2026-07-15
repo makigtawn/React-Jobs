@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { createJob, getEmployerJobs } from "../services/jobService.js";
+import { createJob, getEmployerJobs, updateJob, deleteJob } from "../services/jobService.js";
 import {
   getTopCandidates,
   listApplicationsForJob,
@@ -58,4 +58,15 @@ export const listJobApplications = asyncHandler(async (req, res) => {
 export const listTopCandidates = asyncHandler(async (req, res) => {
   const candidates = await getTopCandidates(req.params.jobId);
   res.json(candidates);
+});
+
+export const updateJobPost = asyncHandler(async (req, res) => {
+  const payload = jobSchema.parse(req.body);
+  const job = await updateJob({ jobId: req.params.id, payload });
+  res.json({ job });
+});
+
+export const deleteJobPost = asyncHandler(async (req, res) => {
+  await deleteJob(req.params.id);
+  res.json({ success: true });
 });
