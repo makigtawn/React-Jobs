@@ -286,7 +286,7 @@ const EmployerDashboardPage = () => {
   }, [applications, search]);
 
   return (
-    <section className="min-h-screen bg-[#152a31] dark:bg-slate-900/60 px-4 py-12 text-surfacemd:px-8">
+    <section className="min-h-screen bg-page-bg dark:bg-page-bg px-4 py-12 text-text-primary md:px-8">
       <div className="mx-auto w-full max-w-7xl">
         <DashboardHeader
           jobs={jobs}

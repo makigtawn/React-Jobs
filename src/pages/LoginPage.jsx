@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 import Button from "../components/Button";
@@ -11,9 +11,18 @@ const LoginPage = () => {
   const location = useLocation();
   const redirectTo = location.state?.from?.pathname || "/jobs";
 
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({
+    email: location.state?.email || "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    if (location.state?.email) {
+      setForm((prev) => ({ ...prev, email: location.state.email }));
+    }
+  }, [location.state?.email]);
 
   const updateField = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -21,9 +30,9 @@ const LoginPage = () => {
 
   const validate = () => {
     if (!emailRegex.test(form.email))
-      return "Please enter a valid email address.";
-    if (form.password.length < 6)
-      return "Password must be at least 6 characters.";
+      return "Please enter a valid email address !";
+    if (form.password.length < 8)
+      return "Password must be at least 8 characters !";
     return "";
   };
 
@@ -38,89 +47,91 @@ const LoginPage = () => {
     }
 
     setLoading(true);
-    const { error } = await login(form.email, form.password);
-    setLoading(false);
-
-    if (error) {
-      if (
-        error.message?.toLowerCase().includes("invalid login credentials") ||
-        error.message?.toLowerCase().includes("invalid credentials")
-      ) {
-        setErrorMsg(
-          "Invalid email or password. Please check your credentials and ensure you've verified your email.",
-        );
-      } else if (error.message?.toLowerCase().includes("email not confirmed")) {
-        setErrorMsg(
-          "Please verify your email address first. Check your inbox for the verification link.",
-        );
-      } else {
-        setErrorMsg(error.message || "Unable to log in.");
+    try {
+      const { error } = await login(form.email, form.password);
+      if (error) {
+        if (
+          error.message?.toLowerCase().includes("invalid login credentials") ||
+          error.message?.toLowerCase().includes("invalid credentials")
+        ) {
+          setErrorMsg(
+            "Invalid email or password. Please check your credentials and ensure you've verified your email.",
+          );
+        } else if (
+          error.message?.toLowerCase().includes("email not confirmed")
+        ) {
+          setErrorMsg(
+            "Please verify your email address first. Check your inbox for the verification link.",
+          );
+        } else {
+          setErrorMsg(error.message || "Unable to log in.");
+        }
+        return;
       }
-      return;
-    }
 
-    navigate(redirectTo, { replace: true });
+      navigate(redirectTo, { replace: true });
+    } catch (err) {
+      console.error("Login error:", err);
+      setErrorMsg(err.message || "Unable to log in.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section className="min-h-screen bg-[#1f3238] dark:bg-[#152a31] px-4 py-24">
-      <div className="mx-auto max-w-md rounded-2xl border border-surface/10 bg-[#21b8b2] dark:bg-[#0d1f25] p-8 text-surfaceshadow-2xl">
-        <h1 className="text-3xl font-black">Welcome back</h1>
-        <p className="mt-2 text-sm text-surface/65">
-          Log in to post jobs, apply, and review candidates.
-        </p>
+    <section className="min-h-screen bg-page-bg  dark:bg-page-bg px-4 py-24">
+      <div className="mx-auto max-w-md rounded-2xl text-text-primary dark:text-text-primary  border border-surface/10 bg-white/10 dark:bg-[#0d1f25] p-8  shadow-2xl">
+        <h1 className="text-3xl text-center font-black">Login</h1>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <label className="block">
-            <span className="text-sm text-surface/75">Email</span>
+            <span className="text-sm ">Email</span>
             <input
               type="email"
               value={form.email}
               onChange={(e) => updateField("email", e.target.value)}
               disabled={loading}
-              className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surface outline-none focus:border-[#21b8b2]"
+              className="mt-2 w-full rounded-xl border border-border-strong bg-surface-strong px-4 py-3  outline-none focus:border-border"
             />
           </label>
 
           <label className="block">
-            <span className="text-sm text-surface/75">Password</span>
+            <span className="text-sm ">Password</span>
             <input
               type="password"
               value={form.password}
               onChange={(e) => updateField("password", e.target.value)}
               disabled={loading}
-              className="mt-2 w-full rounded-xl border border-surface/10 bg-[#1f3238] px-4 py-3 text-surface outline-none focus:border-[#21b8b2]"
+              className="mt-2 w-full rounded-xl border border-border-strong bg-surface-strong px-4 py-3 outline-none focus:border-border"
             />
           </label>
 
           {errorMsg && (
-            <div className="rounded-lg bg-red-900/20 border border-red-700/30 p-3">
-              <p className="text-sm text-red-200">{errorMsg}</p>
-            </div>
+            <p className="text-sm text-center text-text-primary dark:text-text-primary ">
+              {errorMsg}
+            </p>
           )}
 
           <Button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-[#21b8b2] font-semibold text-slate-950 hover:bg-[#1aa69f] disabled:cursor-not-allowed"
+            className="w-full rounded-xl bg-accent font-semibold hover:bg-[#1aa69f] disabled:cursor-not-allowed"
             style={{ padding: "12px 20px" }}>
             {loading ? "Logging in..." : "Login"}
           </Button>
         </form>
 
-        <div className="mt-6 rounded-lg bg-blue-900/20 border border-blue-700/30 p-4">
-          <p className="text-xs text-blue-200">
+        <div className="mt-6 text-text-secondary rounded-lg bg-blue-900/20 border border-blue-700/30 p-4">
+          <p className="text-xs ">
             <strong> Tip:</strong> After signing up, check your email for a
             verification link. You'll need to verify your email before you can
             log in.
           </p>
         </div>
 
-        <p className="mt-6 text-center text-sm text-surface/65">
+        <p className="mt-6 text-center text-text-secondary text-sm ">
           Need an account?{" "}
-          <Link
-            to="/signup"
-            className="font-semibold text-surfacehover:text-[#1f3238]">
+          <Link to="/signup" className="font-semibold hover:font-bold">
             Sign up
           </Link>
         </p>

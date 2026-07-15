@@ -1,18 +1,14 @@
 import React from "react";
 import HomeCards from "../components/HomeCards";
-import ExperienceSection from "../components/ExperienceSection";
-import JobListings from "../components/JobListings";
-import ViewAllJobs from "../components/ViewAllJobs";
+import WorkCarousel from "../components/WorkCarousel";
 import Hero from "../components/Hero";
 
 const HomePage = () => {
   return (
     <>
       <Hero />
+      <WorkCarousel />
       <HomeCards />
-      <ExperienceSection />
-      <JobListings isHome={true} />
-      <ViewAllJobs />
     </>
   );
 };

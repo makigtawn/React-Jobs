@@ -4,13 +4,13 @@ import aboutImg from "../assets/images/new-images/about-img.svg";
 
 const About = () => {
   return (
-    <section className="dark:bg-slate-900/60">
+    <section className="bg-page-bg ">
       <div className="mx-auto max-w-5xl px-6 py-32">
-        <h2 className="lg:text-6xl lg:py-3 md:text-6xl text-2xl  text-center text-[#21b8b2] font-bold mb-4">
+        <h2 className="lg:text-4xl py-3 md:text-6xl text-2xl text-center text-accent font-bold mb-4">
           ABOUT US
         </h2>
 
-        <div className="grid py-4 grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto mb-12">
+        <div className="grid py-4 grid-cols-1 md:grid-cols-2 lg:gap-18 lg:my-20 items-center max-w-5xl mx-auto mb-12">
           <div className="flex justify-center w-full">
             <img
               src={aboutImg}
@@ -19,7 +19,7 @@ const About = () => {
             />
           </div>
 
-          <p className="text-surface dark:text-surface text-center md:text-left text-base leading-relaxed">
+          <p className=" text-text-primary text-center md:text-left text-base leading-relaxed">
             Strata was founded by a group of passionate innovators who saw how
             broken and time-consuming the traditional hiring process had become.
             Our journey began with a mission to eliminate the manual grind of
@@ -32,7 +32,7 @@ const About = () => {
         </div>
 
         <div className="mt-8 py-14">
-          <h3 className="text-4xl py-14 text-[#21b8b2] font-bold text-center">
+          <h3 className="text-4xl py-14 text-accent font-bold text-center">
             Meet Our Team
           </h3>
           <TeamCarousel />
