@@ -4,16 +4,14 @@ const EvaluationModal = ({ report, onClose }) => {
   if (!report) return null;
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 px-4 backdrop-blur-sm">
-      <div className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-surface/10 bg-[#0d1f25] p-6 shadow-2xl">
-        <div className="flex items-start justify-between border-b border-surface/10 pb-4">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center dark:bg-black/80 bg-page-bg/10 px-4 backdrop-blur-sm">
+      <div className="max-h-[85vh] w-full max-w-2xl overflow-y-auto text-text-primary rounded-2xl border border-border/20 bg-surface dark:bg-[#0d1f25] p-6 shadow-2xl">
+        <div className="flex items-start justify-between border-b border-border pb-4">
           <div>
-            <h2 className="text-2xl font-black text-white">
-              {report.candidate_name}
-            </h2>
-            <p className="text-sm text-surface/50 mt-1">
+            <h2 className="text-2xl font-black ">{report.candidate_name}</h2>
+            <p className="text-sm mt-1 text-text-secondary ">
               Overall Evaluation Rating:{" "}
-              <span className="text-[#21b8b2] font-bold">
+              <span className="text-accent font-bold">
                 {report.final_score}/100
               </span>
             </p>
@@ -21,7 +19,7 @@ const EvaluationModal = ({ report, onClose }) => {
           <Button
             type="button"
             onClick={onClose}
-            className="rounded-xl border border-surface/10 bg-surface/5 text-xs font-bold hover:bg-surface/10 transition"
+            className="rounded-xl border border-border bg-surface-muted text-xs font-bold hover:bg-surface/10 transition"
             style={{ padding: "8px 16px" }}>
             Close Report
           </Button>
@@ -29,18 +27,18 @@ const EvaluationModal = ({ report, onClose }) => {
 
         <div className="space-y-6 mt-6">
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[#21b8b2]">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-accent">
               Resume Analysis Insights
             </h3>
-            <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-surface/80 bg-surface/[0.01] border border-surface/5 p-4 rounded-xl">
+            <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed bg-surface-strong border border-border p-4 rounded-xl">
               {report.ai_reasoning}
             </p>
           </div>
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[#21b8b2]">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-accent">
               GitHub Performance Assessment
             </h3>
-            <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-surface/80 bg-surface/[0.01] border border-surface/5 p-4 rounded-xl">
+            <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed  bg-surface-strong border border-border p-4 rounded-xl">
               {report.github_reasoning}
             </p>
           </div>

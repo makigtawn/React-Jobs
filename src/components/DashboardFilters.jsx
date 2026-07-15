@@ -22,7 +22,7 @@ const DashboardFilters = ({
   };
 
   return (
-    <div className="mt-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between bg-[#0d1f25]/40 p-4 rounded-2xl border border-surface/5">
+    <div className="mt-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between p-4 rounded-2xl border border-border">
       <div className="grid gap-3 sm:grid-cols-3 flex-1 w-full">
         <form
           onSubmit={handleSearchSubmit}
@@ -32,7 +32,7 @@ const DashboardFilters = ({
               value={localSearch}
               onChange={(e) => setLocalSearch(e.target.value)}
               placeholder="Search candidate name..."
-              className="w-full rounded-xl border border-surface/10 bg-[#0d1f25] pl-4 pr-10 py-2.5 text-sm text-surface outline-none focus:border-[#21b8b2] placeholder:text-surface/40 transition"
+              className="w-full rounded-xl border border-border bg-surface-strong dark:bg-surface pl-4 pr-10 py-2.5 text-sm text-text-primary outline-none focus:border-surface placeholder:text-text-secondary transition"
             />
             {localSearch && (
               <button
@@ -41,20 +41,20 @@ const DashboardFilters = ({
                   setLocalSearch("");
                   setSearch("");
                 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-surface/40 hover:text-surface text-xs">
-                ✕
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs">
+                x
               </button>
             )}
           </div>
 
           <button
             type="submit"
-            className="flex items-center gap-2 rounded-xl bg-[#21b8b2] px-4 py-2.5 text-xs font-bold text-slate-950 hover:bg-[#1da19b] transition shadow-md active:scale-95">
+            className="flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-slate-950 hover:bg-[#1da19b] transition shadow-md active:scale-95">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={2.5}
+              st0d1f25rokeWidth={2.5}
               stroke="currentColor"
               className="w-4 h-4">
               <path
@@ -71,14 +71,14 @@ const DashboardFilters = ({
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="w-full rounded-xl border border-surface/10 bg-[#0d1f25] px-4 py-2.5 text-sm text-surface outline-none focus:border-[#21b8b2] transition cursor-pointer">
+            className="w-full rounded-xl border border-surface/10 bg-surface-strong dark:bg-surface px-4 py-2.5 text-sm text-text-secondary dark:text-text-secondary  outline-none focus:border-border transition cursor-pointer">
             <option value="highest">Highest Score</option>
             <option value="lowest">Lowest Score</option>
           </select>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-1.5 bg-[#0d1f25] p-1 rounded-xl border border-surface/10 self-start lg:self-auto">
+      <div className="flex flex-wrap items-center dark:bg-surface gap-1.5 bg-surface-strong p-1 rounded-xl border border-border self-start lg:self-auto">
         {statusOptions.map((option) => {
           const isActive = status === option;
           return (
@@ -88,8 +88,8 @@ const DashboardFilters = ({
               onClick={() => setStatus(option)}
               className={`px-4 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap ${
                 isActive
-                  ? "bg-[#21b8b2] text-slate-950 shadow-sm"
-                  : "text-surface/60 hover:text-surface hover:bg-surface/5"
+                  ? "bg-accent text-text-primary shadow-sm"
+                  : "text-text-secondary hover:text-surface hover:bg-surface/5"
               }`}>
               {option}
             </button>
