@@ -1,68 +1,93 @@
-import { supabaseAdmin } from "../config/supabase.js";
+import pool from "../db/pool.js";
 import { HttpError } from "../utils/httpError.js";
 
 export const createJob = async ({ user, payload }) => {
-  const { data, error } = await supabaseAdmin
-    .from("jobs")
-    .insert({
-      employer_id: user.id,
-      title: payload.title,
-      type: payload.type,
-      location: payload.location,
-      description: payload.description,
-      salary: payload.salary,
-      company_name: payload.companyName,
-      company_description: payload.companyDescription,
-      contact_email: payload.contactEmail,
-      contact_phone: payload.contactPhone,
-      minimum_score_threshold: payload.minimumScoreThreshold,
-    })
-    .select("*")
-    .single();
+  try {
+    const result = await pool.query(
+      `INSERT INTO jobs (
+        employer_id, title, type, location, description, salary,
+        company_name, company_description, contact_email, contact_phone,
+        minimum_score_threshold
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      RETURNING *`,
+      [
+        user.id,
+        payload.title,
+        payload.type,
+        payload.location,
+        payload.description,
+        payload.salary,
+        payload.companyName,
+        payload.companyDescription,
+        payload.contactEmail,
+        payload.contactPhone,
+        payload.minimumScoreThreshold,
+      ]
+    );
 
-  if (error) throw new HttpError(500, "Failed to create job", error.message);
-  return data;
+    if (result.rows.length === 0)
+      throw new HttpError(500, "Failed to create job");
+    return result.rows[0];
+  } catch (error) {
+    if (error instanceof HttpError) throw error;
+    throw new HttpError(500, "Failed to create job", error.message);
+  }
 };
 
 export const getEmployerJobs = async (employerId) => {
-  const { data, error } = await supabaseAdmin
-    .from("jobs")
-    .select("id,title,minimum_score_threshold,created_at")
-    .eq("employer_id", employerId)
-    .order("created_at", { ascending: false });
+  try {
+    const result = await pool.query(
+      `SELECT id, title, minimum_score_threshold, created_at
+       FROM jobs WHERE employer_id = $1 ORDER BY created_at DESC`,
+      [employerId]
+    );
 
-  if (error) throw new HttpError(500, "Failed to fetch employer jobs", error.message);
-  return data;
+    return result.rows;
+  } catch (error) {
+    throw new HttpError(500, "Failed to fetch employer jobs", error.message);
+  }
 };
 
 export const updateJob = async ({ jobId, payload }) => {
-  const { data, error } = await supabaseAdmin
-    .from("jobs")
-    .update({
-      title: payload.title,
-      type: payload.type,
-      location: payload.location,
-      description: payload.description,
-      salary: payload.salary,
-      company_name: payload.companyName,
-      company_description: payload.companyDescription,
-      contact_email: payload.contactEmail,
-      contact_phone: payload.contactPhone,
-      minimum_score_threshold: payload.minimumScoreThreshold,
-    })
-    .eq("id", jobId)
-    .select("*")
-    .single();
+  try {
+    const result = await pool.query(
+      `UPDATE jobs SET
+        title = $1, type = $2, location = $3, description = $4,
+        salary = $5, company_name = $6, company_description = $7,
+        contact_email = $8, contact_phone = $9, minimum_score_threshold = $10
+       WHERE id = $11 RETURNING *`,
+      [
+        payload.title,
+        payload.type,
+        payload.location,
+        payload.description,
+        payload.salary,
+        payload.companyName,
+        payload.companyDescription,
+        payload.contactEmail,
+        payload.contactPhone,
+        payload.minimumScoreThreshold,
+        jobId,
+      ]
+    );
 
-  if (error) throw new HttpError(500, "Failed to update job", error.message);
-  return data;
+    if (result.rows.length === 0)
+      throw new HttpError(404, "Job not found");
+    return result.rows[0];
+  } catch (error) {
+    if (error instanceof HttpError) throw error;
+    throw new HttpError(500, "Failed to update job", error.message);
+  }
 };
 
 export const deleteJob = async (jobId) => {
-  const { error } = await supabaseAdmin
-    .from("jobs")
-    .delete()
-    .eq("id", jobId);
+  try {
+    const result = await pool.query("DELETE FROM jobs WHERE id = $1", [jobId]);
 
-  if (error) throw new HttpError(500, "Failed to delete job", error.message);
+    if (result.rowCount === 0)
+      throw new HttpError(404, "Job not found");
+  } catch (error) {
+    if (error instanceof HttpError) throw error;
+    throw new HttpError(500, "Failed to delete job", error.message);
+  }
 };
