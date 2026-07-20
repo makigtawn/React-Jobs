@@ -1,4 +1,5 @@
 import { ZodError } from "zod";
+import { isUniqueViolation, messageForUniqueViolation } from "../utils/dbErrors.js";
 
 export const notFound = (req, res) => {
   res.status(404).json({ error: `Route not found: ${req.method} ${req.path}` });
@@ -17,6 +18,13 @@ export const errorHandler = (err, req, res, next) => {
         path: issue.path.join("."),
         message: issue.message,
       })),
+    });
+    return;
+  }
+
+  if (isUniqueViolation(err)) {
+    res.status(409).json({
+      error: messageForUniqueViolation(err),
     });
     return;
   }

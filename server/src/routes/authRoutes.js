@@ -4,6 +4,9 @@ import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import pool from '../db/pool.js';
 import { requireAuth } from '../middleware/auth.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
+import { HttpError } from '../utils/httpError.js';
+import { isUniqueViolation, messageForUniqueViolation } from '../utils/dbErrors.js';
 
 const router = express.Router();
 
@@ -41,28 +44,31 @@ function generateAccessToken(user) {
 }
 
 // REGISTER
-router.post('/register', async (req, res) => {
+router.post('/register', asyncHandler(async (req, res) => {
   const fullName = req.body?.fullName?.trim();
   const email = normalizeEmail(req.body?.email);
   const password = req.body?.password;
 
   if (!email || !password)
-    return res.status(400).json({ error: 'Email and password are required' });
+    throw new HttpError(400, 'Email and password are required');
   if (!fullName || fullName.length < 2)
-    return res.status(400).json({ error: 'Full name is required' });
+    throw new HttpError(400, 'Full name is required');
   if (password.length < 8)
-    return res.status(400).json({ error: 'Password must be at least 8 characters' });
+    throw new HttpError(400, 'Password must be at least 8 characters');
 
   try {
-    const existing = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
-    if (existing.rows.length > 0)
-      return res.status(409).json({ error: 'Email already in use' });
-
     const hash = await bcrypt.hash(password, 10);
     const result = await pool.query(
-      'INSERT INTO users (email, password, full_name) VALUES ($1, $2, $3) RETURNING id, email, full_name, created_at',
+      `INSERT INTO users (email, password, full_name)
+       VALUES ($1, $2, $3)
+       ON CONFLICT (email) DO NOTHING
+       RETURNING id, email, full_name, created_at`,
       [email, hash, fullName]
     );
+
+    if (result.rows.length === 0)
+      throw new HttpError(409, 'Email already in use');
+
     const user = result.rows[0];
 
     return res.status(201).json({
@@ -71,12 +77,15 @@ router.post('/register', async (req, res) => {
     });
   } catch (err) {
     console.error('Register error:', err);
-    if (err.message === 'JWT_ACCESS_SECRET is not configured') {
-      return res.status(500).json({ error: 'Authentication service is not configured' });
+    if (isUniqueViolation(err)) {
+      throw new HttpError(409, messageForUniqueViolation(err, 'Email already in use'));
     }
-    return res.status(500).json({ error: 'Internal server error' });
+    if (err.message === 'JWT_ACCESS_SECRET is not configured') {
+      throw new HttpError(500, 'Authentication service is not configured');
+    }
+    throw err;
   }
-});
+}));
 
 // LOGIN
 router.post('/login', async (req, res) => {
