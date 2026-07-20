@@ -2,8 +2,6 @@ export const env = {
   nodeEnv: process.env.NODE_ENV || "development",
   port: Number(process.env.PORT || 3000),
   clientOrigin: process.env.CLIENT_ORIGIN,
-  Url: process.env.SUPABASE_URL,
-  supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
   geminiApiKey: process.env.GEMINI_API_KEY || "",
   openaiApiKey: process.env.OPENAI_API_KEY || "",
   githubToken: process.env.GITHUB_TOKEN || "",

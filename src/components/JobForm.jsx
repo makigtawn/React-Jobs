@@ -31,6 +31,7 @@ const EMPTY_JOB = {
     description: "",
     contactEmail: "",
     contactPhone: "",
+    TIN: "", 
   },
 };
 
@@ -81,6 +82,9 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
     };
   });
 
+  // Track TIN error messages dynamically
+  const [tinError, setTinError] = useState("");
+
   const updateField = (field, value) => {
     setJob((prev) => ({ ...prev, [field]: value }));
   };
@@ -93,10 +97,28 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
         [field]: value,
       },
     }));
+
+    // Trigger instant validation when the user changes the TIN
+    if (field === "TIN") {
+      const tinRegex = /^\d{2}-\d{7}$/;
+      if (value === "") {
+        setTinError(""); // Optional field: Empty values are allowed
+      } else if (!tinRegex.test(value)) {
+        setTinError("Format must be XX-YYYYYYY (e.g., 12-3456789)");
+      } else {
+        setTinError(""); // Valid TIN structure
+      }
+    }
   };
 
   const submit = (e) => {
     e.preventDefault();
+    
+    // Prevent submitting the form if there is an unresolved validation error
+    if (tinError) {
+      return;
+    }
+    
     onSubmit(job);
   };
 
@@ -129,7 +151,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   value={job.type}
                   onChange={(e) => updateField("type", e.target.value)}
                   className={selectClasses}
-                >
+                  >
                   {jobTypes.map((option) => (
                     <option key={option} value={option}>
                       {option}
@@ -143,7 +165,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                   value={job.salary}
                   onChange={(e) => updateField("salary", e.target.value)}
                   className={selectClasses}
-                >
+                  >
                   {salaryRanges.map((range) => (
                     <option key={range} value={range}>
                       {range}
@@ -176,7 +198,7 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
             <Field
               label="Minimum candidate score"
               hint="Only applicants scoring at or above this threshold will be shown."
-            >
+              >
               <div className="flex items-center gap-4">
                 <input
                   type="range"
@@ -236,6 +258,20 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
                 />
               </Field>
             </div>
+            
+            <Field label="Company TIN number" hint="Used for employer validation. Format: 12-3456789">
+              <input
+                value={job.company.TIN || ""}
+                onChange={(e) => updateCompanyField("TIN", e.target.value)}
+                placeholder="Company TIN (Optional)"
+                className={`${inputClasses} ${tinError ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}`}
+              />
+              {tinError && (
+                <p className="mt-1.5 text-xs font-medium text-red-500 dark:text-red-400">
+                  {tinError}
+                </p>
+              )}
+            </Field>
 
             <Field label="Company description">
               <textarea
@@ -253,8 +289,9 @@ const JobForm = ({ initialJob, onSubmit, heading, submitLabel }) => {
           <div className="flex justify-end">
             <Button
               type="submit"
-              className="w-full bg-accent hover:bg-accent/70 sm:w-auto"
-            >
+              disabled={!!tinError}
+              className={`w-full sm:w-auto bg-accent hover:bg-accent/70 ${tinError ? "opacity-50 cursor-not-allowed" : ""}`}
+              >
               {submitLabel}
             </Button>
           </div>

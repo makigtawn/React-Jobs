@@ -2,17 +2,19 @@ import JobListing from "./JobListing";
 import { useState, useEffect } from "react";
 import Spinner from "./Spinner";
 
+
 const JobListings = ({ isHome = false }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+const BACKEND_URL = 'https://strata-backend-ri59.onrender.com'
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const url = isHome
-          ? "http://localhost:3000/api/jobs?limit=3"
-          : "http://localhost:3000/api/jobs";
 
+     const url = isHome
+  ? `${BACKEND_URL}/api/jobs?limit=3`
+  : `${BACKEND_URL}/api/jobs`;
         const response = await fetch(url);
         if (!response.ok) throw new Error("Failed to fetch jobs");
 

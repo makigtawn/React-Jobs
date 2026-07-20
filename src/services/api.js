@@ -24,9 +24,14 @@ export const apiRequest = async (path, options = {}) => {
     headers.set("Content-Type", "application/json");
   }
 
+  // Get token from localStorage and set Authorization header
+  const token = localStorage.getItem("token");
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
   const requestOptions = {
     ...options,
-    credentials: "include",
     headers,
   };
 
@@ -61,23 +66,62 @@ export const apiRequest = async (path, options = {}) => {
 };
 
 export const registerUser = async (email, password) => {
-  return apiRequest("/api/auth/register", {
+  const data = await apiRequest("/api/auth/register", {
     method: "POST",
     body: { email, password },
   });
+  if (data && data.token) {
+    localStorage.setItem("token", data.token);
+  }
+  if (data && data.refresh_token) {
+    localStorage.setItem("refresh_token", data.refresh_token);
+  }
+  return data;
 };
 
 export const loginUser = async (email, password) => {
-  return apiRequest("/api/auth/login", {
+  const data = await apiRequest("/api/auth/login", {
     method: "POST",
     body: { email, password },
   });
+  if (data && data.token) {
+    localStorage.setItem("token", data.token);
+  }
+  if (data && data.refresh_token) {
+    localStorage.setItem("refresh_token", data.refresh_token);
+  }
+  return data;
 };
 
 export const logoutUser = async () => {
-  return apiRequest("/api/auth/logout", {
+  try {
+    const refreshToken = localStorage.getItem("refresh_token");
+    await apiRequest("/api/auth/logout", {
+      method: "POST",
+      body: refreshToken ? { refresh_token: refreshToken } : {},
+    });
+  } finally {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+  }
+};
+
+export const refreshTokens = async () => {
+  const refreshToken = localStorage.getItem("refresh_token");
+  if (!refreshToken) throw new Error("No refresh token");
+
+  const data = await apiRequest("/api/auth/refresh", {
     method: "POST",
+    body: { refresh_token: refreshToken },
   });
+
+  if (data && data.token) {
+    localStorage.setItem("token", data.token);
+  }
+  if (data && data.refresh_token) {
+    localStorage.setItem("refresh_token", data.refresh_token);
+  }
+  return data;
 };
 
 export const getCurrentUser = async () => {

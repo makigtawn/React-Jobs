@@ -52,7 +52,27 @@ router.get('/:id', async (req, res, next) => {
       return res.status(404).json({ error: 'Job not found' });
     }
 
-    res.json(rows[0]);
+    const row = rows[0];
+
+    const job = {
+      id: row.id,
+      title: row.title,
+      type: row.type,
+      location: row.location,
+      description: row.description,
+      salary: row.salary,
+      employer_id: row.employer_id,
+      minimum_score_threshold: row.minimum_score_threshold,
+      created_at: row.created_at,
+      company: {
+        name: row.company_name,
+        description: row.company_description,
+        contactEmail: row.contact_email,
+        contactPhone: row.contact_phone,
+      },
+    };
+
+    res.json(job);
   } catch (error) {
     next(error);
   }

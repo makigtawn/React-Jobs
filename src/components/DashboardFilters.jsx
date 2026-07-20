@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 const statusOptions = ["All", "Pending", "Accepted", "Rejected"];
 
 const DashboardFilters = ({
@@ -50,11 +49,11 @@ const DashboardFilters = ({
           <button
             type="submit"
             className="flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-slate-950 hover:bg-[#1da19b] transition shadow-md active:scale-95">
-            <svg
+             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              st0d1f25rokeWidth={2.5}
+              strokeWidth={2.5}
               stroke="currentColor"
               className="w-4 h-4">
               <path
@@ -62,7 +61,10 @@ const DashboardFilters = ({
                 strokeLinejoin="round"
                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.603 10.601z"
               />
-            </svg>
+
+            </svg> 
+
+
             <span>Search</span>
           </button>
         </form>
@@ -89,7 +91,7 @@ const DashboardFilters = ({
               className={`px-4 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap ${
                 isActive
                   ? "bg-accent text-text-primary shadow-sm"
-                  : "text-text-secondary hover:text-surface hover:bg-surface/5"
+                  : "text-text-secondary hover:text-text-primary hover:bg-surface/5"
               }`}>
               {option}
             </button>

@@ -50,16 +50,14 @@ const LoginPage = () => {
     try {
       const { error } = await login(form.email, form.password);
       if (error) {
+        const msg = error.message?.toLowerCase() || "";
         if (
-          error.message?.toLowerCase().includes("invalid login credentials") ||
-          error.message?.toLowerCase().includes("invalid credentials")
+          msg.includes("invalid email or password") ||
+          msg.includes("invalid login credentials") ||
+          msg.includes("invalid credentials")
         ) {
-          setErrorMsg(
-            "Invalid email or password. Please check your credentials and ensure you've verified your email.",
-          );
-        } else if (
-          error.message?.toLowerCase().includes("email not confirmed")
-        ) {
+          setErrorMsg("Invalid email or password. Please check your credentials.");
+        } else if (msg.includes("email not confirmed")) {
           setErrorMsg(
             "Please verify your email address first. Check your inbox for the verification link.",
           );

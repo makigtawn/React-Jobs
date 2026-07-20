@@ -135,14 +135,12 @@ const Navbar = () => {
                 <>
                   <NavLink
                     to="/login"
-                    // className="text-sm font-medium transition duration-300 text-text-primary dark:text-text-primary ">
                     className={linkClass}>
                     Login
                   </NavLink>
 
                   <NavLink
                     to="/signup"
-                    // className="text-sm font-medium transition duration-300 text-text-primary dark:text-text-primary ">
                     className={linkClass}>
                     Signup
                   </NavLink>
@@ -153,7 +151,9 @@ const Navbar = () => {
                   <NavLink to="/dashboard" className={linkClass}>
                     Dashboard
                   </NavLink>
-
+                  <NavLink to="/profile" className={linkClass}>
+                    My Profile
+                  </NavLink>
                   <NavLink
                     to="/add-job"
                     className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground shadow-lg transition duration-300 ">
@@ -238,6 +238,11 @@ const Navbar = () => {
                     Dashboard
                   </NavLink>
 
+                  <NavLink
+                    to="/profile"
+                    className="w-full rounded-full border border-surface/20 px-4 py-3 text-center text-sm font-medium text-surface/90 transition hover:bg-surface/10">
+                    My Profile
+                  </NavLink>
                   <NavLink
                     to="/add-job"
                     onClick={() => setMenuOpen(false)}

@@ -1,4 +1,3 @@
-import Spinner from "./Spinner";
 import Button from "./Button";
 import ScoreBar from "./ScoreBar";
 
@@ -26,7 +25,6 @@ const ApplicationsTable = ({
 
       {loading ? (
         <div className="flex min-h-[350px] items-center justify-center">
-          <Spinner loading={loading} />
         </div>
       ) : applications.length === 0 ? (
         <div className="flex min-h-[250px] items-center justify-center px-4 py-8">

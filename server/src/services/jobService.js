@@ -7,11 +7,11 @@ export const createJob = async ({ user, payload }) => {
       `INSERT INTO jobs (
         employer_id, title, type, location, description, salary,
         company_name, company_description, contact_email, contact_phone,
-        minimum_score_threshold
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+        minimum_score_threshold, employer_tin
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       RETURNING *`,
       [
-        user.id,
+        user.sub,
         payload.title,
         payload.type,
         payload.location,
@@ -22,6 +22,7 @@ export const createJob = async ({ user, payload }) => {
         payload.contactEmail,
         payload.contactPhone,
         payload.minimumScoreThreshold,
+        payload.employer_tin || null, // Safely handles empty or missing TIN values
       ]
     );
 
@@ -54,8 +55,9 @@ export const updateJob = async ({ jobId, payload }) => {
       `UPDATE jobs SET
         title = $1, type = $2, location = $3, description = $4,
         salary = $5, company_name = $6, company_description = $7,
-        contact_email = $8, contact_phone = $9, minimum_score_threshold = $10
-       WHERE id = $11 RETURNING *`,
+        contact_email = $8, contact_phone = $9, minimum_score_threshold = $10,
+        employer_tin = $11
+       WHERE id = $12 RETURNING *`,
       [
         payload.title,
         payload.type,
@@ -67,6 +69,7 @@ export const updateJob = async ({ jobId, payload }) => {
         payload.contactEmail,
         payload.contactPhone,
         payload.minimumScoreThreshold,
+        payload.employer_tin || null, // Updates TIN, setting to null if cleared out
         jobId,
       ]
     );

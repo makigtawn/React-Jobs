@@ -15,7 +15,7 @@
     "@ckeditor/ckeditor5-react": "^11.2.0",
     "@google/generative-ai": "^0.24.1",
     "@supabase/auth-ui-react": "^0.4.7",
-    "@supabase/supabase-js": "^2.109.0",
+    "@supabase/supabase-js": "^2.110.7",
     "@tailwindcss/vite": "^4.2.1",
     "bcryptjs": "^3.0.3",
     "ckeditor5": "^48.2.0",
