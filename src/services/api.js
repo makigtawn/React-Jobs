@@ -1,5 +1,5 @@
 const API_BASE_URL = import.meta.env.DEV
-  ? ""
+  ? (import.meta.env.VITE_API_BASE_URL || "")
   : (import.meta.env.VITE_API_BASE_URL || (typeof window !== "undefined" ? window.location.origin : "")).replace(/\/$/, "");
 
 const getErrorMessage = (data, fallback = "Request failed") => {
@@ -68,21 +68,15 @@ export const apiRequest = async (path, options = {}) => {
 export const registerUser = async (email, password) => {
   const data = await apiRequest("/api/auth/register", {
     method: "POST",
-    body: { email, password },
+    body: { email: email.trim().toLowerCase(), password },
   });
-  if (data && data.token) {
-    localStorage.setItem("token", data.token);
-  }
-  if (data && data.refresh_token) {
-    localStorage.setItem("refresh_token", data.refresh_token);
-  }
   return data;
 };
 
 export const loginUser = async (email, password) => {
   const data = await apiRequest("/api/auth/login", {
     method: "POST",
-    body: { email, password },
+    body: { email: email.trim().toLowerCase(), password },
   });
   if (data && data.token) {
     localStorage.setItem("token", data.token);

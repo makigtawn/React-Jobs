@@ -7,17 +7,43 @@ import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
+const DUMMY_PASSWORD_HASH = '$2a$10$CwTycUXWue0Thq9StjUM0uJ8cKWvb.Y1j4Zt86M4fM6ZMxG5eP9Iq';
+
+function normalizeEmail(email) {
+  return String(email || '').trim().toLowerCase();
+}
+
+function getJwtAccessSecret() {
+  const secret = process.env.JWT_ACCESS_SECRET;
+  if (!secret) {
+    throw new Error('JWT_ACCESS_SECRET is not configured');
+  }
+  return secret;
+}
+
+function serializeUser(user) {
+  return {
+    id: user.id,
+    email: user.email,
+    app_metadata: {
+      role: user.role || 'user',
+    },
+  };
+}
+
 function generateAccessToken(user) {
   return jwt.sign(
-    { sub: user.id, email: user.email, role: 'authenticated' },
-    process.env.JWT_ACCESS_SECRET,
+    { sub: user.id, email: user.email, role: user.role || 'user' },
+    getJwtAccessSecret(),
     { expiresIn: '1h' }
   );
 }
 
 // REGISTER
 router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  const email = normalizeEmail(req.body?.email);
+  const password = req.body?.password;
+
   if (!email || !password)
     return res.status(400).json({ error: 'Email and password are required' });
   if (password.length < 8)
@@ -46,27 +72,31 @@ router.post('/register', async (req, res) => {
     return res.status(201).json({
       token: accessToken,
       refresh_token: refreshToken,
-      user: { id: user.id, email: user.email }
+      user: serializeUser(user)
     });
   } catch (err) {
     console.error('Register error:', err);
+    if (err.message === 'JWT_ACCESS_SECRET is not configured') {
+      return res.status(500).json({ error: 'Authentication service is not configured' });
+    }
     return res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 // LOGIN
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const email = normalizeEmail(req.body?.email);
+  const password = req.body?.password;
+
   if (!email || !password)
     return res.status(400).json({ error: 'Email and password are required' });
 
   try {
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     const user = result.rows[0];
-    const dummyHash = '$2a$10$invalidhashfortimingattackprevention00000000000000000';
     const valid = user
       ? await bcrypt.compare(password, user.password)
-      : await bcrypt.compare(password, dummyHash);
+      : await bcrypt.compare(password, DUMMY_PASSWORD_HASH);
 
     if (!user || !valid)
       return res.status(401).json({ error: 'Invalid email or password' });
@@ -82,10 +112,13 @@ router.post('/login', async (req, res) => {
     return res.json({
       token: accessToken,
       refresh_token: refreshToken,
-      user: { id: user.id, email: user.email }
+      user: serializeUser(user)
     });
   } catch (err) {
     console.error('Login error:', err);
+    if (err.message === 'JWT_ACCESS_SECRET is not configured') {
+      return res.status(500).json({ error: 'Authentication service is not configured' });
+    }
     return res.status(500).json({ error: 'Internal server error' });
   }
 });
@@ -119,10 +152,14 @@ router.post('/refresh', async (req, res) => {
 
     return res.json({
       token: newAccessToken,
-      refresh_token: newRefreshToken
+      refresh_token: newRefreshToken,
+      user: serializeUser(user)
     });
   } catch (err) {
     console.error('Refresh error:', err);
+    if (err.message === 'JWT_ACCESS_SECRET is not configured') {
+      return res.status(500).json({ error: 'Authentication service is not configured' });
+    }
     return res.status(500).json({ error: 'Internal server error' });
   }
 });
@@ -144,8 +181,8 @@ router.get('/me', requireAuth, async (req, res) => {
       [req.user.sub]
     );
     if (result.rows.length === 0) return res.status(404).json({ error: 'User not found' });
-    return res.json({ user: result.rows[0] });
-  } catch (err) {
+    return res.json({ user: serializeUser(result.rows[0]) });
+  } catch {
     return res.status(500).json({ error: 'Internal server error' });
   }
 });

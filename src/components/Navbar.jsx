@@ -86,7 +86,7 @@ const Navbar = () => {
     <header
       className={`sticky top-0 z-50 lg:px-4 ${hideNavbar ? "-translate-y-full" : "translate-y-0 bg-page-bg"}`}
       aria-hidden={hideNavbar}
-      inert={hideNavbar ? "" : undefined}>
+      inert={hideNavbar ? true : undefined}>
       <nav className="mx-auto flex max-w-7xl flex-col lg:rounded-[1.6rem] bg-nav-bg px-3 shadow py-3 transition duration-300 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between gap-3">
           <NavLink to="/" className="flex items-center gap-3">

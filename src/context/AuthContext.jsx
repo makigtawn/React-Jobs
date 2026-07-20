@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
 
       const data = await registerUser(email, password);
 
-      setUser(data.user || null);
+      setUser(null);
       setSessionError(null);
       return { data, error: null };
     } catch (error) {
