@@ -124,13 +124,13 @@ export const getCurrentUser = async () => {
 
 // Employer Profile Endpoints
 export const getEmployerProfile = async () => {
-  return apiRequest("/api/employer/profile", {
+  return apiRequest("/api/company", {
     method: "GET",
   });
 };
 
 export const updateEmployerProfile = async (profileData) => {
-  return apiRequest("/api/employer/profile", {
+  return apiRequest("/api/company", {
     method: "PUT",
     body: profileData,
   });

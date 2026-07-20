@@ -151,7 +151,7 @@ const Navbar = () => {
                   <NavLink to="/dashboard" className={linkClass}>
                     Dashboard
                   </NavLink>
-                  <NavLink to="/profile" className={linkClass}>
+                  <NavLink to="/company" className={linkClass}>
                     My Profile
                   </NavLink>
                   <NavLink
@@ -239,7 +239,7 @@ const Navbar = () => {
                   </NavLink>
 
                   <NavLink
-                    to="/profile"
+                    to="/company"
                     className="w-full rounded-full border border-surface/20 px-4 py-3 text-center text-sm font-medium text-surface/90 transition hover:bg-surface/10">
                     My Profile
                   </NavLink>

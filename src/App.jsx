@@ -176,7 +176,7 @@ const App = () => {
           }
         />
         <Route
-  path="/profile"
+  path="/company"
   element={
     <ProtectedRoute allowedRoles={["admin", "user"]}>
       <EmployerProfilePage  />

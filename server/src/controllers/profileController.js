@@ -1,10 +1,7 @@
 import pool from '../db/pool.js';
 import { HttpError } from '../utils/httpError.js';
 
-/**
- * Get the employer profile for the logged-in user
- * GET /api/employer/profile
- */
+
 export const getEmployerProfile = async (req, res, next) => {
   try {
     const userId = req.user.sub; // From JWT payload set by requireAuth middleware
@@ -28,8 +25,6 @@ export const getEmployerProfile = async (req, res, next) => {
     );
 
     if (result.rows.length === 0) {
-      // Profile doesn't exist yet - return null or empty object
-      // The frontend will handle creating the initial profile
       return res.json({ profile: null });
     }
 
@@ -40,10 +35,7 @@ export const getEmployerProfile = async (req, res, next) => {
   }
 };
 
-/**
- * Update or create the employer profile for the logged-in user
- * PUT /api/employer/profile
- */
+
 export const updateEmployerProfile = async (req, res, next) => {
   try {
     const userId = req.user.sub;

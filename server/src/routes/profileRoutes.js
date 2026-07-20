@@ -7,13 +7,10 @@ import {
 
 const router = express.Router();
 
-// All routes require authentication
 router.use(requireAuth);
 
-// GET /api/employer/profile - Get logged-in employer's profile
-router.get('/profile', getEmployerProfile);
+router.get('/company', getEmployerProfile);
 
-// PUT /api/employer/profile - Update logged-in employer's profile
-router.put('/profile', updateEmployerProfile);
+router.put('/company', updateEmployerProfile);
 
 export default router;
