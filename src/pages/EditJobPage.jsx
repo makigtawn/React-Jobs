@@ -98,6 +98,7 @@ const EditJobPage = ({ updateJobSubmit }) => {
       description: job?.company?.description || "",
       contactEmail: job?.company?.contactEmail || "",
       contactPhone: job?.company?.contactPhone || "",
+      TIN: job?.company?.TIN || "",
     },
   };
 

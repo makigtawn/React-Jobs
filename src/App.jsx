@@ -39,6 +39,7 @@ const App = () => {
       contactEmail: newJob.company?.contactEmail || "",
       contactPhone: newJob.company?.contactPhone || "",
       minimumScoreThreshold: Number(newJob.minimumScoreThreshold || 0),
+      employerTin: newJob.company?.TIN || "",
     };
 
     const { job } = await createJob(payload);
@@ -63,6 +64,7 @@ const App = () => {
       contactEmail: job.company?.contactEmail || "",
       contactPhone: job.company?.contactPhone || "",
       minimumScoreThreshold: Number(job.minimumScoreThreshold || 0),
+      employerTin: job.company?.TIN || "",
     };
 
     const { job: updated } = await updateJobRequest(job.id, payload);

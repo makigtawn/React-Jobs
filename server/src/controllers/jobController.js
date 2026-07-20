@@ -25,6 +25,12 @@ const jobSchema = z.object({
   contactEmail: z.string().trim().email(),
   contactPhone: z.string().trim().optional(),
   minimumScoreThreshold: z.number().min(0).max(100).default(0),
+  employerTin: z
+    .string()
+    .trim()
+    .regex(/^\d{2}-\d{7}$/, "TIN must be in the format XX-XXXXXXX")
+    .optional()
+    .or(z.literal("")),
 });
 
 const dashboardQuerySchema = z.object({

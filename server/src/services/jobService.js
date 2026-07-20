@@ -22,7 +22,7 @@ export const createJob = async ({ user, payload }) => {
         payload.contactEmail,
         payload.contactPhone,
         payload.minimumScoreThreshold,
-        payload.employer_tin || null, // Safely handles empty or missing TIN values
+        payload.employerTin || null, // Safely handles empty or missing TIN values
       ]
     );
 
@@ -69,7 +69,7 @@ export const updateJob = async ({ jobId, payload }) => {
         payload.contactEmail,
         payload.contactPhone,
         payload.minimumScoreThreshold,
-        payload.employer_tin || null, // Updates TIN, setting to null if cleared out
+        payload.employerTin || null, // Updates TIN, setting to null if cleared out
         jobId,
       ]
     );

@@ -65,6 +65,7 @@ router.get('/:id', async (req, res, next) => {
         description: row.company_description,
         contactEmail: row.contact_email,
         contactPhone: row.contact_phone,
+        TIN: row.employer_tin,
       },
     };
 
