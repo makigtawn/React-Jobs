@@ -6,7 +6,7 @@ import {
 } from "../services/applicationService.js";
 
 const applicationSchema = z.object({
-  jobId: z.string().uuid(),
+  jobId: z.coerce.number().int().positive(),
   fullName: z.string().trim().min(2).max(120),
   email: z.string().trim().email(),
   resumeUrl: z.string().trim().url().optional().or(z.literal("")),

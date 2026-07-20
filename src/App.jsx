@@ -21,109 +21,52 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import EmployerDashboardPage from "./pages/EmployerDashboardPage";
 import EmployerProfilePage from "./pages/EmployerProfilePage";
-
-const API_BASE_URL = "/api";
+import { createJob, updateJobRequest, deleteJobRequest } from "./services/api";
 
 const App = () => {
-  // 1. CREATE JOB FLOW (With safe optional chaining)
+  // 1. CREATE JOB FLOW
   const addJob = async (newJob) => {
-    try {
-      if (!newJob) throw new Error("Job data is empty");
+    if (!newJob) throw new Error("Job data is empty");
 
-      const payload = {
-        title: newJob.title || "",
-        type: newJob.type || "",
-        location: newJob.location || "",
-        description: newJob.description || "",
-        salary: newJob.salary || "",
-        company_name: newJob.company?.name || "",
-        company_description: newJob.company?.description || "",
-        contact_email: newJob.company?.contactEmail || "",
-        contact_phone: newJob.company?.contactPhone || "",
-        minimum_score_threshold: Number(newJob.minimumScoreThreshold || 0),
-      };
+    const payload = {
+      title: newJob.title || "",
+      type: newJob.type || "",
+      location: newJob.location || "",
+      description: newJob.description || "",
+      salary: newJob.salary || "",
+      companyName: newJob.company?.name || "",
+      companyDescription: newJob.company?.description || "",
+      contactEmail: newJob.company?.contactEmail || "",
+      contactPhone: newJob.company?.contactPhone || "",
+      minimumScoreThreshold: Number(newJob.minimumScoreThreshold || 0),
+    };
 
-      console.log("Sending payload to backend:", payload);
-
-      const response = await fetch(`${API_BASE_URL}/jobs`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-        credentials: "include", 
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text(); 
-        console.error(`Server Error (${response.status}):`, errorText);
-        
-        try {
-          const errorData = JSON.parse(errorText);
-          throw new Error(errorData.error || errorData.message || `Server error: ${response.status}`);
-        } catch {
-          throw new Error(errorText || `Request failed with status ${response.status}`);
-        }
-      }
-
-      return await response.json();
-    } catch (err) {
-      console.error("Failed to add job:", err);
-      throw err;
-    }
+    const { job } = await createJob(payload);
+    return job;
   };
 
-  // 2. DELETE JOB FLOW 
+  // 2. DELETE JOB FLOW
   const deleteJob = async (id) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/jobs/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "Could not delete job.");
-      }
-    } catch (error) {
-      console.error("Delete job error:", error);
-      throw error;
-    }
+    await deleteJobRequest(id);
   };
 
-  // 3. UPDATE JOB FLOW (Safely guarded from nested undefined properties)
+  // 3. UPDATE JOB FLOW
   const updateJob = async (job) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/jobs/${job.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: job.title || "",
-          type: job.type || "",
-          location: job.location || "",
-          description: job.description || "",
-          salary: job.salary || "",
-          minimum_score_threshold: Number(job.minimumScoreThreshold || 0),
-          company_name: job.company?.name || "",
-          company_description: job.company?.description || "",
-          contact_email: job.company?.contactEmail || "",
-          contact_phone: job.company?.contactPhone || "",
-        }),
-        credentials: "include",
-      });
+    const payload = {
+      title: job.title || "",
+      type: job.type || "",
+      location: job.location || "",
+      description: job.description || "",
+      salary: job.salary || "",
+      companyName: job.company?.name || "",
+      companyDescription: job.company?.description || "",
+      contactEmail: job.company?.contactEmail || "",
+      contactPhone: job.company?.contactPhone || "",
+      minimumScoreThreshold: Number(job.minimumScoreThreshold || 0),
+    };
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "Could not update job.");
-      }
-      
-      return await response.json();
-    } catch (error) {
-      console.error("Update job error:", error);
-      throw error;
-    }
+    const { job: updated } = await updateJobRequest(job.id, payload);
+    return updated;
   };
 
   const router = createBrowserRouter(

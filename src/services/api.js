@@ -59,7 +59,10 @@ export const apiRequest = async (path, options = {}) => {
     : await response.text().catch(() => "");
 
   if (!response.ok) {
-    throw new Error(getErrorMessage(data, "Request failed"));
+    const error = new Error(getErrorMessage(data, "Request failed"));
+    error.status = response.status;
+    error.details = data && typeof data === "object" ? data.details : undefined;
+    throw error;
   }
 
   return data;
@@ -129,9 +132,46 @@ export const getEmployerProfile = async () => {
   });
 };
 
-export const updateEmployerProfile = async (profileData) => {
-  return apiRequest("/api/company", {
-    method: "PUT",
-    body: profileData,
+// Create
+export const createEmployerProfile = async (formData) => {
+  return await apiRequest('/api/company', {
+    method: 'POST',
+    body: JSON.stringify(formData),
+  });
+};
+
+// Update
+export const updateEmployerProfile = async (formData) => {
+  return await apiRequest('/api/company', {
+    method: 'PUT',
+    body: JSON.stringify(formData),
+  });
+};
+
+// Delete
+export const deleteEmployerProfile = async () => {
+  return await apiRequest('/api/company', {
+    method: 'DELETE',
+  });
+};
+
+// Job Endpoints
+export const createJob = async (payload) => {
+  return apiRequest('/api/jobs', {
+    method: 'POST',
+    body: payload,
+  });
+};
+
+export const updateJobRequest = async (id, payload) => {
+  return apiRequest(`/api/jobs/${id}`, {
+    method: 'PUT',
+    body: payload,
+  });
+};
+
+export const deleteJobRequest = async (id) => {
+  return apiRequest(`/api/jobs/${id}`, {
+    method: 'DELETE',
   });
 };

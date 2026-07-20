@@ -33,11 +33,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // POST /api/jobs - Create a new job
-// router.post("/", requireAuth, createJobPost);
-router.post("/", createJobPost);
-
-
-
+router.post("/", requireAuth, createJobPost);
 
 // GET /api/jobs/mine - List employer's jobs
 router.get("/mine", requireAuth, listEmployerJobs);
