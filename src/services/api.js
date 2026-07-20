@@ -65,11 +65,12 @@ export const apiRequest = async (path, options = {}) => {
   return data;
 };
 
-export const registerUser = async (email, password) => {
+export const registerUser = async (fullName, email, password) => {
   const data = await apiRequest("/api/auth/register", {
     method: "POST",
-    body: { email: email.trim().toLowerCase(), password },
+    body: { fullName: fullName.trim(), email: email.trim().toLowerCase(), password },
   });
+  // Don't store tokens - user needs to log in after registration
   return data;
 };
 

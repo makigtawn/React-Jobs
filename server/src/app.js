@@ -67,7 +67,8 @@ import authRoutes from "./routes/authRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import { env } from "./config/env.js";
 import verificationRoutes from "./routes/verificationRoutes.js";
-
+import dns from 'dns';
+dns.setDefaultResultOrder('ipv4first');
 export const createApp = () => {
   const app = express();
 

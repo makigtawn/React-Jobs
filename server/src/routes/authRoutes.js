@@ -25,6 +25,7 @@ function serializeUser(user) {
   return {
     id: user.id,
     email: user.email,
+    full_name: user.full_name,
     app_metadata: {
       role: user.role || 'user',
     },
@@ -41,11 +42,14 @@ function generateAccessToken(user) {
 
 // REGISTER
 router.post('/register', async (req, res) => {
+  const fullName = req.body?.fullName?.trim();
   const email = normalizeEmail(req.body?.email);
   const password = req.body?.password;
 
   if (!email || !password)
     return res.status(400).json({ error: 'Email and password are required' });
+  if (!fullName || fullName.length < 2)
+    return res.status(400).json({ error: 'Full name is required' });
   if (password.length < 8)
     return res.status(400).json({ error: 'Password must be at least 8 characters' });
 
@@ -56,22 +60,13 @@ router.post('/register', async (req, res) => {
 
     const hash = await bcrypt.hash(password, 10);
     const result = await pool.query(
-      'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email, created_at',
-      [email, hash]
+      'INSERT INTO users (email, password, full_name) VALUES ($1, $2, $3) RETURNING id, email, full_name, created_at',
+      [email, hash, fullName]
     );
     const user = result.rows[0];
 
-    const accessToken = generateAccessToken(user);
-    const refreshToken = uuidv4();
-
-    await pool.query(
-      "INSERT INTO refresh_tokens (user_id, token, expires_at) VALUES ($1, $2, NOW() + INTERVAL '7 days')",
-      [user.id, refreshToken]
-    );
-
     return res.status(201).json({
-      token: accessToken,
-      refresh_token: refreshToken,
+      message: 'User registered successfully',
       user: serializeUser(user)
     });
   } catch (err) {
@@ -137,7 +132,7 @@ router.post('/refresh', async (req, res) => {
       return res.status(401).json({ error: 'Refresh token invalid or expired' });
 
     const { user_id } = result.rows[0];
-    const userResult = await pool.query('SELECT id, email FROM users WHERE id = $1', [user_id]);
+    const userResult = await pool.query('SELECT id, email, full_name FROM users WHERE id = $1', [user_id]);
     const user = userResult.rows[0];
 
     await pool.query('DELETE FROM refresh_tokens WHERE token = $1', [token]);
@@ -177,7 +172,7 @@ router.post('/logout', async (req, res) => {
 router.get('/me', requireAuth, async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT id, email, created_at FROM users WHERE id = $1',
+      'SELECT id, email, full_name, created_at FROM users WHERE id = $1',
       [req.user.sub]
     );
     if (result.rows.length === 0) return res.status(404).json({ error: 'User not found' });

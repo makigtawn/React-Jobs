@@ -9,7 +9,7 @@ const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const redirectTo = location.state?.from?.pathname || "/jobs";
+  const redirectTo = location.state?.from?.pathname || "/";
 
   const [form, setForm] = useState({
     email: location.state?.email || "",
@@ -17,12 +17,16 @@ const LoginPage = () => {
   });
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState(location.state?.message || "");
 
   useEffect(() => {
     if (location.state?.email) {
       setForm((prev) => ({ ...prev, email: location.state.email }));
     }
-  }, [location.state?.email]);
+    if (location.state?.message) {
+      setSuccessMsg(location.state.message);
+    }
+  }, [location.state?.email, location.state?.message]);
 
   const updateField = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -39,6 +43,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
+    setSuccessMsg("");
 
     const validationError = validate();
     if (validationError) {
@@ -103,6 +108,12 @@ const LoginPage = () => {
               className="mt-2 w-full rounded-xl border border-border-strong bg-surface-strong px-4 py-3 outline-none focus:border-border"
             />
           </label>
+
+          {successMsg && (
+            <p className="text-sm text-center text-green-400 font-medium bg-green-400/10 py-2 px-4 rounded-lg">
+              {successMsg}
+            </p>
+          )}
 
           {errorMsg && (
             <p className="text-sm text-center text-text-primary dark:text-text-primary ">

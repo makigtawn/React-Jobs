@@ -49,6 +49,7 @@ const SignupPage = () => {
 
     try {
       const { error } = await signup({
+        fullName: form.fullName,
         email: form.email,
         password: form.password,
       });
@@ -63,15 +64,21 @@ const SignupPage = () => {
           msg.includes("409")
         ) {
           setErrorMsg("This email is already registered. Try logging in instead.");
+        } else if (msg.toLowerCase().includes("full name is required")) {
+          setErrorMsg("Full name is required.");
         } else {
           setErrorMsg(msg || "Unable to create your account.");
         }
         return; // stop here — don't navigate on error
       }
 
+      // Success! Navigate to login page
       navigate("/login", {
         replace: true,
-        state: { email: form.email.trim().toLowerCase() },
+        state: { 
+          email: form.email.trim().toLowerCase(),
+          message: "Account created successfully! Please log in."
+        }
       });
     } catch (err) {
       const msg = err.message || "";

@@ -78,12 +78,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signup = async ({ email, password }) => {
+  const signup = async ({ fullName, email, password }) => {
     try {
-      setIsLoading(true); // Fixed from setLoading
+      setIsLoading(true);
 
-      const data = await registerUser(email, password);
+      const data = await registerUser(fullName, email, password);
 
+      // Don't set user or store tokens - user needs to log in
       setUser(null);
       setSessionError(null);
       return { data, error: null };
@@ -91,7 +92,7 @@ export const AuthProvider = ({ children }) => {
       setSessionError(error.message);
       return { data: null, error };
     } finally {
-      setIsLoading(false); // Fixed from setLoading
+      setIsLoading(false);
     }
   };
 
