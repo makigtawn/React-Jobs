@@ -10,7 +10,8 @@ const EmployerProfilePage = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  
+  const [imageError, setImageError] = useState(false);
+
   const [profile, setProfile] = useState({
     company_name: '',
     logo_url: '',
@@ -32,12 +33,11 @@ const EmployerProfilePage = () => {
       setLoading(true);
       setError(null);
       const data = await getEmployerProfile();
-      
-      if (data.profile) {
+
+      if (data?.profile) {
         setProfile(data.profile);
         setFormData(data.profile);
       } else {
-        // No profile exists yet - enable edit mode
         setIsEditMode(true);
       }
     } catch (err) {
@@ -50,6 +50,8 @@ const EmployerProfilePage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'logo_url') setImageError(false);
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -58,20 +60,19 @@ const EmployerProfilePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       setSaving(true);
       setError(null);
       setSuccess(null);
 
       const data = await updateEmployerProfile(formData);
-      
+
       setProfile(data.profile);
       setFormData(data.profile);
       setSuccess('Profile updated successfully!');
       setIsEditMode(false);
 
-      // Clear success message after 3 seconds
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       setError(err.message || 'Failed to update profile');
@@ -85,16 +86,28 @@ const EmployerProfilePage = () => {
     setFormData(profile);
     setIsEditMode(false);
     setError(null);
+    setImageError(false);
+  };
+
+  // Helper function to safely format website URLs
+  const formatWebsiteUrl = (url) => {
+    if (!url) return '';
+    return url.startsWith('http://') || url.startsWith('https://')
+      ? url
+      : `https://${url}`;
   };
 
   if (loading) {
-    return "loading";
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-600"></div>
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
           <div className="px-6 py-5 border-b border-gray-200 flex justify-between items-center">
             <div>
@@ -114,7 +127,6 @@ const EmployerProfilePage = () => {
             )}
           </div>
 
-          {/* Alert Messages */}
           {error && (
             <div className="mx-6 mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
               <p className="text-sm text-red-800">{error}</p>
@@ -127,11 +139,9 @@ const EmployerProfilePage = () => {
             </div>
           )}
 
-          {/* Edit Mode */}
           {isEditMode ? (
             <form onSubmit={handleSubmit} className="p-6">
               <div className="space-y-6">
-                {/* Company Logo */}
                 <div>
                   <label htmlFor="logo_url" className="block text-sm font-medium text-gray-700 mb-2">
                     Company Logo URL
@@ -145,21 +155,18 @@ const EmployerProfilePage = () => {
                     placeholder="https://example.com/logo.png"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   />
-                  {formData.logo_url && (
+                  {formData.logo_url && !imageError && (
                     <div className="mt-3">
                       <img
                         src={formData.logo_url}
                         alt="Company logo preview"
                         className="h-20 w-20 object-contain rounded-lg border border-gray-200"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                        }}
+                        onError={() => setImageError(true)}
                       />
                     </div>
                   )}
                 </div>
 
-                {/* Company Name */}
                 <div>
                   <label htmlFor="company_name" className="block text-sm font-medium text-gray-700 mb-2">
                     Company Name <span className="text-red-500">*</span>
@@ -177,7 +184,6 @@ const EmployerProfilePage = () => {
                   />
                 </div>
 
-                {/* Website */}
                 <div>
                   <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-2">
                     Website
@@ -194,7 +200,6 @@ const EmployerProfilePage = () => {
                   />
                 </div>
 
-                {/* Industry */}
                 <div>
                   <label htmlFor="industry" className="block text-sm font-medium text-gray-700 mb-2">
                     Industry
@@ -211,7 +216,6 @@ const EmployerProfilePage = () => {
                   />
                 </div>
 
-                {/* Company Size */}
                 <div>
                   <label htmlFor="company_size" className="block text-sm font-medium text-gray-700 mb-2">
                     Company Size
@@ -233,7 +237,6 @@ const EmployerProfilePage = () => {
                   </select>
                 </div>
 
-                {/* Location */}
                 <div>
                   <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
                     Location
@@ -250,7 +253,6 @@ const EmployerProfilePage = () => {
                   />
                 </div>
 
-                {/* Bio */}
                 <div>
                   <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
                     Company Bio
@@ -266,7 +268,6 @@ const EmployerProfilePage = () => {
                   />
                 </div>
 
-                {/* Action Buttons */}
                 <div className="flex gap-3 pt-4">
                   <button
                     type="submit"
@@ -289,19 +290,15 @@ const EmployerProfilePage = () => {
               </div>
             </form>
           ) : (
-            /* View Mode */
             <div className="p-6">
               <div className="space-y-6">
-                {/* Company Header */}
                 <div className="flex items-start gap-6 pb-6 border-b border-gray-200">
-                  {profile.logo_url ? (
+                  {profile.logo_url && !imageError ? (
                     <img
                       src={profile.logo_url}
                       alt={`${profile.company_name} logo`}
                       className="h-24 w-24 object-contain rounded-lg border border-gray-200 flex-shrink-0"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                      }}
+                      onError={() => setImageError(true)}
                     />
                   ) : (
                     <div className="h-24 w-24 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -318,7 +315,6 @@ const EmployerProfilePage = () => {
                   </div>
                 </div>
 
-                {/* Company Details Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {profile.website && (
                     <div className="flex items-start gap-3">
@@ -326,7 +322,7 @@ const EmployerProfilePage = () => {
                       <div>
                         <h3 className="text-sm font-medium text-gray-500 mb-1">Website</h3>
                         <a
-                          href={profile.website}
+                          href={formatWebsiteUrl(profile.website)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-indigo-600 hover:text-indigo-800 hover:underline break-all"
@@ -358,7 +354,6 @@ const EmployerProfilePage = () => {
                   )}
                 </div>
 
-                {/* Company Bio */}
                 {profile.bio && (
                   <div className="pt-6 border-t border-gray-200">
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">About Us</h3>
@@ -368,7 +363,6 @@ const EmployerProfilePage = () => {
                   </div>
                 )}
 
-                {/* Empty State */}
                 {!profile.company_name && !profile.bio && !profile.website && (
                   <div className="text-center py-12">
                     <FiBriefcase className="mx-auto text-gray-400 text-5xl mb-4" />
@@ -392,7 +386,6 @@ const EmployerProfilePage = () => {
           )}
         </div>
 
-        {/* Back to Dashboard Button */}
         <div className="text-center">
           <button
             onClick={() => navigate('/dashboard')}

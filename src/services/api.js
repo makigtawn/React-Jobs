@@ -70,7 +70,6 @@ export const registerUser = async (fullName, email, password) => {
     method: "POST",
     body: { fullName: fullName.trim(), email: email.trim().toLowerCase(), password },
   });
-  // Don't store tokens - user needs to log in after registration
   return data;
 };
 
@@ -121,4 +120,18 @@ export const refreshTokens = async () => {
 
 export const getCurrentUser = async () => {
   return apiRequest("/api/auth/me");
+};
+
+// Employer Profile Endpoints
+export const getEmployerProfile = async () => {
+  return apiRequest("/api/employer/profile", {
+    method: "GET",
+  });
+};
+
+export const updateEmployerProfile = async (profileData) => {
+  return apiRequest("/api/employer/profile", {
+    method: "PUT",
+    body: profileData,
+  });
 };

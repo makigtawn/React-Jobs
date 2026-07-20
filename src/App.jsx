@@ -20,6 +20,7 @@ import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import EmployerDashboardPage from "./pages/EmployerDashboardPage";
+import EmployerProfilePage from "./pages/EmployerProfilePage";
 
 const API_BASE_URL = "/api";
 
@@ -174,6 +175,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/profile"
+  element={
+    <ProtectedRoute allowedRoles={["admin", "user"]}>
+      <EmployerProfilePage  />
+    </ProtectedRoute>
+  }
+/>
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>,
